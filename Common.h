@@ -5,7 +5,6 @@
 * \author Carlos Soares
 * \author Diogo Marques
 * \author Fabio Carneiro
-* \author Joao Santos
 *
 * \date Novembro 2014
 *
@@ -19,7 +18,9 @@
 #include <iomanip>
 #include <vector>
 #include <string>
-#include <stdint.h>
+#include <sstream>
+#include <ctime>
+#include <cstdint>
 
 using namespace std;
 

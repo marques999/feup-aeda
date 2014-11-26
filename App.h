@@ -28,14 +28,22 @@ class App {
 public:
 
 	/**
-	 * @brief default constructor for 'App' class
+	* @brief default constructor for 'App' class
+	*/
+	App() 
+	{
+	}
+
+	/**
+	 * @brief constructor with parameters for 'App' class
 	 * @param n app name
 	 * @param p app price
 	 * @param c app category (games, produtividade, multimédia, web, etc...)
 	 * @param d app description
 	 */
-	App(string n, double p, string c, string d) :
-			name(n), price(p), category(c), description(d) {
+	App(string n, double p, string c, string d) : 
+		name(n), price(p), category(c), description(d) 
+	{
 		dev = NULL;
 	}
 

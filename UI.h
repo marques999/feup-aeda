@@ -5,7 +5,6 @@
 * \author Carlos Soares
 * \author Diogo Marques
 * \author Fabio Carneiro
-* \author Joao Santos
 *
 * \date Outubro 2014
 *

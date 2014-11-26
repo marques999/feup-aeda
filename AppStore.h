@@ -1,20 +1,21 @@
 /*!
- * \file AppStore.h
- *
- * FEUP_AEDA1415_2MIEIC03_D
- * \author Carlos Soares
- * \author Diogo Marques
- * \author Fabio Carneiro
- * \author Joao Santos
- *
- * \date Novembro 2014
- *
- */
+* \file AppStore.h
+*
+* FEUP_AEDA1415_2MIEIC03_D
+* \author Carlos Soares
+* \author Diogo Marques
+* \author Fabio Carneiro
+*
+* \date Novembro 2014
+*
+*/
 
 #ifndef APPSTORE_H_
 #define APPSTORE_H_
 
 #include <queue>
+#include "BST.h"
+
 #include "Sale.h"
 #include "Developer.h"
 
@@ -117,6 +118,9 @@ public:
 	void listClientesBySaldo() const;
 	void listClientesByApps() const;
 
+	void listPendingByDeveloper(Developer* dev) const;
+	void listPendingByPriority() const;
+
 	void listSalesByCliente() const;
 	void listSalesByCliente(int cliIndex) const;
 	void listSalesByApps() const;
@@ -137,7 +141,6 @@ public:
 
 private:
 
-	bool comparePriority(const App& lhs, const App& rhs) const;
 	vector<App> sortApps(const vector<App> v, Criteria s) const;
 	vector<Cliente*> sortClients(vector<Cliente*> v, Criteria s) const;
 	vector<Developer*> sortDevelopers(const vector<Developer*> &v, Criteria s) const;
@@ -152,5 +155,46 @@ private:
 	priority_queue<App> appsPendentes;
 };
 
+template<class Comparable>
+vector<Comparable> queueToVector(const priority_queue<Comparable> &q) {
+	priority_queue<Comparable> tempQueue;
+	vector<Comparable> tempVector(tempQueue.size());
+	for (size_t i = 0; i < tempVector.size(); i++) {
+		tempVector[i] = tempQueue.top();
+		tempQueue.pop();
+	}
+	return tempVector;
+}
+
+template<class Comparable>
+bool queueRemoveElement(priority_queue<Comparable>& q, const Comparable &elem) {
+	priority_queue<Comparable> tempQueue;
+	if (q.empty()) {
+		return false;
+	}
+	while (!q.empty()) {
+		if (q.top() == elem) {
+			break;
+		}
+		tempQueue.push(q.top());
+		q.pop();
+	}
+	while (!tempQueue.empty()) {
+		q.push(tempQueue.top());
+		tempQueue.pop();
+	}
+	return true;
+}
+
+template<class Comparable>
+bool queueInsertElement(priority_queue<Comparable> &q, const Comparable &elem) {
+	q.push(elem);
+}
+
+template<class Comparable>
+bool queueUpdateElement(priority_queue<Comparable> &q, const Comparable &o, const Comparable &n) {
+	queueRemoveElement(q, o);
+	queueInsertElement(q, n);
+}
 
 #endif /* APPSTORE_H_ */

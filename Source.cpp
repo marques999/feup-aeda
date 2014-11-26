@@ -5,7 +5,6 @@
  * \author Carlos Soares
  * \author Diogo Marques
  * \author Fabio Carneiro
- * \author Joao Santos
  *
  * \date Novembro 2014
  *
@@ -98,7 +97,6 @@ int main() {
 			UI::Display("Press <0> to save and exit");
 			cout << endl;
 			cout << "Please select an option: ";
-
 			getline(cin, tempStr);
 			userChoice = atoi(tempStr.c_str());
 			if (userChoice < 0 || userChoice > 3) {

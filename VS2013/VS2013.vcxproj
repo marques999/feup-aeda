@@ -79,7 +79,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\App.h" />
+    <ClInclude Include="..\BST.h" />
     <ClInclude Include="..\Cliente.h" />
+    <ClInclude Include="..\DateTime.h" />
     <ClInclude Include="..\Rating.h" />
     <ClInclude Include="..\AppStore.h" />
     <ClInclude Include="..\Common.h" />
@@ -91,6 +93,7 @@
     <ClCompile Include="..\App.cpp" />
     <ClCompile Include="..\AppStore.cpp" />
     <ClCompile Include="..\Cliente.cpp" />
+    <ClCompile Include="..\DateTime.cpp" />
     <ClCompile Include="..\Developer.cpp" />
     <ClCompile Include="..\Rating.cpp" />
     <ClCompile Include="..\Sale.cpp" />
