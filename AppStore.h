@@ -6,7 +6,7 @@
 * \author Diogo Marques
 * \author Fabio Carneiro
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
@@ -136,6 +136,7 @@ public:
 	void listAppsByRating() const;
 	void listAppsByRating(unsigned value) const;
 	void listAppsPending() const;
+	void listAppsPendingByName() const;
 
 	void freeVoucher();
 
@@ -152,6 +153,7 @@ private:
 	vector<Cliente*> clientes;
 	vector<Developer*> developers;
 	vector<Sale> vendas;
+	BST<App*> ranking;
 	priority_queue<App> appsPendentes;
 };
 

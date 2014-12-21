@@ -158,16 +158,43 @@ public:
 	}
 
 	/**
+	 * @brief returns the number of customers who purchased the app
+	 */
+	int getSales() const {
+		return this->sales;
+	}
+
+	/**
+	 * @brief sets a new value for the number of app sales
+	 * @param s the updated value
+	 */
+	void setSales(int s) {
+		this->sales = s;
+	}
+
+	/**
 	 * @brief compares two apps by name
 	 * @param ap the second comparable term
 	 */
-	bool operator==(const App &ap) const;
+	bool operator==(const App &ap) const {
+		return name == ap.name;
+	}
+
+	/**
+	 * @brief compares two apps by number of sales
+	 * @param ap the second comparable term
+	 */
+	bool operator<(const App &ap) const {
+		return sales == ap.sales;
+	}
 
 	/**
 	 * @brief rates the application
 	 * @param r the rating given by the customer
 	 */
-	void classificar(unsigned r);
+	void classificar(unsigned r) {
+		rating.r.push_back(r);
+	}
 
 	/**
 	 * @brief writes a new comment
@@ -192,6 +219,7 @@ private:
 
 	string name;
 	double price;
+	int sales;
 	string category;
 	struct tm date;
 	string description;

@@ -14,11 +14,33 @@
 #ifndef DEVELOPER_H_
 #define DEVELOPER_H
 
+#include <tr1/unordered_set>
 #include "App.h"
 
 typedef enum {
 	DEVELOPER_INDIVIDUAL, DEVELOPER_EMPRESA
 } DevType;
+
+struct developerH {
+
+	bool operator()(const App& lhs)
+	{
+	   int appHash = 0;
+	   string appName = lhs.getName();
+	   for ( int i = 0; i < appName.length() ; i++ )
+	   {
+		   appHash = 37*appHash+ appName[i];
+	   }
+	   return appHash;
+	}
+
+	bool operator()(const App &lhs, const App &rhs)
+	{
+		return lhs.getName() == rhs.getName();
+	}
+};
+
+typedef tr1::unordered_set<App, developerH, developerH> hashDeveloper;
 
 class Developer {
 public:
@@ -77,6 +99,13 @@ public:
 	}
 
 	/**
+	 * @brief returns the removed apps from the developer
+	 */
+	hashDeveloper getRemovedApps() const {
+		return removedApps;
+	}
+
+	/**
 	 * @brief increments the number of apps associated with the developer by one
 	 * @return const reference to 'this' object
 	 */
@@ -132,6 +161,15 @@ public:
 	}
 
 	/**
+	 * @brief sets the developer with a new removed apps table
+	 * @param ht the new hashtable containing removed apps (unordered_set)
+	 */
+	void setRemovedApps(const hashDeveloper &ht) {
+		this->removedApps.clear();
+		this->removedApps(ht);
+	}
+
+	/**
 	 * @brief reads developer information from a given file
 	 * @param fin the input filestream
 	 */
@@ -154,6 +192,8 @@ protected:
 	string address;
 	string name;
 	double balance;
+
+	tr1::unordered_set<App> removedApps;
 };
 
 class Developer_Individual: public Developer {

@@ -17,7 +17,7 @@ struct tm tm_localtime()
 	struct tm * timeinfo = new struct tm;
 	time_t rawtime;
 	time(&rawtime);
-	localtime_s(timeinfo, &rawtime);
+	timeinfo = localtime(&rawtime);
 	return *timeinfo;
 }
 
@@ -31,7 +31,7 @@ struct tm tm_read(time_t rawtime, ifstream &fout)
 {
 	struct tm *timeinfo = new struct tm;
 	fout.read((char*)&rawtime, sizeof(time_t));
-	localtime_s(timeinfo, &rawtime);
+	timeinfo = localtime(&rawtime);
 	return *timeinfo;
 }
 

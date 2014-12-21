@@ -18,14 +18,15 @@
 #include <fstream>
 
 AppStore::AppStore() {
+	ranking(App("",0,"",""));
 	resetCart();
 }
 
 AppStore::~AppStore() {
 }
 
-AppStore::AppStore(string n) :
-nome(n) {
+AppStore::AppStore(string n) : nome(n) {
+	ranking(App("",0,"",""));
 	resetCart();
 }
 
@@ -54,8 +55,7 @@ unsigned int AppStore::getNumDevelopers() const {
 vector<App> AppStore::getAppsFromDev(Developer *dev) const
 {
 	vector<App> devApps;
-	for (vector<App>::const_iterator it = apps.begin(); it != apps.end();
-		it++) {
+	for (vector<App>::const_iterator it = apps.begin(); it != apps.end(); it++) {
 		if ((*it).getDeveloper()->getName() == dev->getName()) {
 			devApps.push_back((*it));
 		}
@@ -1345,7 +1345,7 @@ bool AppStore::Developer_update() {
 		cout << "\nPlease enter your new tax ID number, <enter> to skip:\n";
 		getline(cin, tempStr);
 
-		if (tempStr.length() != 9) {
+		if (tempStr.size() != 9) {
 			throw InvalidParameter("NIF");
 		}
 
@@ -1411,7 +1411,7 @@ void AppStore::App_print(int appIndex, int cliIndex) {
 		string tempStr;
 		getline(cin, tempStr);
 
-		if (tempStr.length() != 1) {
+		if (tempStr.length() != 1 || !isalpha(tempStr[0])) {
 			throw InvalidParameter("choice");
 		}
 
@@ -1468,22 +1468,22 @@ bool operator<(const App &lhs, const App &rhs)
 	{
 		if (lhs.getPrice() == rhs.getPrice())
 		{
-			return (lhs.getName() < rhs.getName());
+			return !(lhs.getName() < rhs.getName());
 		}
-		return (lhs.getPrice() > rhs.getPrice());
+		return (lhs.getPrice() < rhs.getPrice());
 	}
-	return (lhs.getDate() < rhs.getDate());
+	return !(lhs.getDate() < rhs.getDate());
 }
 
 
-
-
-
 void AppStore::App_publish() {
+
 	priority_queue<App> tempQueue;
 
-	while (!appsPendentes.empty()) {
+	while (!appsPendentes.empty())
+	{
 		system("cls");
+
 		UI::DisplayFrame(to_upper(appsPendentes.top().getName()));
 		cout << left << "\t\t" << "Developer: "
 			<< appsPendentes.top().getDeveloper()->getName() << "\n";
@@ -1493,30 +1493,37 @@ void AppStore::App_publish() {
 			<< setprecision(2) << appsPendentes.top().getPrice();
 		cout << "\n\n\t\tDescription: " << endl;
 		cout << "\t\t" << appsPendentes.top().getDescription() << "\n\n";
-		UI::Display("<q> decide later");
+		UI::Display("<s> decide later, <e> edit");
 		cout << "\nDo you want to publish this app? (y/n): ";
 
 		string tempStr;
 		getline(cin, tempStr);
 
-		if (tempStr.size() != 1) {
+		if (tempStr.size() != 1 || !isalpha(tempStr[0]))
+		{
 			throw InvalidParameter("choice");
 		}
 
-		if (tempStr[0] == 'q') {
+		if (tempStr[0] == 'e')
+		{
+			App tempApp = appsPendentes.top();
+			appsPendentes.pop();
+			App_update(1);
+			appsPendentes.push(tempApp);
+			cout << endl << "INFORMATION: pending app information updated successfully" << endl;
 			break;
 		}
-
-		switch (tempStr[0]) {
-		case 'y':
+		else if (tempStr[0] == 'y') {
 			apps.push_back(appsPendentes.top());
 			appsPendentes.pop();
-			break;
-		case 'n':
+		}
+		else if (tempStr[0] == 's') {
 			tempQueue.push(appsPendentes.top());
 			appsPendentes.pop();
-			break;
+		} else if (tempStr[0] == 'n') {
+			appsPendentes.pop();
 		}
+
 	}
 	while (!tempQueue.empty()) {
 		appsPendentes.push(tempQueue.top());
@@ -1524,33 +1531,40 @@ void AppStore::App_publish() {
 	}
 }
 
-void AppStore::App_checkout(int cliIndex, bool voucher) {
+void AppStore::App_checkout(int cliIndex, bool voucher)
+{
 	vector<App> boughtApps = cart.getApps();
-	if (boughtApps.size() == 0) {
+	if (boughtApps.size() == 0)
+	{
 		cout << "\nCheckout failed. Your shopping cart is empty.\n";
 		system("pause");
 		return;
 	}
-	if (voucher) {
+	if (voucher)
+	{
 		cart.setPrice(cart.getPrice() * 0.95);
 	}
-	if (cart.getPrice() > clientes[cliIndex]->getSaldo()) {
+	if (cart.getPrice() > clientes[cliIndex]->getSaldo())
+	{
 		cout << "\nCheckout failed. You don't have enough funds.\n";
 		system("pause");
 		return;
 	}
-	clientes[cliIndex]->setSaldo(
-		clientes[cliIndex]->getSaldo() - cart.getPrice());
-	if (voucher) {
+	clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() - cart.getPrice());
+	if (voucher)
+	{
 		clientes[cliIndex]->setVoucher(false);
 	}
-	for (size_t i = 0; i < boughtApps.size(); i++) {
+	for (size_t i = 0; i < boughtApps.size(); i++)
+	{
 		Developer* devTemp = boughtApps[i].getDeveloper();
 		int j = Developer_index(devTemp->getName());
-		if (j == -1) {
+		if (j == -1)
+		{
 			throw DeveloperInexistente(devTemp->getName());
 		}
 		clientes[cliIndex]->own(boughtApps[i]);
+
 		developers[j]->sale(boughtApps[i].getPrice());
 	}
 	cart.setOwner(clientes[cliIndex]);
@@ -2164,20 +2178,24 @@ void AppStore::Sales_read() {
 	}
 }
 
-void AppStore::Sales_write() const {
+void AppStore::Sales_write() const
+{
 	ofstream fout;
 	fout.open("Vendas.bin", ios::binary);
-	if (!fout.is_open()) {
+	if (!fout.is_open())
+	{
 		throw FileIOException("Vendas.bin");
 	}
-	for (size_t i = 0; i < vendas.size(); i++) {
+	for (size_t i = 0; i < vendas.size(); i++)
+	{
 		fout << vendas[i].getOwner()->getName() << "\n";
 		double tempSaldo = vendas[i].getPrice();
 		fout.write((char*)&tempSaldo, sizeof(double));
 		uint32_t tempNumApps = vendas[i].getApps().size();
 		fout.write((char*)&tempNumApps, sizeof(uint32_t));
 		vector<App> boughtApps = vendas[i].getApps();
-		for (size_t j = 0; j < boughtApps.size(); j++) {
+		for (size_t j = 0; j < boughtApps.size(); j++)
+		{
 			fout << boughtApps[j].getName() << "\n";
 		}
 	}

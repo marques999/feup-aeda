@@ -14,14 +14,6 @@
 #include "App.h"
 #include "Developer.h"
 
-bool App::operator==(const App &ap) const {
-	return name == ap.name;
-}
-
-void App::classificar(unsigned r) {
-	rating.r.push_back(r);
-}
-
 bool App::comentar(string cli, string c) {
 	for (size_t i = 0; i < comments.size(); i++) {
 		if (comments[i].clientName == cli) {
