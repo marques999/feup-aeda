@@ -14,7 +14,7 @@
 #ifndef DEVELOPER_H_
 #define DEVELOPER_H
 
-#include <tr1/unordered_set>
+#include <unordered_set>
 #include "App.h"
 
 typedef enum {
@@ -23,13 +23,13 @@ typedef enum {
 
 struct developerH {
 
-	bool operator()(const App& lhs)
+	int operator()(const App& lhs)
 	{
 	   int appHash = 0;
 	   string appName = lhs.getName();
-	   for ( int i = 0; i < appName.length() ; i++ )
+	   for ( size_t i = 0; i < appName.size() ; i++ )
 	   {
-		   appHash = 37*appHash+ appName[i];
+		   appHash = 37*appHash + appName[i];
 	   }
 	   return appHash;
 	}
@@ -40,7 +40,7 @@ struct developerH {
 	}
 };
 
-typedef tr1::unordered_set<App, developerH, developerH> hashDeveloper;
+typedef unordered_set<App, developerH, developerH> hashDeveloper;
 
 class Developer {
 public:
@@ -166,7 +166,7 @@ public:
 	 */
 	void setRemovedApps(const hashDeveloper &ht) {
 		this->removedApps.clear();
-		this->removedApps(ht);
+		this->removedApps = ht;
 	}
 
 	/**
@@ -192,8 +192,7 @@ protected:
 	string address;
 	string name;
 	double balance;
-
-	tr1::unordered_set<App> removedApps;
+	hashDeveloper removedApps;
 };
 
 class Developer_Individual: public Developer {

@@ -17,16 +17,14 @@
 #include <climits>
 #include <fstream>
 
-AppStore::AppStore() {
-	ranking(App("",0,"",""));
+AppStore::AppStore() : ranking(new App("", 0, "", "")) {
 	resetCart();
 }
 
 AppStore::~AppStore() {
 }
 
-AppStore::AppStore(string n) : nome(n) {
-	ranking(App("",0,"",""));
+AppStore::AppStore(string n) : nome(n), ranking(new App("", 0, "", "")) {
 	resetCart();
 }
 
@@ -34,6 +32,14 @@ void AppStore::resetCart() {
 	cart = Sale();
 	cart.setPrice(0.0);
 	cart.setOwner(NULL);
+
+	ranking.insert(new App("aaaa", 2.99, "Internet", "qqqq"));
+	ranking.insert(new App("bbbb", 1.99, "Category", "xxxx"));
+
+	BSTItrIn<App*> it(ranking);
+	while (!it.isAtEnd()) {
+		it.advance();
+	}
 }
 
 unsigned int AppStore::getNumAppsDev(Developer* dev) const {

@@ -181,14 +181,6 @@ public:
 	}
 
 	/**
-	 * @brief compares two apps by number of sales
-	 * @param ap the second comparable term
-	 */
-	bool operator<(const App &ap) const {
-		return sales == ap.sales;
-	}
-
-	/**
 	 * @brief rates the application
 	 * @param r the rating given by the customer
 	 */
