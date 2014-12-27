@@ -90,13 +90,13 @@ public:
 	 * @brief adds a new app to the sale (for "add to cart")
 	 * @param a the application to be added
 	 */
-	void pushApp(App* a);
+	bool pushApp(App* a);
 
 	/**
 	 * @brief removes an app from the sale (for "remove from cart")
 	 * @param a the application to be removed
 	 */
-	void pullApp(App* a);
+	bool pullApp(App* a);
 };
 
 #endif

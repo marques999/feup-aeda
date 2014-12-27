@@ -63,16 +63,22 @@ public:
 
 	// CLIENTE
 
-	bool Cliente_add(Cliente* c1);
+	bool insertCliente(Cliente* c1);
 	void Cliente_browse(int cliIndex);
 	bool Cliente_create();
-	bool Cliente_delete();
+	bool deleteCliente();
 	int Cliente_index(string name);
 	void Cliente_menu();
 	void Cliente_read();
 	void Cliente_table(const vector<Cliente*> &c) const;
 	bool Cliente_update();
 	void Cliente_write() const;
+
+
+	void GUIAddFunds(int cliIndex);
+	void GUIActivateVoucher(int cliIndex);
+	void GUICheckoutCart(int cliIndex);
+	bool GUIRemoveFromCart();
 
 	// APP
 

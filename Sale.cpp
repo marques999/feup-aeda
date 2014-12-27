@@ -14,7 +14,7 @@
 #include "UI.h"
 #include "Common.h"
 
-void Sale::pushApp(App *a) {
+bool Sale::pushApp(App *a) {
 
 	vector<App*>::const_iterator it = appsBought.begin();
 
@@ -26,9 +26,11 @@ void Sale::pushApp(App *a) {
 
 	price += a->getPrice();
 	appsBought.push_back(a);
+
+	return true;
 }
 
-void Sale::pullApp(App* a) {
+bool Sale::pullApp(App* a) {
 
 	vector<App*>::iterator it = appsBought.begin();
 
@@ -36,8 +38,7 @@ void Sale::pullApp(App* a) {
 		if ((*it) == a) {
 			price -= a->getPrice();
 			appsBought.erase(it);
-			cout << "\nINFORMATION: app removed from cart successfully!\n";
-			return;
+			return true;
 		}
 	}
 

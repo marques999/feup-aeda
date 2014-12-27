@@ -367,13 +367,14 @@ void AppStore::listClientesByApps() const {
 void AppStore::Developer_table(const vector<Developer*> &v) const {
 
 	const int rowCount = 4;
-	vector<string> tableLabel = { " Developer name", " Address", " Type ", " NIF" };
 	int tableLength[rowCount] = { 24, 24, 12, 11 };
+
+	vector<string> tableLabel = { " Developer name", " Address", " Type ", " NIF" };
+	vector<Developer*>::const_iterator it = v.begin();
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 
-	for (vector<Developer*>::const_iterator it = v.begin(); it != v.end();
-			it++) {
+	for (; it != v.end(); it++) {
 		(*it)->print();
 	}
 }
@@ -382,6 +383,7 @@ void AppStore::Developer_altTable(const vector<Developer*> &v) const {
 
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 12 };
+
 	vector<string> tableLabel = { " Developer name", " Address", " No. Apps ", " Balance" };
 	vector<Developer*>::const_iterator it = v.begin();
 
@@ -414,6 +416,7 @@ void AppStore::listDevelopersBySales() const {
 //////////////////////////////
 
 void AppStore::listPendingByDeveloper(Developer* dev) const {
+
 	vector<App*> tempVector = queueToVector(appsPendentes);
 	vector<App*> sortedVector;
 	vector<App*>::const_iterator it = tempVector.begin();
@@ -436,15 +439,20 @@ void AppStore::listPendingByPriority() const {
 //////////////////////////////
 
 void AppStore::Sales_table(const vector<Sale> &s) const {
+
 	const int rowCount = 3;
+	int tableLength[3] = { 32, 10, 10 };
+
 	vector<string> tableLabel = { " Customer name", " No. Apps ", " Price" };
-	int tableLength[rowCount] = { 32, 10, 10 };
+	vector<Sale>::const_iterator it = s.begin();
+
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
-	for (unsigned int i = 0; i < s.size(); i++) {
+
+	for (; it != s.end(); it++) {
 		vector<string> tableRow(rowCount);
-		tableRow[0] = s[i].getOwner()->getName();
-		tableRow[1] = UI::Format(s[i].getApps().size(), 5);
-		tableRow[2] = UI::FormatPrice(s[i].getPrice());
+		tableRow[0] =  it->getOwner()->getName();
+		tableRow[1] = UI::Format(it->getApps().size(), 5);
+		tableRow[2] = UI::FormatPrice(it->getPrice());
 		UI::DisplayTableRow(rowCount, tableRow, tableLength);
 	}
 }
@@ -454,6 +462,7 @@ void AppStore::listSalesByCliente() const {
 }
 
 void AppStore::listSalesByCliente(int cliIndex) const {
+
 	vector<Sale> sortedVector;
 	vector<Sale>::const_iterator it = vendas.begin();
 
@@ -479,10 +488,12 @@ void AppStore::listSalesByPrice() const {
 //////////////////////////////
 
 void AppStore::App_table(const vector<App*> &v) const {
+
 	const int rowCount = 5;
-	vector<string> tableLabel = { " Name", " Developer", " Category", " Price",
-			" Rating" };
 	int tableLength[rowCount] = { 24, 16, 12, 8, 10 };
+
+	vector<string> tableLabel = { " Name", " Developer", " Category", " Price", " Rating" };
+
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 	for (unsigned int i = 0; i < v.size(); i++) {
 		vector<string> tableRow(rowCount);
@@ -597,33 +608,44 @@ void AppStore::freeVoucher() {
 		if (clientes[j]->getVoucher() == false) {
 			clientes[j]->setVoucher(true);
 			i--;
-			cout << "\nINFORMATION: " << clientes[j]->getName()
-					<< " has recieved a voucher!\n";
+			cout << "\nINFORMATION: " << clientes[j]->getName() << " has recieved a voucher!\n";
 		}
 	}
 }
 
 bool AppStore::insertApp(App* app) {
-	if (!sequentialSearch<App*>(apps, app)) {
+
+	vector<App*>::const_iterator it = find(apps.begin(), apps.end(), app);
+
+	if (it == apps.end()) {
 		apps.push_back(app);
 		return true;
 	}
+
 	return false;
 }
 
 bool AppStore::insertDeveloper(Developer* dev) {
-	if (!sequentialSearch<Developer*>(developers, dev)) {
+
+	vector<Developer*>::const_iterator it = find(developers.begin(), developers.end(), dev);
+
+	if (it == developers.end()) {
 		developers.push_back(dev);
 		return true;
 	}
+
 	return false;
 }
 
-bool AppStore::Cliente_add(Cliente* c1) {
-	if (!sequentialSearch<Cliente*>(clientes, c1)) {
+bool AppStore::insertCliente(Cliente* c1) {
+
+	vector<Cliente*>::const_iterator it = find(clientes.begin(), clientes.end(), c1);
+
+	if (it == clientes.end()) {
 		clientes.push_back(c1);
 		return true;
 	}
+
 	return false;
 }
 
@@ -719,7 +741,8 @@ bool AppStore::Cliente_update() {
 	return true;
 }
 
-bool AppStore::Cliente_delete() {
+bool AppStore::deleteCliente() {
+
 	string tempName;
 
 	system("cls");
@@ -778,7 +801,7 @@ void AppStore::Cliente_menu() {
 				Cliente_write();
 				break;
 			case 3:
-				Cliente_delete();
+				deleteCliente();
 				system("pause");
 				Cliente_write();
 				break;
@@ -1096,9 +1119,11 @@ bool AppStore::App_create(int devIndex) {
 }
 
 bool AppStore::App_delete(int devIndex) {
-	string tempName;
 
 	system("cls");
+
+	string tempName;
+
 	UI::DisplayFrame("DELETE APP");
 
 	cout << "\nPlease enter the app name:\n";
@@ -1110,10 +1135,13 @@ bool AppStore::App_delete(int devIndex) {
 	}
 
 	if (devIndex == -1) {
+
 		int j = Developer_index(apps[i]->getDeveloper()->getName());
+
 		if (j != -1) {
 			--(*developers[j]);
 		}
+
 		apps.erase(apps.begin() + i);
 		cout << "\nINFORMATION: app removed from the store successfully.\n";
 		return true;
@@ -1205,7 +1233,6 @@ void AppStore::updateApp(App* app) {
 
 	string tempDescription;
 	string tempCategory;
-	string tempStr;
 	double tempPrice;
 
 	system("cls");
@@ -1233,6 +1260,7 @@ void AppStore::updateApp(App* app) {
 		cin.ignore(INT_MAX, '\n');
 		throw InvalidParameter("price");
 	}
+
 	if (tempPrice >= 0) {
 		app->setPrice(tempPrice);
 	}
@@ -1534,34 +1562,41 @@ void AppStore::App_publish() {
 
 void AppStore::App_checkout(int cliIndex, bool voucher) {
 	vector<App*> boughtApps = cart.getApps();
+
 	if (boughtApps.size() == 0) {
 		cout << "\nCheckout failed. Your shopping cart is empty.\n";
 		system("pause");
 		return;
 	}
+
 	if (voucher) {
 		cart.setPrice(cart.getPrice() * 0.95);
 	}
+
 	if (cart.getPrice() > clientes[cliIndex]->getSaldo()) {
 		cout << "\nCheckout failed. You don't have enough funds.\n";
 		system("pause");
 		return;
 	}
-	clientes[cliIndex]->setSaldo(
-			clientes[cliIndex]->getSaldo() - cart.getPrice());
+
+	clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() - cart.getPrice());
+
 	if (voucher) {
 		clientes[cliIndex]->setVoucher(false);
 	}
-	for (size_t i = 0; i < boughtApps.size(); i++) {
-		Developer* devTemp = boughtApps[i]->getDeveloper();
-		int j = Developer_index(devTemp->getName());
-		if (j == -1) {
-			throw DeveloperInexistente(devTemp->getName());
-		}
-		clientes[cliIndex]->own(boughtApps[i]);
 
-		developers[j]->sale(boughtApps[i]->getPrice());
+	for (size_t i = 0; i < boughtApps.size(); i++) {
+
+		Developer* devTemp = boughtApps[i]->getDeveloper();
+
+		int j = Developer_index(devTemp->getName());
+		if (j != -1) {
+			developers[j]->sale(boughtApps[i]->getPrice());
+		}
+
+		clientes[cliIndex]->own(boughtApps[i]);
 	}
+
 	cart.setOwner(clientes[cliIndex]);
 	vendas.push_back(cart);
 	Cliente_write();
@@ -1615,6 +1650,7 @@ bool AppStore::Main_user(int cliIndex) {
 					<< (clientes[cliIndex]->getVoucher() ? "Yes" : "No")
 					<< endl;
 			UI::DisplayFrame("CUSTOMER MENU");
+
 			UI::DisplayMenuTop();
 			UI::DisplayMenuItem(1, "Purchase app");
 			UI::DisplayMenuItem(2, "List apps");
@@ -1626,6 +1662,7 @@ bool AppStore::Main_user(int cliIndex) {
 			UI::DisplayMenuTop();
 			UI::DisplayMenuItem(0, "Logout");
 			UI::DisplayMenuTop();
+
 			cout << "\nPlease select an option: ";
 			getline(cin, tempStr);
 			userChoice = atoi(tempStr.c_str());
@@ -1637,146 +1674,55 @@ bool AppStore::Main_user(int cliIndex) {
 				resetCart();
 				return true;
 			case 1:
+
 				Cliente_browse(cliIndex);
+
 				break;
+
 			case 2:
+
 				App_list();
+
 				break;
+
 			case 3:
+
 				system("cls");
 				UI::DisplayFrame("APPS OWNED");
 				App_table(clientes[cliIndex]->getOwnedApps());
 				system("pause");
-				break;
-				//////////////////////////
-				// Checkout            //
-				/////////////////////////
-			case 4: {
-				system("cls");
-				UI::DisplayFrame("CHECKOUT CART");
-				App_table(cart.getApps());
-				cout << endl;
-				ostringstream os;
-				os << "Total: " << UI::FormatPrice(cart.getPrice());
-				if (clientes[cliIndex]->getVoucher()) {
-					os << ", w/voucher: "
-							<< UI::FormatPrice(cart.getPrice() * 0.95);
-				}
-				UI::Display(os.str());
-				cout << endl;
-				UI::Display("<c> checkout, <r> remove from cart");
-				cout << endl << "Please select an option: ";
-				getline(cin, tempStr);
-				if (tempStr.length() != 1) {
-					throw InvalidParameter("choice");
-				}
-				switch (tempStr[0]) {
-				case 'c': {
-					cout << endl << "Are you sure you want to checkout? (Y/n) ";
-					getline(cin, tempStr);
-					if (tempStr == "n") {
-						break;
-					} else {
-						if (clientes[cliIndex]->getVoucher()) {
-							cout
-									<< "Do you want to use your voucher with this purchase? (Y/n)";
-							getline(cin, tempStr);
-							if (tempStr == "n") {
-								App_checkout(cliIndex, false);
-							} else {
-								App_checkout(cliIndex, true);
-							}
-						} else {
-							App_checkout(cliIndex, false);
-						}
-					}
-					break;
-				}
 
-				case 'r': {
-					cout << endl
-							<< "Please enter the name of the app to be removed: ";
-					getline(cin, tempStr);
-					vector<App*> cartApps = cart.getApps();
-					size_t i;
-					for (i = 0; i < cartApps.size(); i++) {
-						if (cartApps[i]->getName() == tempStr) {
-							cart.pullApp(cartApps[i]);
-							system("pause");
-							break;
-						}
-					}
-					break;
-				}
-				}
 				break;
-			}
-			case 5: {
+
+			case 4:
+
+				system("cls");
+				GUICheckoutCart(cliIndex);
+
+				break;
+
+			case 5:
+
 				system("cls");
 				UI::DisplayFrame("YOUR TRANSACTION HISTORY");
 				listSalesByCliente(cliIndex);
 				system("pause");
-				break;
-			}
-				//////////////////////////
-				// Add Funds           //
-				/////////////////////////
-			case 6: {
-				cout << endl << "(1) $5.00" << endl;
-				cout << "(2) $10.00" << endl;
-				cout << "(3) $20.00" << endl;
-				cout << "(4) $50.00" << endl;
-				cout << "Please choose the amount: ";
-				getline(cin, tempStr);
-				userChoice = atoi(tempStr.c_str());
-				if (userChoice < 1 || userChoice > 4) {
-					throw InvalidParameter("choice");
-				}
-				switch (userChoice) {
-				case 1:
-					clientes[cliIndex]->setSaldo(
-							clientes[cliIndex]->getSaldo() + 5.00);
-					break;
-				case 2:
-					clientes[cliIndex]->setSaldo(
-							clientes[cliIndex]->getSaldo() + 10.00);
-					break;
-				case 3:
-					clientes[cliIndex]->setSaldo(
-							clientes[cliIndex]->getSaldo() + 20.00);
-					break;
-				case 4:
-					clientes[cliIndex]->setSaldo(
-							clientes[cliIndex]->getSaldo() + 50.00);
-					break;
-				}
-				Cliente_write();
-				cout << "Funds sucessfully added to your account!" << endl;
-				break;
-			}
 
-				//////////////////////////
-				// Activate Voucher    //
-				/////////////////////////
-			case 7: {
-				string tempStr;
-				string voucherCode = "I-LOVE-APPS";
-				cout << endl << "Please enter the discount code: ";
-				getline(cin, tempStr);
-				if (tempStr == voucherCode) {
-					if (clientes[cliIndex]->getVoucher()) {
-						cout << "You already have a discount code." << endl;
-					} else {
-						clientes[cliIndex]->setVoucher(true);
-						Cliente_write();
-						cout << "Code activated successfully!" << endl;
-					}
-				} else {
-					cout << "Invalid code, please try again..." << endl;
-				}
-				system("pause");
 				break;
-			}
+
+			case 6:
+
+				GUIAddFunds(cliIndex);
+				cout << "Funds sucessfully added to your account!" << endl;
+
+				break;
+
+			case 7:
+
+				GUIActivateVoucher(cliIndex);
+				system("pause");
+
+				break;
 			}
 		} catch (InvalidParameter &ip) {
 			cout << "\nERROR: invalid parameter " << ip.what() << "\n";
@@ -1786,6 +1732,151 @@ bool AppStore::Main_user(int cliIndex) {
 			system("pause");
 		}
 	}
+}
+
+void AppStore::GUICheckoutCart(int cliIndex) {
+
+	string tempStr;
+
+	UI::DisplayFrame("CHECKOUT CART");
+	App_table(cart.getApps());
+	cout << endl;
+
+	ostringstream os;
+	os << "Total: " << UI::FormatPrice(cart.getPrice());
+
+	if (clientes[cliIndex]->getVoucher()) {
+		os << ", w/voucher: " << UI::FormatPrice(cart.getPrice() * 0.95);
+	}
+
+	UI::Display(os.str());
+	cout << endl;
+
+	UI::Display("<c> checkout, <r> remove from cart");
+	cout << endl << "Please select an option: ";
+
+	getline(cin, tempStr);
+
+	if (tempStr.length() != 1) {
+		throw InvalidParameter("choice");
+	}
+
+	switch (tempStr[0]) {
+	case 'c': {
+		cout << endl << "Are you sure you want to checkout? (Y/n) ";
+		getline(cin, tempStr);
+		if (tempStr == "n") {
+			break;
+		} else {
+			if (clientes[cliIndex]->getVoucher()) {
+				cout
+						<< "Do you want to use your voucher with this purchase? (Y/n)";
+				getline(cin, tempStr);
+				if (tempStr == "n") {
+					App_checkout(cliIndex, false);
+				} else {
+					App_checkout(cliIndex, true);
+				}
+			} else {
+				App_checkout(cliIndex, false);
+			}
+		}
+		break;
+	}
+
+	case 'r': {
+
+		if (GUIRemoveFromCart())
+			cout << "\nINFORMATION: app removed from cart successfully!\n";
+
+		system("pause");
+		break;
+	}
+	}
+}
+
+bool AppStore::GUIRemoveFromCart() {
+
+	string tempStr;
+
+	cout << endl << "Please enter the name of the app to be removed: ";
+
+	getline(cin, tempStr);
+
+	vector<App*> cartApps = cart.getApps();
+
+	for (size_t i = 0; i < cartApps.size(); i++) {
+		if (cartApps[i]->getName() == tempStr) {
+			return (cart.pullApp(cartApps[i]));
+		}
+	}
+
+	return false;
+}
+
+
+void AppStore::GUIActivateVoucher(int cliIndex) {
+
+	string tempStr;
+	string voucherCode = "I-LOVE-APPS";
+
+	cout << endl << "Please enter the discount code: ";
+
+	getline(cin, tempStr);
+
+	if (tempStr == voucherCode) {
+
+		if (clientes[cliIndex]->getVoucher()) {
+			cout << "INFORMATION: you already own a discount code." << endl;
+		}
+
+		else {
+			clientes[cliIndex]->setVoucher(true);
+			Cliente_write();
+			cout << "INFORMATION: code activated successfully!" << endl;
+		}
+	}
+
+	else {
+		cout << "ERROR: invalid code, please try again..." << endl;
+	}
+}
+
+void AppStore::GUIAddFunds(int cliIndex) {
+
+	string tempStr;
+	int userChoice;
+
+	cout << endl << "(1) $5.00" << endl;
+	cout << "(2) $10.00" << endl;
+	cout << "(3) $20.00" << endl;
+	cout << "(4) $50.00" << endl;
+	cout << "Please choose the amount: ";
+
+	getline(cin, tempStr);
+
+	userChoice = atoi(tempStr.c_str());
+
+	if (userChoice < 1 || userChoice > 4) {
+		throw InvalidParameter("choice");
+	}
+
+	switch (userChoice) {
+	case 1:
+		clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() + 5.00);
+		break;
+	case 2:
+		clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() + 10.00);
+		break;
+	case 3:
+		clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() + 20.00);
+		break;
+	case 4:
+		clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() + 50.00);
+		break;
+	}
+
+	Cliente_write();
 }
 
 void AppStore::Main_developer(int devIndex) {
