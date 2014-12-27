@@ -42,12 +42,12 @@ void testApps() {
 	appStore.insertDeveloper(mycompany);
 	appStore.insertDeveloper(me);
 	appStore.insertDeveloper(urcompany);
-	App Facebook("Facebook", 0.0, "Internet", "This is a description");
-	Facebook.setDeveloper(me);
-	App Whatsapp("WhatsApp", 1.99, "Internet", "This is a description");
-	App Retrica("Retrica", 0.79, "Multimedia", "This is a description");
-	Retrica.setDeveloper(mycompany);
-	Whatsapp.setDeveloper(me);
+	App* Facebook = new App("Facebook", 0.0, "Internet", "This is a description");
+	Facebook->setDeveloper(me);
+	App* Whatsapp = new App("WhatsApp", 1.99, "Internet", "This is a description");
+	App* Retrica = new App("Retrica", 0.79, "Multimedia", "This is a description");
+	Retrica->setDeveloper(mycompany);
+	Whatsapp->setDeveloper(me);
 	appStore.insertApp(Facebook);
 	appStore.insertApp(Retrica);
 	appStore.insertApp(Whatsapp);

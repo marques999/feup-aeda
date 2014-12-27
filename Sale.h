@@ -6,7 +6,7 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Novembro 2014
+ * \date Dezembro 2014
  *
  */
 
@@ -22,7 +22,7 @@ class Sale {
 private:
 
 	Cliente* client;
-	vector<App> appsBought;
+	vector<App*> appsBought;
 	double price;
 
 public:
@@ -39,8 +39,8 @@ public:
 	 * @param AppSold a vector containing the apps bought by the customer in a purchase
 	 * @param value the amount paid by the customer
 	 */
-	Sale(Cliente* Buyer, vector<App> AppSold, double value) :
-			client(Buyer), appsBought(AppSold), price(value) {
+	Sale(Cliente* Buyer, vector<App*> AppsSold, double value) :
+			client(Buyer), appsBought(AppsSold), price(value) {
 	}
 
 	/**
@@ -82,7 +82,7 @@ public:
 	/**
 	 * @brief returns the apps bought by the customer
 	 */
-	vector<App> getApps() const {
+	vector<App*> getApps() const {
 		return this->appsBought;
 	}
 
@@ -90,13 +90,13 @@ public:
 	 * @brief adds a new app to the sale (for "add to cart")
 	 * @param a the application to be added
 	 */
-	void pushApp(const App &a);
+	void pushApp(App* a);
 
 	/**
 	 * @brief removes an app from the sale (for "remove from cart")
 	 * @param a the application to be removed
 	 */
-	void pullApp(const App &a);
+	void pullApp(App* a);
 };
 
 #endif

@@ -5,16 +5,15 @@
 * \author Carlos Soares
 * \author Diogo Marques
 * \author Fabio Carneiro
-* \author Joao Santos
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
 #include "App.h"
 #include "Cliente.h"
 
-Cliente::Cliente(string n, double s){
+Cliente::Cliente(string n, double s) {
 	this->name = n;
 	this->saldo = s;
 	this->voucher = false;

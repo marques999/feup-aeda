@@ -12,16 +12,16 @@
 
 #include "Developer.h"
 
-void Developer_Individual::print() const
-{
+void Developer_Individual::print() const {
+
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 11 };
 	vector<string> tableRow = { name, address, "Individual", "-",};
 	UI::DisplayTableRow(rowCount, tableRow, tableLength);
 }
 
-void Developer_Empresa::print() const
-{
+void Developer_Empresa::print() const {
+
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 11 };
 	vector<string> tableRow = { name, address, "Empresa" , UI::Format(NIF, 9) };

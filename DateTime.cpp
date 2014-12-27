@@ -6,7 +6,6 @@
 * \author Diogo Marques
 * \author Fabio Carneiro
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
-

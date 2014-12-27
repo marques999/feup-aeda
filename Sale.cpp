@@ -6,7 +6,7 @@
 * \author Diogo Marques
 * \author Fabio Carneiro
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
@@ -14,24 +14,32 @@
 #include "UI.h"
 #include "Common.h"
 
-void Sale::pushApp(const App &a) {
-	for (size_t i = 0; i < appsBought.size(); i++) {
-		if (appsBought[i] == a) {
-			throw JaExiste(a.getName());
+void Sale::pushApp(App *a) {
+
+	vector<App*>::const_iterator it = appsBought.begin();
+
+	for (; it != appsBought.end(); it++) {
+		if ((*it) == a) {
+			throw JaExiste((*it)->getName());
 		}
 	}
-	price += a.getPrice();
+
+	price += a->getPrice();
 	appsBought.push_back(a);
 }
 
-void Sale::pullApp(const App &a) {
-	for (size_t i = 0; i < appsBought.size(); i++) {
-		if (appsBought[i] == a) {
-			price -= a.getPrice();
-			appsBought.erase(appsBought.begin() + i);
+void Sale::pullApp(App* a) {
+
+	vector<App*>::iterator it = appsBought.begin();
+
+	for (; it != appsBought.end(); it++) {
+		if ((*it) == a) {
+			price -= a->getPrice();
+			appsBought.erase(it);
 			cout << "\nINFORMATION: app removed from cart successfully!\n";
 			return;
 		}
 	}
-	throw AppInexistente(a.getName());
+
+	throw AppInexistente(a->getName());
 }

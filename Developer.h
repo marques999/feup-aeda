@@ -5,16 +5,15 @@
  * \author Carlos Soares
  * \author Diogo Marques
  * \author Fabio Carneiro
- * \author Joao Santos
  *
- * \date Novembro 2014
+ * \date Dezembro 2014
  *
  */
 
-#ifndef DEVELOPER_H_
-#define DEVELOPER_H
+#ifndef __DEVELOPER_H_
+#define __DEVELOPER_H_
 
-#include <unordered_set>
+#include <tr1/unordered_set>
 #include "App.h"
 
 typedef enum {
@@ -23,24 +22,25 @@ typedef enum {
 
 struct developerH {
 
-	int operator()(const App& lhs)
-	{
-	   int appHash = 0;
-	   string appName = lhs.getName();
-	   for ( size_t i = 0; i < appName.size() ; i++ )
-	   {
-		   appHash = 37*appHash + appName[i];
-	   }
-	   return appHash;
+	int operator()(const App& lhs) {
+
+		int appHash = 0;
+		string appName = lhs.getName();
+
+		for ( size_t i = 0; i < appName.size() ; i++ ) {
+			appHash = 37*appHash + appName[i];
+		}
+
+		return appHash;
 	}
 
-	bool operator()(const App &lhs, const App &rhs)
-	{
+	bool operator()(const App &lhs, const App &rhs) {
+
 		return lhs.getName() == rhs.getName();
 	}
 };
 
-typedef unordered_set<App, developerH, developerH> hashDeveloper;
+typedef tr1::unordered_set<App, developerH, developerH> hashDeveloper;
 
 class Developer {
 public:
@@ -49,6 +49,7 @@ public:
 	 * @brief default constructor for 'Developer' abstract class
 	 */
 	Developer() {
+		this->balance = 0.0;
 		this->numApps = 0;
 	}
 
@@ -319,4 +320,4 @@ private:
 	unsigned NIF;
 };
 
-#endif
+#endif /* __DEVELOPER_H_ */

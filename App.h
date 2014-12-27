@@ -30,8 +30,10 @@ public:
 	/**
 	* @brief default constructor for 'App' class
 	*/
-	App() 
-	{
+	App() {
+		this->dev = NULL;
+		this->price = 0.0;
+		this->sales = 0;
 	}
 
 	/**
@@ -41,10 +43,9 @@ public:
 	 * @param c app category (games, produtividade, multimédia, web, etc...)
 	 * @param d app description
 	 */
-	App(string n, double p, string c, string d) : 
-		name(n), price(p), category(c), description(d) 
-	{
-		dev = NULL;
+	App(string n, double p, string c, string d) : name(n), price(p), category(c), description(d) {
+		this->dev = NULL;
+		this->sales = 0;
 	}
 
 	/**
@@ -200,6 +201,13 @@ public:
 	 * @param fin the input filestream
 	 */
 	void read(ifstream &fin);
+
+	/**
+	 * @brief increments the amount of times the app has been purchased
+	 */
+	void sale() {
+		this->sales++;
+	}
 
 	/**
 	 * @brief writes comments and ratings to a given file

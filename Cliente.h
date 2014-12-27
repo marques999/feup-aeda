@@ -5,9 +5,8 @@
 * \author Carlos Soares
 * \author Diogo Marques
 * \author Fabio Carneiro
-* \author Joao Santos
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
@@ -89,7 +88,7 @@ public:
 	/**
 	* @brief returns a vector containing all the apps owned by the customer
 	*/
-	vector<App> getOwnedApps() const {
+	vector<App*> getOwnedApps() const {
 		return owned;
 	}
 
@@ -97,7 +96,7 @@ public:
 	* @brief pushes an app purchased by the customer to its "collection"
 	* @param a the recently bought app
 	*/
-	void own(const App &a) {
+	void own(App *a) {
 		owned.push_back(a);
 	}
 
@@ -106,7 +105,7 @@ private:
 	string name;
 	double saldo;
 	bool voucher;
-	vector<App> owned;
+	vector<App*> owned;
 };
 
 #endif

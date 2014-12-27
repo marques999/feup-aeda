@@ -5,14 +5,13 @@
 * \author Carlos Soares
 * \author Diogo Marques
 * \author Fabio Carneiro
-* \author Joao Santos
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
-#ifndef RATING_H_
-#define RATING_H_
+#ifndef __RATING_H_
+#define __RATING_H_
 
 #include "Common.h"
 
@@ -55,4 +54,4 @@ public:
 	vector<uint8_t> r;
 };
 
-#endif
+#endif /* __RATING_H */

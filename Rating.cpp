@@ -5,29 +5,30 @@
 * \author Carlos Soares
 * \author Diogo Marques
 * \author Fabio Carneiro
-* \author Joao Santos
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
 #include "Rating.h"
 
-double Rating::get() const
-{
+double Rating::get() const {
+
 	double result = 0.0;
+
 	if (r.size() == 0) {
-		return 0.0;
+		return 3.0;
 	}
-	for (unsigned int i = 0; i < r.size(); i++)
-	{
+
+	for (unsigned int i = 0; i < r.size(); i++) {
 		result += r[i];
 	}
+
 	return (result / r.size());
 }
 
-string Rating::to_string() const
-{
+string Rating::to_string() const {
+
 	switch (floor())
 	{
 	case 1:
@@ -45,13 +46,14 @@ string Rating::to_string() const
 	}
 }
 
-unsigned Rating::floor() const
-{
+unsigned Rating::floor() const {
+
 	double x = get();
-	if (x >= 0)
-	{
+
+	if (x >= 0) {
 		return (unsigned)(x + 0.5);
 	}
+
 	return (unsigned)(x - 0.5);
 }
 
