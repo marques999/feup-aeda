@@ -1194,7 +1194,6 @@ bool AppStore::updateApp(int devIndex) {
 	string tempStr;
 	double tempPrice;
 
-	system("cls");
 	UI::DisplayFrame("UPDATE APP");
 
 	cout << "\nPlease enter the app name, <enter> to cancel:\n" << endl;
@@ -1264,7 +1263,6 @@ void AppStore::updateApp(App* app) {
 	string tempCategory;
 	double tempPrice;
 
-	system("cls");
 	UI::DisplayFrame("UPDATE APP");
 
 	cout << "\nPlease enter a new category, <enter> to skip:\n";
@@ -1488,51 +1486,73 @@ void AppStore::App_print(int appIndex, int cliIndex) {
 		}
 
 		switch (tempStr[0]) {
-		case 'a': {
-			vector<App*> ownedApps = clientes[cliIndex]->getOwnedApps();
-			for (size_t i = 0; i < ownedApps.size(); i++) {
-				if (ownedApps[i] == apps[appIndex]) {
-					throw JaExiste(apps[appIndex]->getName());
-				}
-			}
-			cart.pushApp(apps[appIndex]);
-			cout << "\nINFORMATION: " << apps[appIndex]->getName()
-					<< " added to cart.\n";
-			system("pause");
-			return;
-		}
 
-		case 'r': {
+		case 'a':
+
+			GUIAddToCart(appIndex, cliIndex);
+			system("pause");
+
+			return;
+
+		case 'r':
+
 			App_rate(appIndex);
 			system("pause");
-			break;
-		}
 
-		case 'c': {
+			break;
+
+		case 'c':
+
 			App_comment(appIndex, cliIndex);
 			system("pause");
-			break;
-		}
 
-		case 'l': {
-			system("cls");
-			vector<Comentario> appComments = apps[appIndex]->getComments();
-			ostringstream os;
-			os << "COMMENTS (" << appComments.size() << ")";
-			UI::DisplayFrame(os.str());
-			cout << "\n";
-			for (unsigned int i = 0; i < appComments.size(); i++) {
-				cout << appComments[i].clientName << endl;
-				cout << appComments[i].comment << endl << endl;
-			}
-			system("pause");
 			break;
-		}
+
+		case 'l':
+
+			listComments(appIndex);
+			system("pause");
+
+			break;
+
 		case 'b':
+
 			return;
+
 		default:
+
 			throw InvalidParameter("choice");
 		}
+	}
+}
+
+void AppStore::GUIAddToCart(int appIndex, int cliIndex) {
+
+	vector<App*> ownedApps = clientes[cliIndex]->getOwnedApps();
+	vector<App*>::iterator it = ownedApps.begin();
+
+	for (; it != ownedApps.end(); it++) {
+		if ((*it) == apps[appIndex]) {
+			throw JaExiste(apps[appIndex]->getName());
+		}
+	}
+
+	cart.pushApp(apps[appIndex]);
+	cout << "\nINFORMATION: " << apps[appIndex]->getName() << " added to cart.\n";
+}
+
+void AppStore::listComments(int appIndex) const {
+
+	vector<Comentario> appComments = apps[appIndex]->getComments();
+	ostringstream os;
+
+	os << "COMMENTS (" << appComments.size() << ")";
+	UI::DisplayFrame(os.str());
+	cout << "\n";
+
+	for (unsigned int i = 0; i < appComments.size(); i++) {
+		cout << appComments[i].clientName << endl;
+		cout << appComments[i].comment << endl << endl;
 	}
 }
 

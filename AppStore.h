@@ -76,6 +76,7 @@ public:
 
 
 	void GUIAddFunds(int cliIndex);
+	void GUIAddToCart(int appIndex, int cliIndex);
 	void GUIActivateVoucher(int cliIndex);
 	void GUICheckoutCart(int cliIndex);
 	bool GUIRemoveFromCart();
@@ -130,6 +131,8 @@ public:
 	void listClientesByName() const;
 	void listClientesBySaldo() const;
 	void listClientesByApps() const;
+
+	void listComments(int appIndex) const;
 
 	void listPendingByDeveloper(Developer* dev) const;
 	void listPendingByPriority() const;
