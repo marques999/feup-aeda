@@ -16,6 +16,7 @@
 namespace UI {
 	void DisplayFrame(string s)
 	{
+		system("cls");
 		cout << endl;
 		int begin = (s.size() % 2 == 0) ? (23 - (s.size() / 2)) : (22 - (s.size() / 2));
 		int end = 22 + (s.size() / 2);

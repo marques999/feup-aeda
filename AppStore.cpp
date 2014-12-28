@@ -61,6 +61,7 @@ unsigned int AppStore::getNumDevelopers() const {
 }
 
 vector<App*> AppStore::getAppsFromDev(Developer *dev) const {
+
 	vector<App*> devApps;
 	vector<App*>::const_iterator it = apps.begin();
 
@@ -295,9 +296,9 @@ vector<Sale> AppStore::sortSales(vector<Sale> v, Criteria s) const {
 	return sortedVector;
 }
 
-vector<Developer*> AppStore::sortDevelopers(const vector<Developer*> &v,
-		Criteria s) const {
+vector<Developer*> AppStore::sortDevelopers(const vector<Developer*> &v, Criteria s) const {
 	vector<Developer*> sortedVector = v;
+
 	for (size_t i = 1; i < v.size(); i++) {
 		Developer* tempDev = sortedVector[i];
 		size_t j = 0;
@@ -332,18 +333,21 @@ vector<Developer*> AppStore::sortDevelopers(const vector<Developer*> &v,
 /////////////////////////
 
 void AppStore::Cliente_table(const vector<Cliente*> &c) const {
+
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 32, 10, 10, 9 };
+
 	vector<string> tableLabel = { " Customer name", " No. Apps ", " Balance", " Voucher" };
+	vector<Cliente*>::const_iterator it = c.begin();
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 
-	for (unsigned int i = 0; i < c.size(); i++) {
+	for (; it != c.end(); it++) {
 		vector<string> tableRow(rowCount);
-		tableRow[0] = c[i]->getName();
-		tableRow[1] = UI::Format(c[i]->getNumApps(), 5);
-		tableRow[2] = UI::FormatPrice(c[i]->getSaldo());
-		tableRow[3] = c[i]->getVoucher() ? "  Yes" : "  No";
+		tableRow[0] = (*it)->getName();
+		tableRow[1] = UI::Format((*it)->getNumApps(), 5);
+		tableRow[2] = UI::FormatPrice((*it)->getSaldo());
+		tableRow[3] = (*it)->getVoucher() ? "  Yes" : "  No";
 		UI::DisplayTableRow(rowCount, tableRow, tableLength);
 	}
 }
@@ -649,6 +653,14 @@ bool AppStore::insertCliente(Cliente* c1) {
 	return false;
 }
 
+const string customerCreated = "INFORMATION: customer created successfully.";
+const string customerUpdated =  "INFORMATION: customer information updated successfully.";
+const string customerDeleted = "INFORMATION: customer deleted successfully.";
+
+void displayMessage(string msg) {
+	cout << endl << msg << endl;
+}
+
 bool AppStore::Cliente_create() {
 	string tempName;
 	string tempStr;
@@ -683,11 +695,12 @@ bool AppStore::Cliente_create() {
 	}
 
 	cin.ignore(INT_MAX, '\n');
+
 	Cliente* tempCliente = new Cliente(tempName, tempSaldo);
 	clientes.push_back(tempCliente);
 	Cliente_write();
+	displayMessage(customerCreated);
 
-	cout << endl << "INFORMATION: customer created successfully." << endl;
 	return true;
 }
 
@@ -736,8 +749,10 @@ bool AppStore::Cliente_update() {
 	}
 
 	cin.ignore(INT_MAX, '\n');
+
 	Cliente_write();
-	cout << endl << "INFORMATION: customer information updated." << endl;
+	displayMessage(customerUpdated);
+
 	return true;
 }
 
@@ -762,8 +777,8 @@ bool AppStore::deleteCliente() {
 
 	clientes.erase(clientes.begin() + i);
 	Cliente_write();
+	displayMessage(customerDeleted);
 
-	cout << "\nINFORMATION: customer deleted successfully.\n";
 	return true;
 }
 
@@ -827,13 +842,13 @@ void AppStore::Cliente_menu() {
 				return;
 			}
 		} catch (InvalidParameter &ip) {
-			cout << "\nERROR: invalid parameter " << ip.what() << "\n";
+			cout << ip;
 			system("pause");
 		} catch (JaExiste &e) {
-			cout << "\nERROR: customer " << e.getName() << " already exists.\n";
+			cout << e;
 			system("pause");
 		} catch (ClienteInexistente &e) {
-			cout << "\nERROR: customer " << e.getName() << " not found.\n";
+			cout << e;
 			system("pause");
 		}
 	}
@@ -976,13 +991,13 @@ void AppStore::App_list() const {
 				return;
 			}
 		} catch (InvalidParameter &ip) {
-			cout << "\nERROR: invalid parameter " << ip.what() << "\n";
+			cout << ip;
 			system("pause");
 		} catch (DeveloperInexistente &e) {
-			cout << "\nERRROR: developer " << e.getName() << " not found.\n";
+			cout << e;
 			system("pause");
 		} catch (AppInexistente &e) {
-			cout << "\nERROR: app " << e.getName() << " does not exist.\n";
+			cout << e;
 			system("pause");
 		}
 	}
@@ -1033,22 +1048,30 @@ void AppStore::App_menu() {
 				return;
 			}
 		} catch (InvalidParameter &ip) {
-			cout << "\nERROR: invalid parameter " << ip.what() << "\n";
+			cout << ip;
 			system("pause");
 		} catch (DeveloperInexistente &e) {
-			cout << "\nERRROR: developer " << e.getName() << " not found.\n";
+			cout << e;
 			system("pause");
 		} catch (JaExiste &e) {
 			cout << "\nERROR: app " << e.getName() << " already exists.\n";
 			system("pause");
 		} catch (AppInexistente &e) {
-			cout << "\nERROR: app " << e.getName() << " does not exist.\n";
+			cout << e;
 			system("pause");
 		}
 	}
 }
 
+const string appUpdated = "INFORMATON: app information updated successfully.";
+const string appRemoved = "INFORMATION: app removed from the store successfully.";
+const string appPublished = "INFORMATION: app published successfully!";
+const string appWaitingValidation = "INFORMATION: added app to queue successfully, waiting for approval.";
+const string appPermissionsRemove = "ERROR: permission denied - can't remove apps from other developers.";
+const string appPermissionsUpdate = "ERROR: permission denied - can't modify apps from other developers.";
+
 bool AppStore::App_create(int devIndex) {
+
 	string tempName;
 	string tempDeveloper;
 	string tempCategory;
@@ -1095,6 +1118,7 @@ bool AppStore::App_create(int devIndex) {
 		cin.ignore(INT_MAX, '\n');
 		throw InvalidParameter("price");
 	}
+
 	if (tempPrice < 0) {
 		throw InvalidParameter("price");
 	}
@@ -1106,12 +1130,13 @@ bool AppStore::App_create(int devIndex) {
 
 	if (devIndex == -1) {
 		cin.ignore(INT_MAX, '\n');
-		cout << "\nINFORMATION: app published successfully!\n";
+		displayMessage(appPublished);
 		apps.push_back(newApp);
-	} else {
+	}
+
+	else {
 		cin.ignore(INT_MAX, '\n');
-		cout
-				<< "\nINFORMATION: app added to queue successfully, waiting for validation.\n";
+		displayMessage(appWaitingValidation);
 		appsPendentes.push(newApp);
 	}
 
@@ -1130,6 +1155,7 @@ bool AppStore::App_delete(int devIndex) {
 	getline(cin, tempName);
 
 	int i = App_index(tempName);
+
 	if (i == -1) {
 		throw AppInexistente(tempName);
 	}
@@ -1143,18 +1169,19 @@ bool AppStore::App_delete(int devIndex) {
 		}
 
 		apps.erase(apps.begin() + i);
-		cout << "\nINFORMATION: app removed from the store successfully.\n";
+		displayMessage(appRemoved);
 		return true;
 	}
 
 	if (apps[i]->getDeveloper() == developers[devIndex]) {
 		apps.erase(apps.begin() + i);
 		--(*developers[devIndex]);
-		cout << "\nINFORMATION: app removed from the store successfully.\n";
+		displayMessage(appRemoved);
 		return true;
-	} else {
-		cout
-				<< "\nERROR: permission denied - can't remove apps from other developers\n";
+	}
+
+	else {
+		displayMessage(appPermissionsRemove);
 		return false;
 	}
 }
@@ -1179,16 +1206,16 @@ bool AppStore::updateApp(int devIndex) {
 
 	int i = App_index(tempName);
 	if (i != -1) {
-		cout << "\nERROR: app " << tempName << "not found.\n";
+		throw AppInexistente(tempName);
 	}
 
 	if (devIndex != -1) {
 		if (apps[i]->getDeveloper() != developers[devIndex]) {
-			cout
-					<< "\nERROR: permission denied - can't modify apps from other developers\n";
+			displayMessage(appPermissionsUpdate);
 			return false;
 		}
 	}
+
 	cout << "\nPlease enter a new name, <enter> to skip:\n";
 	getline(cin, tempStr);
 
@@ -1225,6 +1252,8 @@ bool AppStore::updateApp(int devIndex) {
 	if (tempPrice >= 0) {
 		apps[i]->setPrice(tempPrice);
 	}
+
+	displayMessage(appUpdated);
 
 	return true;
 }
@@ -1264,7 +1293,13 @@ void AppStore::updateApp(App* app) {
 	if (tempPrice >= 0) {
 		app->setPrice(tempPrice);
 	}
+
+	displayMessage(appUpdated);
 }
+
+const string developerCreated = "INFORMATION: developer created successfully.";
+const string developerUpdated = "INFORMATION: developer information updated successfully.";
+const string developerRemoved = "INFORMATION: developer deleted sucessfully.";
 
 bool AppStore::Developer_create() {
 
@@ -1274,12 +1309,12 @@ bool AppStore::Developer_create() {
 	string tempStr;
 	int userChoice;
 
-	system("cls");
 	UI::DisplayFrame("CREATE DEVELOPER");
 
 	cout << "Press 1 to create an individual developer.\n";
 	cout << "Press 2 if we're talking about a company.\n";
 	cout << "\nPlease select an option: ";
+
 	getline(cin, tempStr);
 	userChoice = atoi(tempStr.c_str());
 
@@ -1333,7 +1368,8 @@ bool AppStore::Developer_create() {
 		developers.push_back(temp);
 	}
 
-	cout << "\nINFORMATION: developer created successfully.\n";
+	displayMessage(developerCreated);
+
 	return true;
 }
 
@@ -1341,7 +1377,6 @@ bool AppStore::Developer_update() {
 	string tempName;
 	string tempStr;
 
-	system("cls");
 	UI::DisplayFrame("UPDATE DEVELOPER");
 
 	cout << "\nPlease enter the developer/company name:\n";
@@ -1387,14 +1422,15 @@ bool AppStore::Developer_update() {
 		int tempNIF = atoi(tempStr.c_str());
 		dynamic_cast<Developer_Empresa*>(developers[i])->setNIF(tempNIF);
 	}
-	cout << "\nINFORMATION: developer information updated successfully.\n";
+
+	displayMessage(developerUpdated);
+
 	return true;
 }
 
 bool AppStore::Developer_delete() {
 	string tempName;
 
-	system("cls");
 	UI::DisplayFrame("DELETE DEVELOPER");
 
 	cout << "Please enter the developer's name:" << endl;
@@ -1417,13 +1453,14 @@ bool AppStore::Developer_delete() {
 	}
 
 	developers.erase(developers.begin() + i);
-	cout << "\nINFORMATION: developer deleted sucessfully.\n";
+	displayMessage(developerRemoved);
+
 	return true;
 }
 
 void AppStore::App_print(int appIndex, int cliIndex) {
 	while (true) {
-		system("cls");
+
 		UI::DisplayFrame(to_upper(apps[appIndex]->getName()));
 		cout << left << "\t\t" << "Developer: "
 				<< apps[appIndex]->getDeveloper()->getName() << endl;
@@ -1467,11 +1504,13 @@ void AppStore::App_print(int appIndex, int cliIndex) {
 
 		case 'r': {
 			App_rate(appIndex);
+			system("pause");
 			break;
 		}
 
 		case 'c': {
 			App_comment(appIndex, cliIndex);
+			system("pause");
 			break;
 		}
 
@@ -1507,6 +1546,8 @@ bool operator<(const App &lhs, const App &rhs) {
 	return !(lhs.getDate() < rhs.getDate());
 }
 
+const string pendingAppUpdated = "INFORMATION: pending app information updated successfully.";
+
 void AppStore::App_publish() {
 
 	priority_queue<App*> tempQueue;
@@ -1539,9 +1580,8 @@ void AppStore::App_publish() {
 			appsPendentes.pop();
 			updateApp(1);
 			appsPendentes.push(tempApp);
-			cout << endl
-					<< "INFORMATION: pending app information updated successfully"
-					<< endl;
+			displayMessage(pendingAppUpdated);
+
 			break;
 		} else if (tempStr[0] == 'y') {
 			apps.push_back(appsPendentes.top());
@@ -1560,11 +1600,16 @@ void AppStore::App_publish() {
 	}
 }
 
+const string checkoutCartEmpty = "ERROR: checkout failed - your shopping cart is empty.";
+const string checkoutEnoughFunds = "ERROR: checkout failed - you don't have enough funds.";
+const string checkoutSuccessful = "INFORMATION: purchase successful - enjoy your new apps!";
+
 void AppStore::App_checkout(int cliIndex, bool voucher) {
+
 	vector<App*> boughtApps = cart.getApps();
 
 	if (boughtApps.size() == 0) {
-		cout << "\nCheckout failed. Your shopping cart is empty.\n";
+		displayMessage(checkoutCartEmpty);
 		system("pause");
 		return;
 	}
@@ -1574,7 +1619,7 @@ void AppStore::App_checkout(int cliIndex, bool voucher) {
 	}
 
 	if (cart.getPrice() > clientes[cliIndex]->getSaldo()) {
-		cout << "\nCheckout failed. You don't have enough funds.\n";
+		displayMessage(checkoutEnoughFunds);
 		system("pause");
 		return;
 	}
@@ -1603,7 +1648,8 @@ void AppStore::App_checkout(int cliIndex, bool voucher) {
 	Developer_write();
 	Sales_write();
 	resetCart();
-	cout << "\nPurchase successful. Enjoy your new apps!\n";
+	displayMessage(checkoutSuccessful);
+
 	system("pause");
 }
 
@@ -1625,7 +1671,7 @@ void AppStore::Cliente_browse(int cliIndex) {
 			}
 			App_print(i, cliIndex);
 		} catch (AppInexistente &e) {
-			cout << "\nERORR: app " << e.getName() << " not found.\n";
+			cout << e;
 			system("pause");
 		} catch (JaExiste &e) {
 			cout << "\nERROR: couldn't add " << e.getName()
@@ -1670,9 +1716,13 @@ bool AppStore::Main_user(int cliIndex) {
 				throw InvalidParameter("choice");
 			}
 			switch (userChoice) {
+
 			case 0:
+
 				resetCart();
+
 				return true;
+
 			case 1:
 
 				Cliente_browse(cliIndex);
@@ -1687,7 +1737,6 @@ bool AppStore::Main_user(int cliIndex) {
 
 			case 3:
 
-				system("cls");
 				UI::DisplayFrame("APPS OWNED");
 				App_table(clientes[cliIndex]->getOwnedApps());
 				system("pause");
@@ -1696,14 +1745,13 @@ bool AppStore::Main_user(int cliIndex) {
 
 			case 4:
 
-				system("cls");
+				UI::DisplayFrame("CHECKOUT CART");
 				GUICheckoutCart(cliIndex);
 
 				break;
 
 			case 5:
 
-				system("cls");
 				UI::DisplayFrame("YOUR TRANSACTION HISTORY");
 				listSalesByCliente(cliIndex);
 				system("pause");
@@ -1734,11 +1782,12 @@ bool AppStore::Main_user(int cliIndex) {
 	}
 }
 
+const string checkoutRemoveFromCart = "INFORMATION: app removed from cart successfully!";
+
 void AppStore::GUICheckoutCart(int cliIndex) {
 
 	string tempStr;
 
-	UI::DisplayFrame("CHECKOUT CART");
 	App_table(cart.getApps());
 	cout << endl;
 
@@ -1787,7 +1836,7 @@ void AppStore::GUICheckoutCart(int cliIndex) {
 	case 'r': {
 
 		if (GUIRemoveFromCart())
-			cout << "\nINFORMATION: app removed from cart successfully!\n";
+			displayMessage(checkoutRemoveFromCart);
 
 		system("pause");
 		break;
@@ -1814,6 +1863,9 @@ bool AppStore::GUIRemoveFromCart() {
 	return false;
 }
 
+const string voucherOwned = "INFORMATION: you already own a discount code.";
+const string voucherActivated = "INFORMATION: code activated successfully.";
+const string voucherInvalid = "ERROR: invalid code, please try again...";
 
 void AppStore::GUIActivateVoucher(int cliIndex) {
 
@@ -1827,18 +1879,18 @@ void AppStore::GUIActivateVoucher(int cliIndex) {
 	if (tempStr == voucherCode) {
 
 		if (clientes[cliIndex]->getVoucher()) {
-			cout << "INFORMATION: you already own a discount code." << endl;
+			displayMessage(voucherOwned);
 		}
 
 		else {
 			clientes[cliIndex]->setVoucher(true);
 			Cliente_write();
-			cout << "INFORMATION: code activated successfully!" << endl;
+			displayMessage(voucherActivated);
 		}
 	}
 
 	else {
-		cout << "ERROR: invalid code, please try again..." << endl;
+		displayMessage(voucherInvalid);
 	}
 }
 
@@ -1933,13 +1985,13 @@ void AppStore::Main_developer(int devIndex) {
 				return;
 			}
 		} catch (InvalidParameter &ip) {
-			cout << "\nERROR: invalid parameter " << ip.what() << "\n";
+			cout << ip;
 			system("pause");
 		} catch (AppInexistente &e) {
-			cout << "\nERROR: app " << e.getName() << " not found.\n";
+			cout << e;
 			system("pause");
 		} catch (DeveloperInexistente &e) {
-			cout << "\nERROR: developer " << e.getName() << " not found.\n";
+			cout << e;
 			system("pause");
 		}
 	}
@@ -1951,7 +2003,7 @@ void AppStore::Main_admin() {
 	while (true) {
 		try {
 			system("cls");
-			cout << this->nome;
+			cout << nome;
 			cout << " / Apps: " << apps.size();
 			cout << " / Developers: " << developers.size();
 			cout << " / Customers: " << clientes.size() << endl;
@@ -1994,66 +2046,78 @@ void AppStore::Main_admin() {
 				break;
 			}
 			case 5: {
-				system("cls");
 				UI::DisplayFrame("SALES BY ID");
 				Sales_table(vendas);
 				system("pause");
 				break;
 			}
-			case 6: {
-				system("cls");
+			case 6:
+
 				UI::DisplayFrame("SALES BY CUSTOMER");
 				listSalesByCliente();
 				system("pause");
+
 				break;
-			}
-			case 7: {
-				system("cls");
+
+			case 7:
+
 				UI::DisplayFrame("SALES BY NO. APPS");
 				listSalesByApps();
 				system("pause");
+
 				break;
-			}
-			case 8: {
-				system("cls");
+
+			case 8:
+
 				UI::DisplayFrame("SALES BY PRICE");
 				listSalesByPrice();
 				system("pause");
+
 				break;
-			}
+
 			}
 		} catch (InvalidParameter &ip) {
-			cout << "\nERROR: invalid parameter " << ip.what() << "\n";
+			cout << ip;
 			system("pause");
 		}
 	}
 }
 
+const string commentSuccessful = "INFORMATION: comment added successfully.";
+const string commentExists = "ERROR: you have already published a comment for this app.";
+const string appRated = "INFORMATION: thanks for rating our app!";
+
 void AppStore::App_comment(int appIndex, int cliIndex) {
+
 	string tempComment;
 	cout << "Please enter your comment, <enter> to submit:\n";
 	getline(cin, tempComment);
+
 	if (apps[appIndex]->comentar(clientes[cliIndex]->getName(), tempComment)) {
-		cout << "\nINFORMATION: comment added successfully.\n";
-		system("pause");
-	} else {
-		cout << "\nERROR: you have already published a comment for this app.\n";
-		system("pause");
+		displayMessage(commentSuccessful);
+	}
+
+	else {
+		displayMessage(commentExists);
 	}
 }
 
 void AppStore::App_rate(int appIndex) {
+
 	uint8_t tempRating;
 	string tempStr;
+
 	cout << "Rate this app: ";
+
 	getline(cin, tempStr);
 	tempRating = atoi(tempStr.c_str());
+
 	if (tempRating == 0 || tempRating > 5) {
 		throw InvalidParameter("rating");
 	}
+
 	apps[appIndex]->classificar(tempRating);
-	cout << "\nINFORMATION: thanks for rating our app!\n";
-	system("pause");
+	displayMessage(appRated);
 }
 
 void AppStore::App_read() {
