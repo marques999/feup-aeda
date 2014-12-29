@@ -6,12 +6,12 @@
 * \author Diogo Marques
 * \author Fabio Carneiro
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
-#ifndef COMMON_H_
-#define COMMON_H_
+#ifndef __COMMON_H_
+#define __COMMON_H_
 
 #include <fstream>
 #include <iostream>
@@ -20,7 +20,6 @@
 #include <string>
 #include <sstream>
 #include <ctime>
-#include <cstdint>
 
 using namespace std;
 
@@ -30,17 +29,28 @@ class DeveloperInexistente {
 
 public:
 
-
 	DeveloperInexistente(const string& n) {
 		devName = n;
 	}
 
-	string getName() {
-		return devName;
-	}
-
 	friend ostream& operator<<(ostream &os, const DeveloperInexistente &e) {
 		os << "\nERRROR: developer " << e.devName << " not found.\n";
+		return os;
+	}
+};
+
+class DeveloperJaExiste {
+
+	string devName;
+
+public:
+
+	DeveloperJaExiste(const string &n) {
+		devName = n;
+	}
+
+	friend ostream& operator<<(ostream &os, const DeveloperJaExiste &e) {
+		os << "\nERROR: developer " << e.devName << " already exists.\n";
 		return os;
 	}
 };
@@ -55,16 +65,27 @@ public:
 		cliName = n;
 	}
 
-	string getName() {
-		return cliName;
-	}
-
 	friend ostream& operator<<(ostream &os, const ClienteInexistente &e) {
 		os << "\nERROR: customer " << e.cliName << " not found.\n";
 		return os;
 	}
 };
 
+class ClienteJaExiste {
+
+	string cliName;
+
+public:
+
+	ClienteJaExiste(const string &n) {
+		cliName = n;
+	}
+
+	friend ostream& operator<<(ostream& os, const ClienteJaExiste &e) {
+		os << "\nERROR: customer " << e.cliName << " already exists.\n";
+		return os;
+	}
+};
 class AppInexistente {
 
 	string appName;
@@ -75,12 +96,40 @@ public:
 		appName = n;
 	}
 
-	string getName() {
-		return appName;
-	}
-
 	friend ostream& operator<<(ostream &os, const AppInexistente &e) {
 		os << "\nERROR: app " << e.appName << " not found.\n";
+		return os;
+	}
+};
+
+class AppExisteNoCarrinho {
+
+	string appName;
+
+public:
+
+	AppExisteNoCarrinho(const string &n) {
+		appName = n;
+	}
+
+	friend ostream& operator<<(ostream &os, const AppExisteNoCarrinho &e) {
+		os << "\nERROR: couldn't add " << e.appName	<< " to cart - already exists\n";
+		return os;
+	}
+};
+
+class AppJaExiste {
+
+	string appName;
+
+public:
+
+	AppJaExiste(const string &n) {
+		appName = n;
+	}
+
+	friend ostream& operator<<(ostream &os, const AppJaExiste &e) {
+		os << "\nERROR: app " << e.appName << " already exits.\n";
 		return os;
 	}
 };
@@ -93,10 +142,6 @@ public:
 
 	JaExiste(const string &n) {
 		name = n;
-	}
-
-	string getName() {
-		return name;
 	}
 
 	friend ostream& operator<<(ostream &os, const JaExiste &e) {
@@ -115,10 +160,6 @@ public:
 		param = p;
 	}
 
-	string what() {
-		return param;
-	}
-
 	friend ostream& operator<<(ostream &os, const InvalidParameter &ip) {
 		os << "\nERROR: invalid parameter " << ip.param << "\n";
 		return os;
@@ -126,13 +167,18 @@ public:
 };
 
 class FileIOException  {
+
 	string fileName;
+
 public:
+
 	FileIOException(const string &fn) {
 		fileName = fn;
 	}
-	string what() {
-		return fileName;
+
+	friend ostream& operator<<(ostream &os, const FileIOException &e) {
+		os << "\nERROR: file I/O exception occured while trying to read/write " << e.fileName << "\n";
+		return os;
 	}
 };
 

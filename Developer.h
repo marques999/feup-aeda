@@ -107,6 +107,13 @@ public:
 	}
 
 	/**
+	 * @brief returns the apps published by this developer
+	 */
+	hashDeveloper getPublishedApps() const {
+		return removedApps;
+	}
+
+	/**
 	 * @brief increments the number of apps associated with the developer by one
 	 * @return const reference to 'this' object
 	 */
@@ -128,22 +135,6 @@ public:
 	 * @brief returns the developer type (individual/company)
 	 */
 	virtual DevType getType() const = 0;
-
-	/**
-	 * @brief accumulates sales
-	 * @param amount transaction amount
-	 */
-	void sale(double amount) {
-		balance += amount * 0.8;
-	}
-
-	/**
-	 * @brief sets the number of apps associated with the developer
-	 * @param n the new number of apps
-	 */
-	void setNumApps(unsigned n) {
-		this->numApps = n;
-	}
 
 	/**
 	 * @brief sets the developer with a new address
@@ -171,10 +162,43 @@ public:
 	}
 
 	/**
+	 * @brief pushes a new app to the published apps vector
+	 * @param ht a pointer to the new app
+	 */
+	void push(App* app) {
+		publishedApps.push_back(app);
+	}
+
+	/**
+	 * @brief removes an existing app from the published apps vector
+	 */
+	void pop(App* app) {
+
+		vector<App*>::iterator it = find(publishedApps.begin(), publishedApps.end(), app);
+
+		if (it != publishedApps.end()) {
+			publishedApps.erase(it);
+		}
+	}
+
+	/**
+	 * @brief prints the developer information in a user-friendly way
+	 */
+	virtual void print() const = 0;
+
+	/**
 	 * @brief reads developer information from a given file
 	 * @param fin the input filestream
 	 */
 	virtual bool read(ifstream &fin) = 0;
+
+	/**
+	 * @brief accumulates sales
+	 * @param amount transaction amount
+	 */
+	void sale(double amount) {
+		balance += amount * 0.8;
+	}
 
 	/**
 	 * @brief writes developer information to a given file
@@ -182,17 +206,14 @@ public:
 	 */
 	virtual void write(ofstream &fout) const = 0;
 
-	/**
-	 * @brief prints the developer information in a user-friendly way
-	 */
-	virtual void print() const = 0;
-
 protected:
 
-	int numApps;
 	string address;
 	string name;
 	double balance;
+
+	int numApps;
+	vector<App*> publishedApps;
 	hashDeveloper removedApps;
 };
 

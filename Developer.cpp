@@ -6,14 +6,13 @@
 * \author Diogo Marques
 * \author Fabio Carneiro
 *
-* \date Novembro 2014
+* \date Dezembro 2014
 *
 */
 
 #include "Developer.h"
 
 void Developer_Individual::print() const {
-
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 11 };
 	vector<string> tableRow = { name, address, "Individual", "-",};
@@ -21,7 +20,6 @@ void Developer_Individual::print() const {
 }
 
 void Developer_Empresa::print() const {
-
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 11 };
 	vector<string> tableRow = { name, address, "Empresa" , UI::Format(NIF, 9) };

@@ -32,130 +32,146 @@ public:
 
 	AppStore();
 	AppStore(string n);
-	virtual ~AppStore();
 
-	unsigned int getNumAppsDev(Developer* dev) const;
+	virtual ~AppStore();
 
 	////////////////////////////////////////////////////////
 	// CUTE test related								  //
-	bool insertDeveloper(Developer* dev);				  //
-	bool insertApp(App* app);						      //
 	unsigned int getNumAppsTotal() const;				  //
 	unsigned int getNumClientes() const;				  //
 	unsigned int getNumDevelopers() const;				  //
+	unsigned int getNumAppsDev(Developer* dev) const;	  //
 	vector<App*> getAppsFromDev(Developer* dev) const;    //
 	string getName() const;								  //
 	vector<App*> getApps() const;						  //
-	BST<App*> BSTGetApps() const;						  //
 	////////////////////////////////////////////////////////
 
 	// DEVELOPER
 
 	bool Developer_create();
 	bool Developer_delete();
-	int Developer_index(string name) const;
-	void Developer_menu();
-	void Developer_read();
-	void Developer_altTable(const vector<Developer*> &v) const;
-	void Developer_table(const vector<Developer*> &v) const;
+	int indexDeveloper(string devName) const;
+	bool insertDeveloper(Developer* dev);
 	bool Developer_update();
-	void Developer_write();
 
-	// CLIENTE
+	// CLIENTE C/R/U/D
 
-	bool insertCliente(Cliente* c1);
-	void Cliente_browse(int cliIndex);
-	bool Cliente_create();
+	bool createCliente();
 	bool deleteCliente();
-	int Cliente_index(string name);
-	void Cliente_menu();
-	void Cliente_read();
-	void Cliente_table(const vector<Cliente*> &c) const;
-	bool Cliente_update();
-	void Cliente_write() const;
+	bool insertCliente(Cliente* c1);
+	int indexCliente(string cliName);
+	bool updateCliente();
 
+	void Cliente_menu();
+	void Developer_menu();
+	void Cliente_browse(int cliIndex);
+
+	void GUIAppsTable(const vector<App> &v) const;
+	void GUIAppsTable(const vector<App*> &v) const;
+	void GUIClienteTable(const vector<Cliente*> &v) const;
+	void GUIDeveloperTable(const vector<Developer*> &v) const;
+	void GUIDeveloperTable2(const vector<Developer*> &v) const;
+	void GUISalesTable(const vector<Sale> &s) const;
 
 	void GUIAddFunds(int cliIndex);
 	void GUIAddToCart(int appIndex, int cliIndex);
 	void GUIActivateVoucher(int cliIndex);
 	void GUICheckoutCart(int cliIndex);
+	void GUIRateApp(int appIndex);
 	bool GUIRemoveFromCart();
+
 
 	// APP
 
-	bool App_create(int devIndex);
-	void App_checkout(int cliIndex, bool voucher);
-	bool App_delete(int devIndex);
-	void App_comment(int appIndex, int cliIndex);
-	int App_index(string name) const;
-	void App_list() const;
-	void App_menu();
-	void App_publish();
-	void App_print(int appIndex, int cliIndex);
-	void App_read();
-	void App_rate(int appIndex);
-	void App_table(const vector<App*> &a) const;
+	bool createApp(int devIndex);
+	bool deleteApp(int devIndex);
+	bool insertApp(App* app);
 	bool updateApp(int devIndex);
 	void updateApp(App* app);
-	void App_write() const;
 
+	int appIndex(string appName) const;
+
+	void App_list() const;
+	void App_menu();
+	void App_comment(int appIndex, int cliIndex);
+	void App_publish();
+	void App_print(int appIndex, int cliIndex);
+	void App_checkout(int cliIndex, bool voucher);
+
+	// Binary search tree
+
+	BST<App*> BSTGetApps() const;
 	bool BSTInsertApp(App* a);
 	bool BSTRemoveApp(App* a);
 	bool BSTRemoveApp(string appName);
 
 	// IO
 
-	bool read();
-	bool write();
+	void IOReadApps();
+	void IOWriteApps() const;
+	void IOReadClientes();
+	void IOWriteClientes() const;
+	void IOReadDevelopers();
+	void IOWriteDevelopers() const ;
+	void IOReadSales();
+	void IOWriteSales() const;
+	bool IOReadStore();
+	bool IOWriteStore() const;
 	
-	void resetCart();
-
 	// MENU
 
 	void Main_admin();
 	void Main_developer(int devIndex);
 	bool Main_user(int cliIndex);
 
+	void resetCart();
 
-	// SALES
-	void Sales_read();
-	void Sales_table(const vector<Sale> &s) const;
-	void Sales_write() const;
 	
 	// LIST
-
-	void listDevelopersByName() const;
-	void listDevelopersByApps() const;
-	void listDevelopersBySales() const;
 
 	void listClientesByName() const;
 	void listClientesBySaldo() const;
 	void listClientesByApps() const;
 
+	void listDevelopersByName() const;
+	void listDevelopersByApps() const;
+	void listDevelopersBySales() const;
+
 	void listComments(int appIndex) const;
 
-	void listPendingByDeveloper(Developer* dev) const;
+	vector<App*> listDeveloperPending(const Developer* dev) const;
+	vector<App> listDeveloperRemoved(int devIndex) const;
+
+	void listDevPendingByName(const Developer* dev) const;
+	void listDevPendingByPriority(const Developer* dev) const;
+
+	void listPendingByName() const;
 	void listPendingByPriority() const;
 
+	void listRemovedByName(int devIndex) const;
+	void listRemovedByPrice(int devIndex) const;
+
+	void listSalesByApps() const;
 	void listSalesByCliente() const;
 	void listSalesByCliente(int cliIndex) const;
-	void listSalesByApps() const;
+	void listSalesByID() const;
 	void listSalesByPrice() const;
-
-	void listTopNApps(int topN) const;
-	void listTop10Apps() const;
 
 	void listAppsByName() const;
 	void listAppsByCategory(string cat) const;
-	void listAppsByCliente(const Cliente &cli);
-	void listAppsByDate(bool ord) const;
-	void listAppsByDeveloper(Developer* dev) const;
+	void listAppsByCliente(int cliIndex) const;
+	void listAppsByDateAscending() const;
+	void listAppsByDateDescending() const;
+	void listAppsByDeveloper(const Developer* dev) const;
 	void listAppsByPrice() const;
 	void listAppsByPrice(double min, double max) const;
 	void listAppsByRating() const;
 	void listAppsByRating(unsigned value) const;
 	void listAppsPending() const;
 	void listAppsPendingByName() const;
+
+	void listTopNApps(int topN) const;
+	void listTop10Apps() const;
 
 	void freeVoucher();
 
@@ -165,6 +181,15 @@ private:
 	vector<Cliente*> sortClientes(vector<Cliente*> v, Criteria s) const;
 	vector<Developer*> sortDevelopers(const vector<Developer*> &v, Criteria s) const;
 	vector<Sale> sortSales(const vector<Sale> v, Criteria s) const;
+
+	vector<App*> queueToVector() const;
+	void queueInsertElement(App* elem);
+	bool queueRemoveElement(App* elem);
+	void queueUpdateElement(App* o, App* n);
+
+//	bool tableInsertElement(const App &elem);
+//	bool tableRemoveElement(const App& elem);
+//	bool tableUpdateElement(const App& o, const App &n);
 
 	string nome;
 	Sale cart;
