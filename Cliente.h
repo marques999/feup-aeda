@@ -1,17 +1,17 @@
 /*!
-* \file Cliente.h
-*
-* FEUP_AEDA1415_2MIEIC03_D
-* \author Carlos Soares
-* \author Diogo Marques
-* \author Fabio Carneiro
-*
-* \date Dezembro 2014
-*
-*/
+ * \file Cliente.h
+ *
+ * FEUP_AEDA1415_2MIEIC03_D
+ * \author Carlos Soares
+ * \author Diogo Marques
+ * \author Fabio Carneiro
+ *
+ * \date Dezembro 2014
+ *
+ */
 
-#ifndef CLIENTE_H
-#define CLIENTE_H
+#ifndef __CLIENTE_H_
+#define __CLIENTE_H_
 
 #include "Common.h"
 #include "UI.h"
@@ -27,7 +27,11 @@ public:
 	* @param n the customer's name
 	* @param s initial account balance (may add some funds later)
 	*/
-	Cliente(string n, double s);
+	Cliente(string n, double s) {
+		this->name = n;
+		this->saldo = s;
+		this->voucher = false;
+	}
 
 	/**
 	* @brief default destructor for 'Cliente' class
@@ -108,4 +112,4 @@ private:
 	vector<App*> owned;
 };
 
-#endif
+#endif /* __CLIENTE_H_ */

@@ -14,6 +14,7 @@
 #define __DEVELOPER_H_
 
 #include <tr1/unordered_set>
+
 #include "App.h"
 
 typedef enum {
@@ -174,7 +175,7 @@ public:
 	 */
 	void pop(App* app) {
 
-		vector<App*>::iterator it = find(publishedApps.begin(), publishedApps.end(), app);
+		vector<App*>::iterator it = find(publishedApps.begin(), publishedApps.end(), *app);
 
 		if (it != publishedApps.end()) {
 			publishedApps.erase(it);
@@ -267,6 +268,7 @@ public:
 };
 
 class Developer_Empresa: public Developer {
+
 public:
 
 	/**

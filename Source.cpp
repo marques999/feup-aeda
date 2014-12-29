@@ -24,7 +24,7 @@ int main() {
 	AppStore appStore("BL@CK M@RKET");
 
 	try {
-		appStore.read();
+		appStore.IOReadStore();
 	}
 	catch (FileIOException &e) {
 		cout << e;
@@ -36,6 +36,7 @@ int main() {
 	int userChoice;
 
 	while (true) {
+
 		try {
 
 			UI::DisplayFrame("APPSTORE SIMULATOR");
@@ -62,9 +63,10 @@ int main() {
 				throw InvalidParameter("choice");
 			}
 			switch (userChoice) {
+
 			case 0:
 
-				appStore.write();
+				appStore.IOWriteStore();
 
 				return 0;
 
@@ -75,31 +77,36 @@ int main() {
 				break;
 
 			case 2:
-			{
+
 				UI::DisplayFrame("DEVELOPER LOGIN");
 				cout << "Username: ";
 				getline(cin, tempUser);
-				int i = appStore.Developer_index(tempUser);
+				int i = appStore.indexDeveloper(tempUser);
 				if (i == -1) {
 					throw DeveloperInexistente(tempUser);
 				}
+
 				appStore.Main_developer(i);
+
 				break;
-			}
+
 			case 3:
-			{
+
 				UI::DisplayFrame("CUSTOMER LOGIN");
 				cout << "Username: ";
 				getline(cin, tempUser);
-				int i = appStore.Cliente_index(tempUser);
+				int i = appStore.indexCliente(tempUser);
 				if (i == -1) {
 					throw ClienteInexistente(tempUser);
 				}
+
 				appStore.Main_user(i);
+
 				break;
-			}
+
 			}
 		}
+
 		catch (DeveloperInexistente &e) {
 			cout << e;
 			system("pause");

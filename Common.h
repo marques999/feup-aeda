@@ -1,14 +1,14 @@
 /*!
-* \file Common.h
-*
-* FEUP_AEDA1415_2MIEIC03_D
-* \author Carlos Soares
-* \author Diogo Marques
-* \author Fabio Carneiro
-*
-* \date Dezembro 2014
-*
-*/
+ * \file Common.h
+ *
+ * FEUP_AEDA1415_2MIEIC03_D
+ * \author Carlos Soares
+ * \author Diogo Marques
+ * \author Fabio Carneiro
+ *
+ * \date Dezembro 2014
+ *
+ */
 
 #ifndef __COMMON_H_
 #define __COMMON_H_
@@ -194,4 +194,4 @@ bool sequentialSearch(const vector<Comparable> &v, Comparable value) {
 
 string to_upper(const string &s);
 
-#endif
+#endif /* __COMMON_H_ */

@@ -10,12 +10,10 @@
  *
  */
 
-#ifndef DATE_TIME_H
-#define DATE_TIME_H
+#ifndef __DATETIME_H_
+#define __DATETIME_H_
 
 #include "Common.h"
-
-using namespace std;
 
 struct tm tm_localtime() {
 	struct tm * timeinfo = new struct tm;
@@ -74,4 +72,4 @@ ostream &operator<<(ostream& os, struct tm t1) {
 	return os;
 }
 
-#endif
+#endif /* __DATETIME_H_ */

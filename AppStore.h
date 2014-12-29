@@ -1,14 +1,14 @@
 /*!
-* \file AppStore.h
-*
-* FEUP_AEDA1415_2MIEIC03_D
-* \author Carlos Soares
-* \author Diogo Marques
-* \author Fabio Carneiro
-*
-* \date Dezembro 2014
-*
-*/
+ * \file AppStore.h
+ *
+ * FEUP_AEDA1415_2MIEIC03_D
+ * \author Carlos Soares
+ * \author Diogo Marques
+ * \author Fabio Carneiro
+ *
+ * \date Dezembro 2014
+ *
+ */
 
 #ifndef __APPSTORE_H_
 #define __APPSTORE_H_
@@ -73,13 +73,21 @@ public:
 	void GUIDeveloperTable2(const vector<Developer*> &v) const;
 	void GUISalesTable(const vector<Sale> &s) const;
 
+	void GUIAdminBar() const;
+	void GUIDeveloperBar(int devIndex) const;
+	void GUIClienteBar(int cliIndex) const;
+
 	void GUIAddFunds(int cliIndex);
 	void GUIAddToCart(int appIndex, int cliIndex);
 	void GUIActivateVoucher(int cliIndex);
 	void GUICheckoutCart(int cliIndex);
+	void GUIFreeVoucher();
 	void GUIRateApp(int appIndex);
+	void GUISearchCategory() const;
+	void GUISearchDeveloper() const;
+	void GUISearchPrice() const;
+	void GUISearchRating() const;
 	bool GUIRemoveFromCart();
-
 
 	// APP
 
@@ -177,7 +185,8 @@ public:
 
 private:
 
-	vector<App*> sortApps(const vector<App*> v, Criteria s) const;
+	vector<App*> sortApps(const vector<App> &v, Criteria s) const;
+	vector<App*> sortApps(const vector<App*> &v, Criteria s) const;
 	vector<Cliente*> sortClientes(vector<Cliente*> v, Criteria s) const;
 	vector<Developer*> sortDevelopers(const vector<Developer*> &v, Criteria s) const;
 	vector<Sale> sortSales(const vector<Sale> v, Criteria s) const;

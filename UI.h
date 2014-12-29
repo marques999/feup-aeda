@@ -1,27 +1,19 @@
 ﻿/*!
-* \file UI.h
-*
-* FEUP_AEDA1415_2MIEIC03_D
-* \author Carlos Soares
-* \author Diogo Marques
-* \author Fabio Carneiro
-*
-* \date Outubro 2014
-*
-*/
+ * \file UI.h
+ *
+ * FEUP_AEDA1415_2MIEIC03_D
+ * \author Carlos Soares
+ * \author Diogo Marques
+ * \author Fabio Carneiro
+ *
+ * \date Dezembro 2014
+ *
+ */
 
-#ifndef UI_H_
-#define UI_H_
+#ifndef __UI_H_
+#define __UI_H_
 
-#include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <vector>
-#include <conio.h>
-#include <stdlib.h>
-#include <math.h>
-
-using namespace std;
+#include "Common.h"
 
 namespace UI
 {

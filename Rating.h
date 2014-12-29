@@ -1,14 +1,14 @@
 /*!
-* \file Rating.h
-*
-* FEUP_AEDA1415_2MIEIC03_D
-* \author Carlos Soares
-* \author Diogo Marques
-* \author Fabio Carneiro
-*
-* \date Dezembro 2014
-*
-*/
+ * \file Rating.h
+ *
+ * FEUP_AEDA1415_2MIEIC03_D
+ * \author Carlos Soares
+ * \author Diogo Marques
+ * \author Fabio Carneiro
+ *
+ * \date Dezembro 2014
+ *
+ */
 
 #ifndef __RATING_H_
 #define __RATING_H_
@@ -16,6 +16,7 @@
 #include "Common.h"
 
 class Rating {
+
 public:
 
 	/**
@@ -54,4 +55,4 @@ public:
 	vector<uint8_t> r;
 };
 
-#endif /* __RATING_H */
+#endif /* __RATING_H_ */

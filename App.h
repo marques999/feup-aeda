@@ -5,14 +5,13 @@
  * \author Carlos Soares
  * \author Diogo Marques
  * \author Fabio Carneiro
- * \author Joao Santos
  *
- * \date Novembro 2014
+ * \date Dezembro 2014
  *
  */
 
-#ifndef APP_H_
-#define APP_H_
+#ifndef __APP_H_
+#define __APP_H_
 
 #include "Cliente.h"
 #include "Rating.h"
@@ -63,14 +62,14 @@ public:
 
 	/**
 	 * @brief sets the app with a new name
-	 * @param newName the new app name
+	 * @param newName a new app name
 	 */
 	void setName(string newName) {
 		this->name = newName;
 	}
 
 	/**
-	 * @brief returns the current app price
+	 * @brief returns the app price
 	 */
 	double getPrice() const {
 		return this->price;
@@ -78,7 +77,7 @@ public:
 
 	/**
 	 * @brief sets the app with a new price
-	 * @param newPrice the new price for the app
+	 * @param newPrice a new price for the app
 	 */
 	void setPrice(double newPrice) {
 		this->price = newPrice;
@@ -93,7 +92,7 @@ public:
 
 	/**
 	 * @brief sets the app with a new category
-	 * @param newCategory the new category for the app
+	 * @param newCategory a new category for the app
 	 */
 	void setCategory(string newCategory) {
 		this->category = newCategory;
@@ -108,14 +107,14 @@ public:
 
 	/**
 	 * @brief sets the app with a new publish date
-	 * @param timeinfo a time struct containing the new date
+	 * @param timeinfo a data structure containing the new date
 	 */
 	void setDate(struct tm timeinfo) {
 		this->date = timeinfo;
 	}
 
 	/**
-	 * @brief returns a time struct for the publish date
+	 * @brief returns a data structure containing the publish date
 	 */
 	struct tm getDate() const {
 		return date;
@@ -123,7 +122,7 @@ public:
 
 	/**
 	* @brief sets the app with a new description
-	* @param newDescription string containing the new description
+	* @param newDescription a string containing the new description
 	*/
 	void setDescription(string newDescription) {
 		this->description = newDescription;
@@ -137,7 +136,7 @@ public:
 	}
 
 	/**
-	 * @brief returns the app developer
+	 * @brief returns the developer who published this app
 	 */
 	Developer* getDeveloper() const {
 		return this->dev;
@@ -152,14 +151,14 @@ public:
 	}
 
 	/**
-	 * @brief returns the ratings given by customers
+	 * @brief returns an object containing the ratings given by customers
 	 */
 	Rating getRating() const {
 		return this->rating;
 	}
 
 	/**
-	 * @brief returns the number of customers who purchased the app
+	 * @brief returns the number of customers who have purchased this app
 	 */
 	int getSales() const {
 		return this->sales;
@@ -182,7 +181,7 @@ public:
 	}
 
 	/**
-	 * @brief rates the application
+	 * @brief updates the application rating
 	 * @param r the rating given by the customer
 	 */
 	void classificar(unsigned r) {
@@ -191,8 +190,8 @@ public:
 
 	/**
 	 * @brief writes a new comment
-	 * @param cli the customer name
-	 * @param c the comment written by the customer
+	 * @param cli the customer's name
+	 * @param c the comment left by the customer
 	 */
 	bool comentar(string cli, string c);
 
@@ -203,7 +202,7 @@ public:
 	void read(ifstream &fin);
 
 	/**
-	 * @brief increments the amount of times the app has been purchased
+	 * @brief increments the amount of times this app has been purchased
 	 */
 	void sale() {
 		this->sales++;
