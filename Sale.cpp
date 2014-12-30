@@ -20,7 +20,7 @@ bool Sale::pushApp(App *a) {
 
 	for (; it != appsBought.end(); it++) {
 		if ((*it) == a) {
-			throw JaExiste((*it)->getName());
+			throw AppExisteNoCarrinho((*it)->getName());
 		}
 	}
 

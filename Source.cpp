@@ -20,7 +20,42 @@ string to_upper(const string &s) {
 	return r;
 }
 
+void GUIDeveloperLogin(AppStore &as) {
+
+	string developerName;
+
+	UI::DisplayFrame("DEVELOPER LOGIN");
+
+	cout << "Username: ";
+	getline(cin, developerName);
+
+	int i = as.indexDeveloper(developerName);
+	if (i == -1) {
+		throw DeveloperInexistente(developerName);
+	}
+
+	as.GUIDeveloperMenu(i);
+}
+
+void GUIClienteLogin(AppStore &as) {
+
+	string clienteName;
+
+	UI::DisplayFrame("CUSTOMER LOGIN");
+
+	cout << "Username: ";
+	getline(cin, clienteName);
+
+	int i = as.indexCliente(clienteName);
+	if (i == -1) {
+		throw ClienteInexistente(clienteName);
+	}
+
+	as.GUIClienteMenu(i);
+}
+
 int main() {
+
 	AppStore appStore("BL@CK M@RKET");
 
 	try {
@@ -59,51 +94,32 @@ int main() {
 			cout << "Please select an option: ";
 			getline(cin, tempStr);
 			userChoice = atoi(tempStr.c_str());
+
 			if (userChoice < 0 || userChoice > 3) {
 				throw InvalidParameter("choice");
 			}
+
 			switch (userChoice) {
 
 			case 0:
 
 				appStore.IOWriteStore();
-
 				return 0;
 
 			case 1:
 
-				appStore.Main_admin();
-
+				appStore.GUIAdminMenu();
 				break;
 
 			case 2:
 
-				UI::DisplayFrame("DEVELOPER LOGIN");
-				cout << "Username: ";
-				getline(cin, tempUser);
-				int i = appStore.indexDeveloper(tempUser);
-				if (i == -1) {
-					throw DeveloperInexistente(tempUser);
-				}
-
-				appStore.Main_developer(i);
-
+				GUIDeveloperLogin(appStore);
 				break;
 
 			case 3:
 
-				UI::DisplayFrame("CUSTOMER LOGIN");
-				cout << "Username: ";
-				getline(cin, tempUser);
-				int i = appStore.indexCliente(tempUser);
-				if (i == -1) {
-					throw ClienteInexistente(tempUser);
-				}
-
-				appStore.Main_user(i);
-
+				GUIClienteLogin(appStore);
 				break;
-
 			}
 		}
 

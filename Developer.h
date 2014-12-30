@@ -110,8 +110,8 @@ public:
 	/**
 	 * @brief returns the apps published by this developer
 	 */
-	hashDeveloper getPublishedApps() const {
-		return removedApps;
+	vector<App*> getPublishedApps() const {
+		return publishedApps;
 	}
 
 	/**
@@ -154,31 +154,45 @@ public:
 	}
 
 	/**
-	 * @brief sets the developer with a new removed apps table
-	 * @param ht the new hashtable containing removed apps (unordered_set)
+	 * @brief pushes a new app to the published apps vector
+	 * @param app a pointer to the new app
 	 */
-	void setRemovedApps(const hashDeveloper &ht) {
-		this->removedApps.clear();
-		this->removedApps = ht;
+	void pushp(App* app) {
+		publishedApps.push_back(app);
 	}
 
 	/**
 	 * @brief pushes a new app to the published apps vector
-	 * @param ht a pointer to the new app
+	 * @param app a pointer to the new app
 	 */
-	void push(App* app) {
-		publishedApps.push_back(app);
+	void pushr(const App &app) {
+		removedApps.insert(app);
 	}
 
 	/**
 	 * @brief removes an existing app from the published apps vector
 	 */
-	void pop(App* app) {
+	void popp(App* app) {
 
-		vector<App*>::iterator it = find(publishedApps.begin(), publishedApps.end(), *app);
+		vector<App*>::iterator it = publishedApps.begin();
 
-		if (it != publishedApps.end()) {
-			publishedApps.erase(it);
+		for (; it != publishedApps.end(); it++) {
+			if (it != publishedApps.end()) {
+				publishedApps.erase(it);
+				return;
+			}
+		}
+	}
+
+	/**
+	 * @brief removes an existing app from the removed apps table
+	 */
+	void popr(const App& app) {
+
+		hashDeveloper::iterator it = removedApps.find(app);
+
+		if (it != removedApps.end()) {
+			removedApps.erase(it);
 		}
 	}
 
@@ -274,7 +288,7 @@ public:
 	/**
 	 * @brief default constructor for 'Developer_Empresa' class
 	 */
-	Developer_Empresa() {
+	Developer_Empresa() : NIF(0) {
 	}
 
 	/**
@@ -283,8 +297,7 @@ public:
 	 * @param a company address
 	 * @param id company tax ID number
 	 */
-	Developer_Empresa(string n, string a, unsigned id) :
-			Developer(n, a) {
+	Developer_Empresa(string n, string a, unsigned id) : Developer(n, a) {
 		ostringstream os;
 		os << id;
 		if (os.str().length() != 9) {

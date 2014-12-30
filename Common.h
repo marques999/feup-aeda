@@ -19,6 +19,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <cstdlib>
 #include <ctime>
 
 using namespace std;
@@ -130,22 +131,6 @@ public:
 
 	friend ostream& operator<<(ostream &os, const AppJaExiste &e) {
 		os << "\nERROR: app " << e.appName << " already exits.\n";
-		return os;
-	}
-};
-
-class JaExiste {
-
-	string name;
-
-public:
-
-	JaExiste(const string &n) {
-		name = n;
-	}
-
-	friend ostream& operator<<(ostream &os, const JaExiste &e) {
-		os << "\nERROR: customer " << e.name << " already exists.\n";
 		return os;
 	}
 };

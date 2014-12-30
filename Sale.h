@@ -30,7 +30,7 @@ public:
 	/**
 	 * @brief default constructor for 'Sale' class
 	 */
-	Sale() {
+	Sale() : client(NULL), price(0.0) {
 	}
 
 	/**
@@ -39,8 +39,7 @@ public:
 	 * @param AppSold a vector containing the apps bought by the customer in a purchase
 	 * @param value the amount paid by the customer
 	 */
-	Sale(Cliente* Buyer, vector<App*> AppsSold, double value) :
-			client(Buyer), appsBought(AppsSold), price(value) {
+	Sale(Cliente* Buyer, vector<App*> AppsSold, double value) : client(Buyer), appsBought(AppsSold), price(value) {
 	}
 
 	/**

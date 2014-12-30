@@ -23,16 +23,15 @@ struct tm tm_localtime() {
 	return *timeinfo;
 }
 
-void tm_write(struct tm* timeinfo, ofstream &fout) {
-	time_t rawtime = mktime(timeinfo);
+void tm_write(struct tm timeinfo, ofstream &fout) {
+	time_t rawtime = mktime(&timeinfo);
 	fout.write((char*)&rawtime, sizeof(time_t));
 }
 
-struct tm tm_read(time_t rawtime, ifstream &fout) {
-	struct tm *timeinfo = new struct tm;
-	fout.read((char*)&rawtime, sizeof(time_t));
+void tm_read(struct tm *timeinfo, ifstream &fin) {
+	time_t rawtime;
+	fin.read((char*)&rawtime, sizeof(time_t));
 	timeinfo = localtime(&rawtime);
-	return *timeinfo;
 }
 
 bool operator<(struct tm t1, struct tm t2) {

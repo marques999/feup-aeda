@@ -21,10 +21,20 @@
 
 typedef enum  {
 	APP_NAME, APP_DATE, APP_PRICE, APP_RATING,
-	DEV_NAME, DEV_APPS, DEV_SALES,
+} AppSort;
+
+typedef enum {
 	CLIENTE_NAME, CLIENTE_APPS, CLIENTE_SALDO,
+} ClienteSort;
+
+typedef enum {
+	DEV_NAME, DEV_APPS, DEV_SALES,
+
+} DeveloperSort;
+
+typedef enum {
 	SALES_CLIENTE, SALES_PRICE, SALES_APPS
-} Criteria;
+} SaleSort;
 
 class AppStore
 {
@@ -36,7 +46,7 @@ public:
 	virtual ~AppStore();
 
 	////////////////////////////////////////////////////////
-	// CUTE test related								  //
+	// CUTE tests related								  //
 	unsigned int getNumAppsTotal() const;				  //
 	unsigned int getNumClientes() const;				  //
 	unsigned int getNumDevelopers() const;				  //
@@ -46,21 +56,24 @@ public:
 	vector<App*> getApps() const;						  //
 	////////////////////////////////////////////////////////
 
-	// DEVELOPER
+	////////////////////////////////////////////////////////
+	//					 CLIENTE C/R/U/D				  //
+	////////////////////////////////////////////////////////
+	bool createCliente();
+	bool deleteCliente();
+	bool insertCliente(Cliente* c1);
+	int indexCliente(string cliName);
+	bool updateCliente();
 
+	////////////////////////////////////////////////////////
+	//			    	DEVELOPER C/R/U/D				  //
+	////////////////////////////////////////////////////////
 	bool Developer_create();
 	bool Developer_delete();
 	int indexDeveloper(string devName) const;
 	bool insertDeveloper(Developer* dev);
 	bool Developer_update();
 
-	// CLIENTE C/R/U/D
-
-	bool createCliente();
-	bool deleteCliente();
-	bool insertCliente(Cliente* c1);
-	int indexCliente(string cliName);
-	bool updateCliente();
 
 	void Cliente_menu();
 	void Developer_menu();
@@ -68,6 +81,7 @@ public:
 
 	void GUIAppsTable(const vector<App> &v) const;
 	void GUIAppsTable(const vector<App*> &v) const;
+	void GUIAppsTable2(const vector<App*> &v) const;
 	void GUIClienteTable(const vector<Cliente*> &v) const;
 	void GUIDeveloperTable(const vector<Developer*> &v) const;
 	void GUIDeveloperTable2(const vector<Developer*> &v) const;
@@ -116,31 +130,51 @@ public:
 	// IO
 
 	void IOReadApps();
+	bool IOReadApp(ifstream &fin);
+	void IOReadRemovedApps();
+	bool IOReadRemovedApp(ifstream &fin);
+	void IOWriteApp(App* app, ofstream &fout) const;
+	void IOWriteApp(const App &app, ofstream &fout) const;
 	void IOWriteApps() const;
+	void IOWriteRemovedApps() const;
+
 	void IOReadClientes();
+	void IOWriteCliente(Cliente* cli, ofstream &fout) const;
 	void IOWriteClientes() const;
 	void IOReadDevelopers();
-	void IOWriteDevelopers() const ;
+	void IOWriteDeveloper(Developer* dev, ofstream &fout) const;
+	void IOWriteDevelopers() const;
+
 	void IOReadSales();
+	void IOWriteSale(const Sale &s, ofstream& fout) const;
 	void IOWriteSales() const;
 	bool IOReadStore();
 	bool IOWriteStore() const;
 	
+	void IOReadSale(ifstream &fin);
+
 	// MENU
 
-	void Main_admin();
-	void Main_developer(int devIndex);
-	bool Main_user(int cliIndex);
+	void GUIAdminMenu();
+	void GUIDeveloperMenu(int devIndex);
+	bool GUIClienteMenu(int cliIndex);
 
 	void resetCart();
 
 	
 	// LIST
 
+
+	////////////////////////////////////////////////////////
+	//			    	  LIST CLIENTES					  //
+	////////////////////////////////////////////////////////
 	void listClientesByName() const;
 	void listClientesBySaldo() const;
 	void listClientesByApps() const;
 
+	////////////////////////////////////////////////////////
+	//			         LIST DEVELOPERS				  //
+	////////////////////////////////////////////////////////
 	void listDevelopersByName() const;
 	void listDevelopersByApps() const;
 	void listDevelopersBySales() const;
@@ -185,11 +219,11 @@ public:
 
 private:
 
-	vector<App*> sortApps(const vector<App> &v, Criteria s) const;
-	vector<App*> sortApps(const vector<App*> &v, Criteria s) const;
-	vector<Cliente*> sortClientes(vector<Cliente*> v, Criteria s) const;
-	vector<Developer*> sortDevelopers(const vector<Developer*> &v, Criteria s) const;
-	vector<Sale> sortSales(const vector<Sale> v, Criteria s) const;
+	vector<App> sortApps(const vector<App> &v, AppSort s) const;
+	vector<App*> sortApps(const vector<App*> &v, AppSort s) const;
+	vector<Cliente*> sortClientes(vector<Cliente*> v, ClienteSort s) const;
+	vector<Developer*> sortDevelopers(const vector<Developer*> &v, DeveloperSort s) const;
+	vector<Sale> sortSales(const vector<Sale> v, SaleSort s) const;
 
 	vector<App*> queueToVector() const;
 	void queueInsertElement(App* elem);

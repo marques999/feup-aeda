@@ -32,6 +32,13 @@ namespace UI
 	void Display(string s);
 
 	/**
+	* @brief displays a brief error or informative message
+	* @param s string to be displayed
+	* @return void
+	*/
+	void DisplayMessage(string s);
+
+	/**
 	* @brief displays the table header
 	* @param c the number of columns
 	* @param labels an array containing the labels

@@ -1,15 +1,14 @@
 /*!
-* \file UI.cpp
-*
-* FEUP_AEDA1415_2MIEIC03_D
-* \author Carlos Soares
-* \author Diogo Marques
-* \author Fabio Carneiro
-* \author Joao Santos
-*
-* \date Outubro 2014
-*
-*/
+ * \file UI.cpp
+ *
+ * FEUP_AEDA1415_2MIEIC03_D
+ * \author Carlos Soares
+ * \author Diogo Marques
+ * \author Fabio Carneiro
+ *
+ * \date Dezembro 2014
+ *
+ */
 
 #include "UI.h"
 
@@ -33,6 +32,11 @@ namespace UI {
 		}
 		cout << "|" << endl;
 		cout << "\t\t-------------------------------------------------" << endl << endl;
+	}
+
+	void DisplayMessage(string msg)
+	{
+		cout << endl << msg << endl;
 	}
 
 	void Display(string s)
