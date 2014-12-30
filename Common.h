@@ -135,6 +135,22 @@ public:
 	}
 };
 
+class PermissoesInsuficientes {
+
+	string param;
+
+public:
+
+	PermissoesInsuficientes(const string &n) {
+		param = n;
+	}
+
+	friend ostream& operator<<(ostream &os, const PermissoesInsuficientes &e) {
+		os << "ERROR: permission denied - can't access " << e.param << " from other developers.\n";
+		return os;
+	}
+};
+
 class InvalidParameter {
 
 	string param;

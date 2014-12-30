@@ -116,7 +116,9 @@ public:
 	void App_list() const;
 	void App_menu();
 	void App_comment(int appIndex, int cliIndex);
-	void App_publish();
+	void publishApp();
+	void GUIRemovedApps(int devIndex);
+	void publishRemovedApp(int devIndex);
 	void App_print(int appIndex, int cliIndex);
 	void App_checkout(int cliIndex, bool voucher);
 
@@ -127,6 +129,8 @@ public:
 	bool BSTRemoveApp(App* a);
 	bool BSTRemoveApp(string appName);
 
+	bool updatePendingApp(int devIndex);
+	bool deletePendingApp(int devIndex);
 	// IO
 
 	void IOReadApps();
@@ -226,8 +230,10 @@ private:
 	vector<Sale> sortSales(const vector<Sale> v, SaleSort s) const;
 
 	vector<App*> queueToVector() const;
-	void queueInsertElement(App* elem);
+	App* queueFindElement(string name, int devIndex) const;
 	bool queueRemoveElement(App* elem);
+	void queueInsertElement(App* elem);
+	bool queueRemoveElement(string name);
 	void queueUpdateElement(App* o, App* n);
 
 //	bool tableInsertElement(const App &elem);

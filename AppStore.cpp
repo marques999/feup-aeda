@@ -16,11 +16,13 @@
 #include <algorithm>
 #include <climits>
 
-AppStore::AppStore() : appsRanking(new App("", 0, "", "")) {
+AppStore::AppStore() :
+		appsRanking(new APP_NOT_FOUND) {
 	resetCart();
 }
 
-AppStore::AppStore(string n) : nome(n), appsRanking(new App("", 0, "", "")) {
+AppStore::AppStore(string n) :
+		nome(n), appsRanking(new APP_NOT_FOUND) {
 	resetCart();
 }
 
@@ -206,28 +208,39 @@ vector<App*> AppStore::sortApps(const vector<App*> &v, AppSort s) const {
 
 		if (s == APP_NAME) {
 
-			for (j = i; j > 0 && tempApp->getName() < sortedVector[j - 1]->getName(); j--) {
+			for (j = i;
+					j > 0 && tempApp->getName() < sortedVector[j - 1]->getName();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == APP_PRICE) {
 
-			for (j = i; j > 0 && tempApp->getPrice() < sortedVector[j - 1]->getPrice(); j--) {
+			for (j = i;
+					j > 0
+							&& tempApp->getPrice()
+									< sortedVector[j - 1]->getPrice(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == APP_RATING) {
 
-			for (j = i; j > 0 && tempApp->getRating().get() > sortedVector[j - 1]->getRating().get(); j--) {
+			for (j = i;
+					j > 0
+							&& tempApp->getRating().get()
+									> sortedVector[j - 1]->getRating().get();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == APP_DATE) {
 
-			for (j = i; j > 0 && tempApp->getDate() < sortedVector[j - 1]->getDate(); j--) {
+			for (j = i;
+					j > 0 && tempApp->getDate() < sortedVector[j - 1]->getDate();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
@@ -249,28 +262,38 @@ vector<App> AppStore::sortApps(const vector<App> &v, AppSort s) const {
 
 		if (s == APP_NAME) {
 
-			for (j = i; j > 0 && tempApp.getName() < sortedVector[j - 1].getName(); j--) {
+			for (j = i;
+					j > 0 && tempApp.getName() < sortedVector[j - 1].getName();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == APP_PRICE) {
 
-			for (j = i; j > 0 && tempApp.getPrice() < sortedVector[j - 1].getPrice(); j--) {
+			for (j = i;
+					j > 0 && tempApp.getPrice() < sortedVector[j - 1].getPrice();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == APP_RATING) {
 
-			for (j = i; j > 0 && tempApp.getRating().get() > sortedVector[j - 1].getRating().get(); j--) {
+			for (j = i;
+					j > 0
+							&& tempApp.getRating().get()
+									> sortedVector[j - 1].getRating().get();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == APP_DATE) {
 
-			for (j = i; j > 0 && tempApp.getDate() < sortedVector[j - 1].getDate(); j--) {
+			for (j = i;
+					j > 0 && tempApp.getDate() < sortedVector[j - 1].getDate();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
@@ -281,7 +304,8 @@ vector<App> AppStore::sortApps(const vector<App> &v, AppSort s) const {
 	return sortedVector;
 }
 
-vector<Cliente*> AppStore::sortClientes(vector<Cliente*> v, ClienteSort s) const {
+vector<Cliente*> AppStore::sortClientes(vector<Cliente*> v,
+		ClienteSort s) const {
 
 	vector<Cliente*> sortedVector = v;
 
@@ -292,21 +316,30 @@ vector<Cliente*> AppStore::sortClientes(vector<Cliente*> v, ClienteSort s) const
 
 		if (s == CLIENTE_NAME) {
 
-			for (j = i;	j > 0 && tempCliente->getName() < sortedVector[j - 1]->getName(); j--) {
+			for (j = i;
+					j > 0
+							&& tempCliente->getName()
+									< sortedVector[j - 1]->getName(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == CLIENTE_APPS) {
 
-			for (j = i; j > 0 && tempCliente->getNumApps() > sortedVector[j - 1]->getNumApps(); j--) {
+			for (j = i;
+					j > 0
+							&& tempCliente->getNumApps()
+									> sortedVector[j - 1]->getNumApps(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == CLIENTE_SALDO) {
 
-			for (j = i; j > 0 && tempCliente->getSaldo() > sortedVector[j - 1]->getSaldo(); j--) {
+			for (j = i;
+					j > 0
+							&& tempCliente->getSaldo()
+									> sortedVector[j - 1]->getSaldo(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
@@ -328,21 +361,32 @@ vector<Sale> AppStore::sortSales(vector<Sale> v, SaleSort s) const {
 
 		if (s == SALES_CLIENTE) {
 
-			for (j = i; j > 0 && tempSale.getOwner()->getName() < sortedVector[j - 1].getOwner()->getName(); j--) {
+			for (j = i;
+					j > 0
+							&& tempSale.getOwner()->getName()
+									< sortedVector[j - 1].getOwner()->getName();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == SALES_PRICE) {
 
-			for (j = i; j > 0 && tempSale.getPrice() > sortedVector[j - 1].getPrice(); j--) {
+			for (j = i;
+					j > 0
+							&& tempSale.getPrice()
+									> sortedVector[j - 1].getPrice(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == SALES_APPS) {
 
-			for (j = i; j > 0 && tempSale.getApps().size() > sortedVector[j - 1].getApps().size(); j--) {
+			for (j = i;
+					j > 0
+							&& tempSale.getApps().size()
+									> sortedVector[j - 1].getApps().size();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
@@ -353,7 +397,8 @@ vector<Sale> AppStore::sortSales(vector<Sale> v, SaleSort s) const {
 	return sortedVector;
 }
 
-vector<Developer*> AppStore::sortDevelopers(const vector<Developer*> &v, DeveloperSort s) const {
+vector<Developer*> AppStore::sortDevelopers(const vector<Developer*> &v,
+		DeveloperSort s) const {
 
 	vector<Developer*> sortedVector = v;
 
@@ -364,21 +409,29 @@ vector<Developer*> AppStore::sortDevelopers(const vector<Developer*> &v, Develop
 
 		if (s == DEV_NAME) {
 
-			for (j = i;	j > 0 && tempDev->getName() < sortedVector[j - 1]->getName(); j--) {
+			for (j = i;
+					j > 0 && tempDev->getName() < sortedVector[j - 1]->getName();
+					j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == DEV_APPS) {
 
-			for (j = i; j > 0 && tempDev->getNumApps() > sortedVector[j - 1]->getNumApps(); j--) {
+			for (j = i;
+					j > 0
+							&& tempDev->getNumApps()
+									> sortedVector[j - 1]->getNumApps(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
 
 		else if (s == DEV_SALES) {
 
-			for (j = i; j > 0 && tempDev->getBalance() > sortedVector[j - 1]->getBalance(); j--) {
+			for (j = i;
+					j > 0
+							&& tempDev->getBalance()
+									> sortedVector[j - 1]->getBalance(); j--) {
 				sortedVector[j] = sortedVector[j - 1];
 			}
 		}
@@ -398,7 +451,8 @@ void AppStore::GUIClienteTable(const vector<Cliente*> &v) const {
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 32, 10, 10, 9 };
 
-	vector<string> tableLabel = { " Customer name", " No. Apps ", " Balance", " Voucher" };
+	vector<string> tableLabel = { " Customer name", " No. Apps ", " Balance",
+			" Voucher" };
 	vector<Cliente*>::const_iterator it = v.begin();
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
@@ -434,7 +488,8 @@ void AppStore::GUIDeveloperTable(const vector<Developer*> &v) const {
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 11 };
 
-	vector<string> tableLabel = { " Developer name", " Address", " Type ", " NIF" };
+	vector<string> tableLabel = { " Developer name", " Address", " Type ",
+			" NIF" };
 	vector<Developer*>::const_iterator it = v.begin();
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
@@ -449,7 +504,8 @@ void AppStore::GUIDeveloperTable2(const vector<Developer*> &v) const {
 	const int rowCount = 4;
 	int tableLength[rowCount] = { 24, 24, 12, 12 };
 
-	vector<string> tableLabel = { " Developer name", " Address", " No. Apps ", " Balance" };
+	vector<string> tableLabel = { " Developer name", " Address", " No. Apps ",
+			" Balance" };
 	vector<Developer*>::const_iterator it = v.begin();
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
@@ -532,7 +588,7 @@ vector<App> AppStore::listDeveloperRemoved(int devIndex) const {
 void AppStore::listRemovedByName(int devIndex) const {
 
 	vector<App> sortedVector = listDeveloperRemoved(devIndex);
-	GUIAppsTable(sortApps(sortedVector,APP_NAME));
+	GUIAppsTable(sortApps(sortedVector, APP_NAME));
 }
 
 void AppStore::listRemovedByPrice(int devIndex) const {
@@ -557,7 +613,7 @@ void AppStore::GUISalesTable(const vector<Sale> &s) const {
 
 	for (; it != s.end(); it++) {
 		vector<string> tableRow(rowCount);
-		tableRow[0] =  it->getOwner()->getName();
+		tableRow[0] = it->getOwner()->getName();
 		tableRow[1] = UI::Format(it->getApps().size(), 5);
 		tableRow[2] = UI::FormatPrice(it->getPrice());
 		UI::DisplayTableRow(rowCount, tableRow, tableLength);
@@ -603,7 +659,8 @@ void AppStore::GUIAppsTable(const vector<App*> &v) const {
 	const int rowCount = 5;
 	int tableLength[rowCount] = { 24, 16, 12, 8, 10 };
 
-	vector<string> tableLabel = { " Name", " Developer", " Category", " Price", " Rating" };
+	vector<string> tableLabel = { " Name", " Developer", " Category", " Price",
+			" Rating" };
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 	for (unsigned int i = 0; i < v.size(); i++) {
@@ -634,7 +691,8 @@ void AppStore::GUIAppsTable2(const vector<App*> &v) const {
 	const int rowCount = 5;
 	int tableLength[rowCount] = { 24, 16, 12, 8, 10 };
 
-	vector<string> tableLabel = { " Name", " Developer", " Date ", " Price", " Rating" };
+	vector<string> tableLabel = { " Name", " Developer", " Date ", " Price",
+			" Rating" };
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 	for (unsigned int i = 0; i < v.size(); i++) {
@@ -660,13 +718,13 @@ void AppStore::GUIAppsTable2(const vector<App*> &v) const {
 	}
 }
 
-
 void AppStore::GUIAppsTable(const vector<App> &v) const {
 
 	const int rowCount = 5;
 	int tableLength[rowCount] = { 24, 16, 12, 8, 10 };
 
-	vector<string> tableLabel = { " Name", " Developer", " Category", " Price", " Rating" };
+	vector<string> tableLabel = { " Name", " Developer", " Category", " Price",
+			" Rating" };
 	vector<App>::const_iterator it = v.begin();
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
@@ -777,7 +835,8 @@ void AppStore::listAppsByRating(unsigned value) const {
 	GUIAppsTable(sortApps(sortedVector, APP_NAME));
 }
 
-const string voucherNoCostumers = "\nINFORMATION: not enough customers on the database\n";
+const string voucherNoCostumers =
+		"\nINFORMATION: not enough customers on the database\n";
 
 void AppStore::GUIFreeVoucher() {
 
@@ -791,7 +850,8 @@ void AppStore::GUIFreeVoucher() {
 		if (clientes[j]->getVoucher() == false) {
 			clientes[j]->setVoucher(true);
 			numeroClientes--;
-			cout << "\nINFORMATION: " << clientes[j]->getName() << " has recieved a voucher!\n";
+			cout << "\nINFORMATION: " << clientes[j]->getName()
+					<< " has recieved a voucher!\n";
 		}
 	}
 }
@@ -810,7 +870,8 @@ bool AppStore::insertApp(App* app) {
 
 bool AppStore::insertDeveloper(Developer* dev) {
 
-	vector<Developer*>::const_iterator it = find(developers.begin(), developers.end(), dev);
+	vector<Developer*>::const_iterator it = find(developers.begin(),
+			developers.end(), dev);
 
 	if (it == developers.end()) {
 		developers.push_back(dev);
@@ -822,7 +883,8 @@ bool AppStore::insertDeveloper(Developer* dev) {
 
 bool AppStore::insertCliente(Cliente* c1) {
 
-	vector<Cliente*>::const_iterator it = find(clientes.begin(), clientes.end(), c1);
+	vector<Cliente*>::const_iterator it = find(clientes.begin(), clientes.end(),
+			c1);
 
 	if (it == clientes.end()) {
 		clientes.push_back(c1);
@@ -833,7 +895,8 @@ bool AppStore::insertCliente(Cliente* c1) {
 }
 
 const string customerCreated = "INFORMATION: customer created successfully.";
-const string customerUpdated =  "INFORMATION: customer information updated successfully.";
+const string customerUpdated =
+		"INFORMATION: customer information updated successfully.";
 const string customerDeleted = "INFORMATION: customer deleted successfully.";
 
 bool AppStore::createCliente() {
@@ -1245,7 +1308,6 @@ void AppStore::App_menu() {
 
 		try {
 
-
 			UI::DisplayFrame("APP C/R/U/D");
 			UI::DisplayMenuTop();
 			UI::DisplayMenuItem(1, "Create a new app");
@@ -1318,11 +1380,11 @@ void AppStore::App_menu() {
 }
 
 const string appUpdated = "INFORMATON: app information updated successfully.";
-const string appRemoved = "INFORMATION: app removed from the store successfully.";
+const string appRemoved =
+		"INFORMATION: app removed from the store successfully.";
 const string appPublished = "INFORMATION: app published successfully!";
-const string appWaitingValidation = "INFORMATION: added app to queue successfully, waiting for approval.";
-const string appPermissionsRemove = "ERROR: permission denied - can't remove apps from other developers.";
-const string appPermissionsUpdate = "ERROR: permission denied - can't modify apps from other developers.";
+const string appWaitingValidation =
+		"INFORMATION: added app to queue successfully, waiting for approval.";
 
 bool AppStore::createApp(int devIndex) {
 
@@ -1331,18 +1393,20 @@ bool AppStore::createApp(int devIndex) {
 	string tempCategory;
 	string tempDescription;
 	string tempStr;
-	double tempPrice;
 
-	system("cls");
+	double tempPrice;
+	int j;
+
 	UI::DisplayFrame("CREATE APP");
 
 	cout << "Please enter the app name:\n";
 	getline(cin, tempName);
-	int i = appIndex(tempName);
-	int j;
+
 	if (tempName == "") {
 		throw InvalidParameter("name");
 	}
+
+	int i = appIndex(tempName);
 	if (i != -1) {
 		throw AppJaExiste(tempName);
 	}
@@ -1350,6 +1414,7 @@ bool AppStore::createApp(int devIndex) {
 	if (devIndex == -1) {
 		cout << "\nPlease enter the developer name:\n";
 		getline(cin, tempDeveloper);
+
 		j = indexDeveloper(tempDeveloper);
 		if (j == -1) {
 			throw DeveloperInexistente(tempDeveloper);
@@ -1380,21 +1445,39 @@ bool AppStore::createApp(int devIndex) {
 	App* newApp = new App(tempName, tempPrice, tempCategory, tempDescription);
 
 	newApp->setDeveloper(developers[j]);
+	newApp->setDate(tm_localtime());
 
 	if (devIndex == -1) {
 		cin.ignore(INT_MAX, '\n');
 		UI::DisplayMessage(appPublished);
+
 		developers[j]->pushp(newApp);
 		appsRanking.insert(newApp);
 		apps.push_back(newApp);
-	}
-
-	else {
+	} else {
 		cin.ignore(INT_MAX, '\n');
 		UI::DisplayMessage(appWaitingValidation);
 		appsPendentes.push(newApp);
 	}
 
+	return true;
+}
+
+bool AppStore::deletePendingApp(int devIndex) {
+	string tempName;
+
+	UI::DisplayFrame("DELETE PENDING APP");
+
+	cout << "\nPlease enter the app name:\n";
+	getline(cin, tempName);
+
+	App* tempApp = queueFindElement(tempName, devIndex);
+	if (tempApp == APP_NOT_FOUND) {
+		throw AppInexistente(tempName);
+	}
+
+	queueRemoveElement(tempApp);
+	UI::DisplayMessage(appRemoved);
 	return true;
 }
 
@@ -1413,7 +1496,6 @@ bool AppStore::deleteApp(int devIndex) {
 	}
 
 	if (devIndex == -1) {
-
 		int j = indexDeveloper(apps[i]->getDeveloper()->getName());
 		if (j != -1) {
 			developers[j]->popp(apps[i]);
@@ -1423,18 +1505,33 @@ bool AppStore::deleteApp(int devIndex) {
 		UI::DisplayMessage(appRemoved);
 		return true;
 	}
-
 	if (apps[i]->getDeveloper() == developers[devIndex]) {
 		developers[devIndex]->popp(apps[i]);
+		developers[devIndex]->pushr(*apps[i]);
 		apps.erase(apps.begin() + i);
+
+		BSTRemoveApp(apps[i]);
 		UI::DisplayMessage(appRemoved);
 		return true;
+	} else {
+		throw PermissoesInsuficientes("delete");
+	}
+}
+
+bool AppStore::updatePendingApp(int devIndex) {
+
+	string tempName;
+
+	cout << "\nPlease enter the app name:\n";
+	getline(cin, tempName);
+
+	App* tempApp = queueFindElement(tempName, devIndex);
+	if (tempApp == APP_NOT_FOUND) {
+		throw AppInexistente(tempName);
 	}
 
-	else {
-		UI::DisplayMessage(appPermissionsRemove);
-		return false;
-	}
+	updateApp(tempApp);
+	return true;
 }
 
 bool AppStore::updateApp(int devIndex) {
@@ -1461,8 +1558,7 @@ bool AppStore::updateApp(int devIndex) {
 
 	if (devIndex != -1) {
 		if (apps[i]->getDeveloper() != developers[devIndex]) {
-			UI::DisplayMessage(appPermissionsUpdate);
-			return false;
+			throw PermissoesInsuficientes("update");
 		}
 	}
 
@@ -1503,8 +1599,8 @@ bool AppStore::updateApp(int devIndex) {
 		apps[i]->setPrice(tempPrice);
 	}
 
+	apps[i]->setDate(tm_localtime());
 	UI::DisplayMessage(appUpdated);
-
 	return true;
 }
 
@@ -1543,11 +1639,13 @@ void AppStore::updateApp(App* app) {
 		app->setPrice(tempPrice);
 	}
 
+	app->setDate(tm_localtime());
 	UI::DisplayMessage(appUpdated);
 }
 
 const string developerCreated = "INFORMATION: developer created successfully.";
-const string developerUpdated = "INFORMATION: developer information updated successfully.";
+const string developerUpdated =
+		"INFORMATION: developer information updated successfully.";
 const string developerRemoved = "INFORMATION: developer deleted sucessfully.";
 
 bool AppStore::Developer_create() {
@@ -1610,15 +1708,16 @@ bool AppStore::Developer_create() {
 	}
 
 	if (userChoice == 2) {
-		Developer* novoDeveloper = new Developer_Empresa(tempName, tempAddress, tempNIF);
+		Developer* novoDeveloper = new Developer_Empresa(tempName, tempAddress,
+				tempNIF);
 		developers.push_back(novoDeveloper);
 	} else {
-		Developer* novoDeveloper = new Developer_Individual(tempName, tempAddress);
+		Developer* novoDeveloper = new Developer_Individual(tempName,
+				tempAddress);
 		developers.push_back(novoDeveloper);
 	}
 
 	UI::DisplayMessage(developerCreated);
-
 	return true;
 }
 
@@ -1794,7 +1893,8 @@ void AppStore::GUIAddToCart(int appIndex, int cliIndex) {
 	}
 
 	cart.pushApp(apps[appIndex]);
-	cout << "\nINFORMATION: " << apps[appIndex]->getName() << " added to cart.\n";
+	cout << "\nINFORMATION: " << apps[appIndex]->getName()
+			<< " added to cart.\n";
 }
 
 void AppStore::listComments(int appIndex) const {
@@ -1822,9 +1922,35 @@ bool operator<(const App &lhs, const App &rhs) {
 	return !(lhs.getDate() < rhs.getDate());
 }
 
-const string pendingAppUpdated = "INFORMATION: pending app information updated successfully.";
+const string pendingAppUpdated =
+		"INFORMATION: pending app information updated successfully.";
 
-void AppStore::App_publish() {
+void AppStore::publishRemovedApp(int devIndex) {
+
+	string tempName;
+
+	cout << "\nPlease enter the app name:\n";
+	getline(cin, tempName);
+
+	App tempApp = developers[devIndex]->find(tempName);
+	if (tempApp == APP_NOT_FOUND) {
+		throw AppInexistente(tempName);
+	}
+
+	App* newApp = new App();
+
+	newApp->setName(tempApp.getName());
+	newApp->setPrice(tempApp.getPrice());
+	newApp->setDate(tm_localtime());
+	newApp->setDescription(tempApp.getDescription());
+	newApp->setDeveloper(tempApp.getDeveloper());
+	newApp->setSales(0);
+
+	developers[devIndex]->popr(tempApp);
+	appsPendentes.push(newApp);
+}
+
+void AppStore::publishApp() {
 
 	priority_queue<App*> tempQueue;
 
@@ -1853,7 +1979,7 @@ void AppStore::App_publish() {
 		if (tempStr[0] == 'e') {
 			App* tempApp = appsPendentes.top();
 			appsPendentes.pop();
-			updateApp(1);
+			updateApp(tempApp);
 			appsPendentes.push(tempApp);
 			UI::DisplayMessage(pendingAppUpdated);
 		} else if (tempStr[0] == 'y') {
@@ -1865,17 +1991,20 @@ void AppStore::App_publish() {
 		} else if (tempStr[0] == 'n') {
 			appsPendentes.pop();
 		}
-
 	}
+
 	while (!tempQueue.empty()) {
 		appsPendentes.push(tempQueue.top());
 		tempQueue.pop();
 	}
 }
 
-const string checkoutCartEmpty = "ERROR: checkout failed - your shopping cart is empty.";
-const string checkoutEnoughFunds = "ERROR: checkout failed - you don't have enough funds.";
-const string checkoutSuccessful = "INFORMATION: purchase successful - enjoy your new apps!";
+const string checkoutCartEmpty =
+		"ERROR: checkout failed - your shopping cart is empty.";
+const string checkoutEnoughFunds =
+		"ERROR: checkout failed - you don't have enough funds.";
+const string checkoutSuccessful =
+		"INFORMATION: purchase successful - enjoy your new apps!";
 
 void AppStore::App_checkout(int cliIndex, bool voucher) {
 
@@ -1897,7 +2026,8 @@ void AppStore::App_checkout(int cliIndex, bool voucher) {
 		clientes[cliIndex]->setVoucher(false);
 	}
 
-	clientes[cliIndex]->setSaldo(clientes[cliIndex]->getSaldo() - cart.getPrice());
+	clientes[cliIndex]->setSaldo(
+			clientes[cliIndex]->getSaldo() - cart.getPrice());
 
 	for (int i = 0; i < boughtApps.size(); i++) {
 
@@ -2058,7 +2188,70 @@ bool AppStore::GUIClienteMenu(int cliIndex) {
 	}
 }
 
-const string checkoutRemoveFromCart = "INFORMATION: app removed from cart successfully!";
+const string checkoutRemoveFromCart =
+		"INFORMATION: app removed from cart successfully!";
+
+void AppStore::GUIRemovedApps(int devIndex) {
+
+	string tempStr;
+
+	listRemovedByName(devIndex);
+
+	UI::Display("<p> publish, <u> update");
+	cout << endl << "Please select an option: ";
+
+	getline(cin, tempStr);
+
+	if (tempStr.length() != 1) {
+		throw InvalidParameter("choice");
+	}
+
+	switch (tempStr[0]) {
+
+	case 'p':
+
+		publishRemovedApp(devIndex);
+		system("pause");
+		break;
+
+	case 'u':
+
+		updateRemovedApp(devIndex);
+		system("pause");
+		break;
+	}
+}
+
+void AppStore::GUIPendingApps(int devIndex) {
+
+	string tempStr;
+
+	listRemovedByName(devIndex);
+
+	UI::Display("<r> remove, <u> update");
+	cout << endl << "Please select an option: ";
+
+	getline(cin, tempStr);
+
+	if (tempStr.length() != 1) {
+		throw InvalidParameter("choice");
+	}
+
+	switch (tempStr[0]) {
+
+	case 'r':
+
+		deletePendingApp(devIndex);
+		system("pause");
+		break;
+
+	case 'u':
+
+		updatePendingApp(devIndex);
+		system("pause");
+		break;
+	}
+}
 
 void AppStore::GUICheckoutCart(int cliIndex) {
 
@@ -2112,8 +2305,7 @@ void AppStore::GUICheckoutCart(int cliIndex) {
 
 	case 'r': {
 
-		if (GUIRemoveFromCart())
-		{
+		if (GUIRemoveFromCart()) {
 			UI::DisplayMessage(checkoutRemoveFromCart);
 		}
 
@@ -2227,7 +2419,8 @@ void AppStore::GUIClienteBar(int cliIndex) const {
 	cout << "Customer: " << clientes[cliIndex]->getName();
 	cout << " / Balance: " << UI::FormatPrice(clientes[cliIndex]->getSaldo());
 	cout << " / Apps: " << clientes[cliIndex]->getNumApps();
-	cout << " / Voucher: " << (clientes[cliIndex]->getVoucher() ? "Yes" : "No") << endl;
+	cout << " / Voucher: " << (clientes[cliIndex]->getVoucher() ? "Yes" : "No")
+			<< endl;
 }
 
 void AppStore::GUIDeveloperBar(int devIndex) const {
@@ -2238,13 +2431,12 @@ void AppStore::GUIDeveloperBar(int devIndex) const {
 
 	if (developers[devIndex]->getType() == DEVELOPER_EMPRESA) {
 		cout << " / Type: Company";
-	}
-
-	else {
+	} else {
 		cout << " / Type: Individual";
 	}
 
-	cout << " / Balance: " << UI::FormatPrice(developers[devIndex]->getBalance());
+	cout << " / Balance: "
+			<< UI::FormatPrice(developers[devIndex]->getBalance());
 	cout << " / Apps: " << UI::Format(developers[devIndex]->getNumApps(), 5);
 }
 
@@ -2287,21 +2479,18 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 
 				createApp(devIndex);
 				system("pause");
-
 				break;
 
 			case 2:
 
 				updateApp(devIndex);
 				system("pause");
-
 				break;
 
 			case 3:
 
 				deleteApp(devIndex);
 				system("pause");
-
 				break;
 
 			case 4:
@@ -2309,7 +2498,6 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 				UI::DisplayFrame("PUBLISHED APPS BY NAME");
 				listAppsByDeveloper(developers[devIndex]);
 				system("pause");
-
 				break;
 
 			case 5:
@@ -2317,7 +2505,6 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 				UI::DisplayFrame("PUBLISHED APPS BY SALES");
 				listAppsByDeveloper(developers[devIndex]);
 				system("pause");
-
 				break;
 
 			case 6:
@@ -2325,7 +2512,6 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 				UI::DisplayFrame("PENDING APPS BY NAME");
 				listDevPendingByName(developers[devIndex]);
 				system("pause");
-
 				break;
 
 			case 7:
@@ -2333,7 +2519,6 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 				UI::DisplayFrame("PENDING APPS BY PRIORITY");
 				listDevPendingByPriority(developers[devIndex]);
 				system("pause");
-
 				break;
 
 			case 8:
@@ -2341,7 +2526,6 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 				UI::DisplayFrame("REMOVED APPS BY NAME");
 				listRemovedByName(devIndex);
 				system("pause");
-
 				break;
 
 			case 9:
@@ -2349,7 +2533,6 @@ void AppStore::GUIDeveloperMenu(int devIndex) {
 				UI::DisplayFrame("REMOVED APPS BY PRICE");
 				listRemovedByPrice(devIndex);
 				system("pause");
-
 				break;
 
 			case 0:
@@ -2465,7 +2648,8 @@ void AppStore::GUIAdminMenu() {
 }
 
 const string commentSuccessful = "INFORMATION: comment added successfully.";
-const string commentExists = "ERROR: you have already published a comment for this app.";
+const string commentExists =
+		"ERROR: you have already published a comment for this app.";
 const string appRated = "INFORMATION: thanks for rating our app!";
 
 void AppStore::App_comment(int appIndex, int cliIndex) {
@@ -2507,46 +2691,38 @@ void AppStore::GUIRateApp(int appIndex) {
 /**
  * READ APPS
  */
-void AppStore::IOReadApps()
-{
+void AppStore::IOReadApps() {
 	ifstream fin;
 
 	fin.open("Apps.bin");
 
-	if (!fin.is_open())
-	{
+	if (!fin.is_open()) {
 		throw FileIOException("Apps.bin");
 	}
 
-	while (!fin.eof() && IOReadApp(fin))
-	{
+	while (!fin.eof() && IOReadApp(fin)) {
 	}
 }
 
-void AppStore::IOReadRemovedApps()
-{
+void AppStore::IOReadRemovedApps() {
 	ifstream fin;
 
 	fin.open("Removed.bin");
 
-	if (!fin.is_open())
-	{
+	if (!fin.is_open()) {
 		throw FileIOException("Removed.bin");
 	}
 
-	while (!fin.eof() && IOReadRemovedApp(fin))
-	{
+	while (!fin.eof() && IOReadRemovedApp(fin)) {
 	}
 }
 
-bool AppStore::IOReadApp(ifstream &fin)
-{
+bool AppStore::IOReadApp(ifstream &fin) {
 	// APP NAME
 	string tempName;
 	getline(fin, tempName);
 
-	if (tempName == "")
-	{
+	if (tempName == "") {
 		return false;
 	}
 
@@ -2572,13 +2748,10 @@ bool AppStore::IOReadApp(ifstream &fin)
 	App* newApp = new App(tempName, tempPrice, tempCategory, tempDescription);
 	// FIND DEVELOPER
 	int devIndex = indexDeveloper(tempDev);
-	if (devIndex != -1)
-	{
+	if (devIndex != -1) {
 		newApp->setDeveloper(developers[devIndex]);
 		developers[devIndex]->pushp(newApp);
-	}
-	else
-	{
+	} else {
 		newApp->setDeveloper(NULL);
 	}
 	// READ COMMENTS AND RATINGS
@@ -2587,26 +2760,21 @@ bool AppStore::IOReadApp(ifstream &fin)
 	uint8_t tempPending;
 	fin.read((char*) &tempPending, sizeof(uint8_t));
 	// PUSH NEW APP
-	if (tempPending)
-	{
+	if (tempPending) {
 		appsPendentes.push(newApp);
-	}
-	else
-	{
+	} else {
 		apps.push_back(newApp);
 		appsRanking.insert(newApp);
 	}
 	return true;
 }
 
-bool AppStore::IOReadRemovedApp(ifstream &fin)
-{
+bool AppStore::IOReadRemovedApp(ifstream &fin) {
 	// APP NAME
 	string tempName;
 	getline(fin, tempName);
 
-	if (tempName == "")
-	{
+	if (tempName == "") {
 		return false;
 	}
 
@@ -2634,8 +2802,7 @@ bool AppStore::IOReadRemovedApp(ifstream &fin)
 	newApp.read(fin);
 	// FIND DEVELOPER AND PUSH APP
 	int devIndex = indexDeveloper(tempDev);
-	if (devIndex != -1)
-	{
+	if (devIndex != -1) {
 		newApp.setDeveloper(developers[devIndex]);
 		developers[devIndex]->pushr(newApp);
 	}
@@ -3060,6 +3227,31 @@ void AppStore::queueInsertElement(App* elem) {
 	appsPendentes.push(elem);
 }
 
+bool AppStore::queueRemoveElement(string name) {
+
+	priority_queue<App*> tempQueue;
+
+	if (appsPendentes.empty()) {
+		return false;
+	}
+
+	while (!appsPendentes.empty()) {
+
+		if (appsPendentes.top()->getName() != name) {
+			tempQueue.push(appsPendentes.top());
+		}
+
+		appsPendentes.pop();
+	}
+
+	while (!tempQueue.empty()) {
+		appsPendentes.push(tempQueue.top());
+		tempQueue.pop();
+	}
+
+	return true;
+}
+
 bool AppStore::queueRemoveElement(App* elem) {
 
 	priority_queue<App*> tempQueue;
@@ -3091,12 +3283,38 @@ void AppStore::queueUpdateElement(App* o, App* n) {
 	queueInsertElement(n);
 }
 
+App* AppStore::queueFindElement(string name, int devIndex) const {
+
+	priority_queue<App*> tempQueue(appsPendentes);
+
+	if (appsPendentes.empty()) {
+		return false;
+	}
+
+	while (!tempQueue.empty()) {
+
+		App* tempApp = tempQueue.top();
+		tempQueue.pop();
+
+		if (tempApp->getName() == name) {
+			if (devIndex != -1) {
+				if (tempApp->getDeveloper() == developers[devIndex]) {
+					return tempApp;
+				}
+			} else {
+				return tempApp;
+			}
+		}
+	}
+
+	return (new APP_NOT_FOUND);
+}
+
 /**
  *
  * Hash table functions
  *
  */
-
 
 bool tableInsertElement(hashDeveloper &ht, const App &elem) {
 
@@ -3115,6 +3333,19 @@ bool tableRemoveElement(hashDeveloper &ht, const App &elem) {
 	}
 
 	return false;
+}
+
+App tableRetrieveElement(hashDeveloper &ht, string name) {
+
+	App appProcurada = App(name, 0, "", "");
+	hashDeveloper::iterator it = ht.find(appProcurada);
+
+	if (it != ht.end()) {
+		return *it;
+	}
+
+	throw AppInexistente(name);
+	return APP_NOT_FOUND;
 }
 
 bool tableUpdateElement(hashDeveloper &ht, const App &o, const App &n) {

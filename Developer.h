@@ -21,6 +21,8 @@ typedef enum {
 	DEVELOPER_INDIVIDUAL, DEVELOPER_EMPRESA
 } DevType;
 
+#define APP_NOT_FOUND App("", 0, "", "")
+
 struct developerH {
 
 	int operator()(const App& lhs) {
@@ -194,6 +196,18 @@ public:
 		if (it != removedApps.end()) {
 			removedApps.erase(it);
 		}
+	}
+
+	App find(string name) {
+
+		App appProcurada = App(name, 0, "", "");
+		hashDeveloper::iterator it = removedApps.find(appProcurada);
+
+		if (it != removedApps.end()) {
+			return *it;
+		}
+
+		return APP_NOT_FOUND;
 	}
 
 	/**
