@@ -74,10 +74,14 @@ public:
 	bool insertDeveloper(Developer* dev);
 	bool Developer_update();
 
-
 	void Cliente_menu();
 	void Developer_menu();
 	void Cliente_browse(int cliIndex);
+
+	void publishRemovedApp(int devIndex);
+
+	bool updatePendingApp(App* app);
+	bool updateRemovedApp(int devIndex);
 
 	void GUIAppsTable(const vector<App> &v) const;
 	void GUIAppsTable(const vector<App*> &v) const;
@@ -96,7 +100,9 @@ public:
 	void GUIActivateVoucher(int cliIndex);
 	void GUICheckoutCart(int cliIndex);
 	void GUIFreeVoucher();
+	void GUIPendingApps(int devIndex);
 	void GUIRateApp(int appIndex);
+	void GUIRemovedApps(int devIndex);
 	void GUISearchCategory() const;
 	void GUISearchDeveloper() const;
 	void GUISearchPrice() const;
@@ -116,9 +122,7 @@ public:
 	void App_list() const;
 	void App_menu();
 	void App_comment(int appIndex, int cliIndex);
-	void publishApp();
-	void GUIRemovedApps(int devIndex);
-	void publishRemovedApp(int devIndex);
+	void App_publish();
 	void App_print(int appIndex, int cliIndex);
 	void App_checkout(int cliIndex, bool voucher);
 
@@ -128,7 +132,7 @@ public:
 	bool BSTInsertApp(App* a);
 	bool BSTRemoveApp(App* a);
 	bool BSTRemoveApp(string appName);
-
+	App* queueFindElement(string name) const;
 	bool updatePendingApp(int devIndex);
 	bool deletePendingApp(int devIndex);
 	// IO
@@ -137,13 +141,10 @@ public:
 	bool IOReadApp(ifstream &fin);
 	void IOReadRemovedApps();
 	bool IOReadRemovedApp(ifstream &fin);
-	void IOWriteApp(App* app, ofstream &fout) const;
-	void IOWriteApp(const App &app, ofstream &fout) const;
 	void IOWriteApps() const;
 	void IOWriteRemovedApps() const;
 
 	void IOReadClientes();
-	void IOWriteCliente(Cliente* cli, ofstream &fout) const;
 	void IOWriteClientes() const;
 	void IOReadDevelopers();
 	void IOWriteDeveloper(Developer* dev, ofstream &fout) const;

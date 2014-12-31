@@ -13,6 +13,8 @@
 #ifndef __DEVELOPER_H_
 #define __DEVELOPER_H_
 
+#define APP_NOT_FOUND App("", 0, "", "")
+
 #include <tr1/unordered_set>
 
 #include "App.h"
@@ -20,8 +22,6 @@
 typedef enum {
 	DEVELOPER_INDIVIDUAL, DEVELOPER_EMPRESA
 } DevType;
-
-#define APP_NOT_FOUND App("", 0, "", "")
 
 struct developerH {
 
@@ -110,13 +110,6 @@ public:
 	}
 
 	/**
-	 * @brief returns the apps published by this developer
-	 */
-	vector<App*> getPublishedApps() const {
-		return publishedApps;
-	}
-
-	/**
 	 * @brief increments the number of apps associated with the developer by one
 	 * @return const reference to 'this' object
 	 */
@@ -159,37 +152,14 @@ public:
 	 * @brief pushes a new app to the published apps vector
 	 * @param app a pointer to the new app
 	 */
-	void pushp(App* app) {
-		publishedApps.push_back(app);
-	}
-
-	/**
-	 * @brief pushes a new app to the published apps vector
-	 * @param app a pointer to the new app
-	 */
-	void pushr(const App &app) {
+	void push(const App &app) {
 		removedApps.insert(app);
-	}
-
-	/**
-	 * @brief removes an existing app from the published apps vector
-	 */
-	void popp(App* app) {
-
-		vector<App*>::iterator it = publishedApps.begin();
-
-		for (; it != publishedApps.end(); it++) {
-			if (it != publishedApps.end()) {
-				publishedApps.erase(it);
-				return;
-			}
-		}
 	}
 
 	/**
 	 * @brief removes an existing app from the removed apps table
 	 */
-	void popr(const App& app) {
+	void pop(const App& app) {
 
 		hashDeveloper::iterator it = removedApps.find(app);
 
@@ -242,7 +212,8 @@ protected:
 	double balance;
 
 	int numApps;
-	vector<App*> publishedApps;
+	int numRemovedApps;
+
 	hashDeveloper removedApps;
 };
 

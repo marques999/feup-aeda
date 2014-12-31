@@ -41,6 +41,7 @@ void Developer_Individual::write(ofstream &fout) const {
 	fout << name << endl;
 	fout << address << endl;
 	fout.write((char*)&numApps, sizeof(unsigned));
+	fout.write((char*)&numRemovedApps, sizeof(unsigned));
 	fout.write((char*)&balance, sizeof(double));
 }
 
@@ -52,6 +53,7 @@ bool Developer_Empresa::read(ifstream &fin) {
 	getline(fin, address);
 	fin.read((char*)&NIF, sizeof(unsigned));
 	fin.read((char*)&numApps, sizeof(unsigned));
+	fin.read((char*)&numRemovedApps, sizeof(unsigned));
 	fin.read((char*)&balance, sizeof(double));
 	return true;
 }
@@ -62,5 +64,6 @@ void Developer_Empresa::write(ofstream &fout) const {
 	unsigned tempNIF = NIF;
 	fout.write((char*)&tempNIF, sizeof(unsigned));
 	fout.write((char*)&numApps, sizeof(unsigned));
+	fout.write((char*)&numRemovedApps, sizeof(unsigned));
 	fout.write((char*)&balance, sizeof(double));
 }

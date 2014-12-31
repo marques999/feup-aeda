@@ -45,11 +45,29 @@ void App::read(ifstream &fin) {
 }
 
 void App::write(ofstream &fout) const {
+	// APP NAME
+	fout << name << endl;
+	// DEVELOPER NAME
+	fout << dev->getName() << endl;
+	// APP CATEGORY
+	fout << category << endl;
+	// APP DESCRIPTION
+	fout << description << endl;
+	// APP PRICE
+	fout.write((char*) &price, sizeof(double));
+	// APP SALES
+	fout.write((char*) &sales, sizeof(uint32_t));
+	// APP PUBLISH DATE
+	tm_write(date, fout);
+	// APP RATINGS
 	rating.write(fout);
+	// NUMBER OF COMMENTS
 	uint32_t tempNumComments = comments.size();
 	fout.write((char*)&tempNumComments, sizeof(uint32_t));
-	for (size_t i = 0; i < comments.size(); i++) {
-		fout << comments[i].clientName << endl;
-		fout << comments[i].comment << endl;
+	// APP COMMENTS
+	vector<Comentario>::const_iterator it = comments.begin();
+	for (; it != comments.end(); it++) {
+		fout << it->clientName << endl;
+		fout << it->clientName << endl;
 	}
 }

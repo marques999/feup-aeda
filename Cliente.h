@@ -104,6 +104,8 @@ public:
 		owned.push_back(a);
 	}
 
+	void write(ofstream &fout);
+
 private:
 
 	string name;
