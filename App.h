@@ -14,6 +14,7 @@
 #define __APP_H_
 
 #include "Cliente.h"
+#include "DateTime.h"
 #include "Rating.h"
 
 class Developer;

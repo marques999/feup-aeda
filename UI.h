@@ -6,7 +6,7 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
@@ -64,8 +64,16 @@ namespace UI
 	*/
 	void DisplayMenuItem(int i, string label);
 
+	/**
+	 * @brief displays top menu separator
+	 * @return void
+	 */
 	void DisplayMenuTop();
 
+	/**
+	 * @brief display bottom menu separator
+	 * @return void
+	 */
 	void DisplayMenuBottom();
 
 	/**

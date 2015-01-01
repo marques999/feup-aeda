@@ -6,12 +6,11 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
 #include "AppStore.h"
-#include "DateTime.h"
 
 #include <algorithm>
 #include <climits>
@@ -47,10 +46,6 @@ unsigned int AppStore::getNumClientes() const {
 
 unsigned int AppStore::getNumDevelopers() const {
 	return developers.size();
-}
-
-vector<App*> AppStore::getAppsFromDev(Developer *dev) const {
-
 }
 
 string AppStore::getName() const {
@@ -122,6 +117,7 @@ void AppStore::GUIDeveloperCRUD() {
 
 			cout << "Please select an option: ";
 			getline(cin, tempStr);
+
 			userChoice = atoi(tempStr.c_str());
 			if (userChoice < 0 || userChoice > 6) {
 				throw InvalidParameter("choice");
@@ -634,8 +630,8 @@ void AppStore::listSalesByPrice() const
 // LIST&SORT APPS
 //////////////////////////////
 
-void AppStore::GUIAppsTable(const vector<App*> &v) const {
-
+void AppStore::GUIAppsTable(const vector<App*> &v) const
+{
 	const int rowCount = 5;
 	int tableLength[rowCount] = { 24, 16, 12, 8, 10 };
 
@@ -644,34 +640,42 @@ void AppStore::GUIAppsTable(const vector<App*> &v) const {
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 
-	for (; it != v.end(); it++) {
-
+	for (; it != v.end(); it++)
+	{
 		vector<string> tableRow(rowCount);
 
 		tableRow[0] = (*it)->getName();
-		if ((*it)->getDeveloper() == NULL) {
+		if ((*it)->getDeveloper() == NULL)
+		{
 			tableRow[1] = "Unknown";
-		} else {
+		}
+		else
+		{
 			tableRow[1] = (*it)->getDeveloper()->getName();
 		}
 		tableRow[2] = (*it)->getCategory();
-		if ((*it)->getPrice() == 0.0) {
+		if ((*it)->getPrice() == 0.0)
+		{
 			tableRow[3] = "FREE";
-		} else {
+		}
+		else
+		{
 			tableRow[3] = UI::FormatPrice((*it)->getPrice());
 		}
-		if ((*it)->getRating().get() == 0.0) {
+		if ((*it)->getRating().get() == 0.0)
+		{
 			tableRow[4] = "N/A";
-		} else {
+		}
+		else
+		{
 			tableRow[4] = UI::FormatRating((*it)->getRating().get());
 		}
-
 		UI::DisplayTableRow(rowCount, tableRow, tableLength);
 	}
 }
 
-void AppStore::GUIAppsTable2(const vector<App*> &v) const {
-
+void AppStore::GUIAppsTable2(const vector<App*> &v) const
+{
 	const int rowCount = 5;
 	int tableLength[rowCount] = { 24, 16, 12, 8, 10 };
 
@@ -680,8 +684,8 @@ void AppStore::GUIAppsTable2(const vector<App*> &v) const {
 
 	UI::DisplayTable(rowCount, tableLabel, tableLength);
 
-	for (; it != v.end(); it++) {
-
+	for (; it != v.end(); it++)
+	{
 		vector<string> tableRow(rowCount);
 
 		tableRow[0] = (*it)->getName();
@@ -3608,7 +3612,7 @@ App* AppStore::queueFindElement(string name, int devIndex) const
 
 	if (appsPendentes.empty())
 	{
-		return false;
+		return new APP_NOT_FOUND;
 	}
 
 	while (!tempQueue.empty())
@@ -3625,7 +3629,7 @@ App* AppStore::queueFindElement(string name, int devIndex) const
 		}
 	}
 
-	return APP_NOT_FOUND;
+	return new APP_NOT_FOUND;
 }
 
 /**
