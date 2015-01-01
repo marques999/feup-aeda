@@ -25,7 +25,7 @@ typedef enum {
 
 struct developerH {
 
-	int operator()(const App& lhs) {
+	int operator()(const App& lhs) const {
 
 		int appHash = 0;
 		string appName = lhs.getName();
@@ -37,7 +37,7 @@ struct developerH {
 		return appHash;
 	}
 
-	bool operator()(const App &lhs, const App &rhs) {
+	bool operator()(const App &lhs, const App &rhs) const {
 
 		return lhs.getName() == rhs.getName();
 	}

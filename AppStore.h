@@ -210,9 +210,13 @@ public:
 	vector<App*> listDeveloperPending(const Developer* dev) const;
 	vector<App> listDeveloperRemoved(int devIndex) const;
 
-	void listDevPendingByName(const Developer* dev) const;
-	void listDevPendingByPrice(const Developer* dev) const;
-	void listDevPendingByPriority(const Developer* dev) const;
+	void listDeveloperPendingByName(const Developer* dev) const;
+	void listDeveloperPendingByPrice(const Developer* dev) const;
+	void listDeveloperPendingByPriority(const Developer* dev) const;
+
+	vector<App*> listDeveloperApps(const Developer* dev) const;
+	void listDeveloperAppsByName(const Developer* dev) const;
+	void listDeveloperAppsBySales(const Developer* dev) const;
 
 	void listPendingByName() const;
 	void listPendingByDate() const;
@@ -234,7 +238,7 @@ public:
 	void listAppsByCliente(int cliIndex) const;
 	void listAppsByDateAscending() const;
 	void listAppsByDateDescending() const;
-	void listAppsByDeveloper(const Developer* dev) const;
+
 	void listAppsByPrice() const;
 	void listAppsByPrice(double min, double max) const;
 	void listAppsByRating() const;
