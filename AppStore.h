@@ -29,7 +29,6 @@ typedef enum {
 
 typedef enum {
 	DEV_NAME, DEV_APPS, DEV_SALES
-
 } DeveloperSort;
 
 typedef enum {
@@ -57,6 +56,18 @@ public:
 	////////////////////////////////////////////////////////
 
 	////////////////////////////////////////////////////////
+	//					   APP C/R/U/D					  //
+	////////////////////////////////////////////////////////
+	bool createApp(int devIndex);
+	bool deleteApp(int devIndex);
+	bool deletePendingApp(int devIndex);
+	void publishRemovedApp(int devIndex);
+	bool updateApp(int devIndex);
+	bool updatePendingApp(int devIndex);
+	bool updateRemovedApp(int devIndex);
+	void updateApp(App* app);
+
+	////////////////////////////////////////////////////////
 	//					 CLIENTE C/R/U/D				  //
 	////////////////////////////////////////////////////////
 	bool createCliente();
@@ -70,21 +81,8 @@ public:
 	bool deleteDeveloper();
 	bool updateDeveloper();
 
-
-	bool insertCliente(Cliente* c1);
 	int indexCliente(string cliName);
 	int indexDeveloper(string devName) const;
-	bool insertDeveloper(Developer* dev);
-
-
-
-
-
-
-	void publishRemovedApp(int devIndex);
-
-	bool updatePendingApp(App* app);
-	bool updateRemovedApp(int devIndex);
 
 	////////////////////////////////////////////////////////
 	//			       		GUI: TABLES			 		  //
@@ -93,6 +91,7 @@ public:
 	void GUIAppsTable(const vector<App*> &v) const;
 	void GUIAppsTable2(const vector<App*> &v) const;
 	void GUIClienteTable(const vector<Cliente*> &v) const;
+	void GUIDeveloperAppsTable(const vector<App*> &v) const;
 	void GUIDeveloperTable(const vector<Developer*> &v) const;
 	void GUIDeveloperTable2(const vector<Developer*> &v) const;
 	void GUISalesTable(const vector<Sale> &s) const;
@@ -111,6 +110,9 @@ public:
 	void GUIClienteCRUD();
 	void GUIDeveloperCRUD();
 
+	////////////////////////////////////////////////////////
+	//			       GUI: OTHER METHODS				  //
+	////////////////////////////////////////////////////////
 	void GUIAddFunds(int cliIndex);
 	void GUIAddToCart(int appIndex, int cliIndex);
 	void GUIActivateVoucher(int cliIndex);
@@ -127,14 +129,6 @@ public:
 	bool GUIRemoveFromCart();
 
 	// APP
-
-
-
-	bool createApp(int devIndex);
-	bool deleteApp(int devIndex);
-	bool insertApp(App* app);
-	bool updateApp(int devIndex);
-	void updateApp(App* app);
 
 	int appIndex(string appName) const;
 
@@ -155,8 +149,8 @@ public:
 	bool BSTRemoveApp(App* a);
 	bool BSTRemoveApp(string appName);
 	App* queueFindElement(string name) const;
-	bool updatePendingApp(int devIndex);
-	bool deletePendingApp(int devIndex);
+
+
 	// IO
 
 	void IOReadApps();
@@ -189,7 +183,21 @@ public:
 
 	void GUIListSales() const;
 	
-	// LIST
+
+	////////////////////////////////////////////////////////
+	//					     LIST APPS					  //
+	////////////////////////////////////////////////////////
+	void listAppsByName() const;
+	void listAppsByCategory(string cat) const;
+	void listAppsByCliente(int cliIndex) const;
+	void listAppsByDateAscending() const;
+	void listAppsByDateDescending() const;
+	void listAppsByPrice() const;
+	void listAppsByPrice(double min, double max) const;
+	void listAppsByRating() const;
+	void listAppsByRating(unsigned value) const;
+	void listAppsPending() const;
+	void listAppsPendingByName() const;
 
 	////////////////////////////////////////////////////////
 	//			    	  LIST CLIENTES					  //
@@ -199,52 +207,57 @@ public:
 	void listClientesByApps() const;
 
 	////////////////////////////////////////////////////////
+	//			      LIST APPS BY DEVELOPER			  //
+	////////////////////////////////////////////////////////
+	vector<App*> listDeveloperApps(const Developer* dev) const;
+	void listDeveloperAppsByName(const Developer* dev) const;
+	void listDeveloperAppsBySales(const Developer* dev) const;
+
+	////////////////////////////////////////////////////////
 	//			         LIST DEVELOPERS				  //
 	////////////////////////////////////////////////////////
 	void listDevelopersByName() const;
 	void listDevelopersByApps() const;
 	void listDevelopersBySales() const;
 
+	////////////////////////////////////////////////////////
+	//			      	   LIST COMMENTS				  //
+	////////////////////////////////////////////////////////
 	void listComments(int appIndex) const;
 
+	////////////////////////////////////////////////////////
+	//			     LIST PENDING APPS BY DEVELOPER		  //
+	////////////////////////////////////////////////////////
 	vector<App*> listDeveloperPending(const Developer* dev) const;
-	vector<App> listDeveloperRemoved(int devIndex) const;
-
 	void listDeveloperPendingByName(const Developer* dev) const;
 	void listDeveloperPendingByPrice(const Developer* dev) const;
 	void listDeveloperPendingByPriority(const Developer* dev) const;
 
-	vector<App*> listDeveloperApps(const Developer* dev) const;
-	void listDeveloperAppsByName(const Developer* dev) const;
-	void listDeveloperAppsBySales(const Developer* dev) const;
-
+	////////////////////////////////////////////////////////
+	//			    	 LIST PENDING APPS	        	  //
+	////////////////////////////////////////////////////////
 	void listPendingByName() const;
 	void listPendingByDate() const;
 	void listPendingByPrice() const;
 	void listPendingByPriority() const;
 
+	////////////////////////////////////////////////////////
+	//			     	 LIST REMOVED APPS     			  //
+	////////////////////////////////////////////////////////
+	vector<App> listDeveloperRemoved(int devIndex) const;
 	void listRemovedByName(int devIndex) const;
 	void listRemovedByPrice(int devIndex) const;
 	void listRemovedBySales(int devIndex) const;
 
+	////////////////////////////////////////////////////////
+	//			 		     LIST SALES					  //
+	////////////////////////////////////////////////////////
 	void listSalesByApps() const;
 	void listSalesByCliente() const;
 	void listSalesByCliente(int cliIndex) const;
 	void listSalesByID() const;
 	void listSalesByPrice() const;
 
-	void listAppsByName() const;
-	void listAppsByCategory(string cat) const;
-	void listAppsByCliente(int cliIndex) const;
-	void listAppsByDateAscending() const;
-	void listAppsByDateDescending() const;
-
-	void listAppsByPrice() const;
-	void listAppsByPrice(double min, double max) const;
-	void listAppsByRating() const;
-	void listAppsByRating(unsigned value) const;
-	void listAppsPending() const;
-	void listAppsPendingByName() const;
 
 	void listTopNApps(int topN) const;
 	void listTop10Apps() const;

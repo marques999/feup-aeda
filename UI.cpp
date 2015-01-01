@@ -13,6 +13,7 @@
 #include "UI.h"
 
 namespace UI {
+
 	void DisplayFrame(string s)
 	{
 		system("cls");
