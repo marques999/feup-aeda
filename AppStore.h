@@ -20,15 +20,15 @@
 #include "Developer.h"
 
 typedef enum  {
-	APP_NAME, APP_DATE, APP_PRICE, APP_RATING,
+	APP_NAME, APP_DATE, APP_PRICE, APP_RATING, APP_SALES
 } AppSort;
 
 typedef enum {
-	CLIENTE_NAME, CLIENTE_APPS, CLIENTE_SALDO,
+	CLIENTE_NAME, CLIENTE_APPS, CLIENTE_SALDO
 } ClienteSort;
 
 typedef enum {
-	DEV_NAME, DEV_APPS, DEV_SALES,
+	DEV_NAME, DEV_APPS, DEV_SALES
 
 } DeveloperSort;
 
@@ -61,28 +61,34 @@ public:
 	////////////////////////////////////////////////////////
 	bool createCliente();
 	bool deleteCliente();
-	bool insertCliente(Cliente* c1);
-	int indexCliente(string cliName);
 	bool updateCliente();
 
 	////////////////////////////////////////////////////////
 	//			    	DEVELOPER C/R/U/D				  //
 	////////////////////////////////////////////////////////
-	bool Developer_create();
-	bool Developer_delete();
+	bool createDeveloper();
+	bool deleteDeveloper();
+	bool updateDeveloper();
+
+
+	bool insertCliente(Cliente* c1);
+	int indexCliente(string cliName);
 	int indexDeveloper(string devName) const;
 	bool insertDeveloper(Developer* dev);
-	bool Developer_update();
 
-	void Cliente_menu();
-	void Developer_menu();
-	void Cliente_browse(int cliIndex);
+
+
+
+
 
 	void publishRemovedApp(int devIndex);
 
 	bool updatePendingApp(App* app);
 	bool updateRemovedApp(int devIndex);
 
+	////////////////////////////////////////////////////////
+	//			       		GUI: TABLES			 		  //
+	////////////////////////////////////////////////////////
 	void GUIAppsTable(const vector<App> &v) const;
 	void GUIAppsTable(const vector<App*> &v) const;
 	void GUIAppsTable2(const vector<App*> &v) const;
@@ -91,13 +97,24 @@ public:
 	void GUIDeveloperTable2(const vector<Developer*> &v) const;
 	void GUISalesTable(const vector<Sale> &s) const;
 
+	////////////////////////////////////////////////////////
+	//			       GUI: INFORMATION BARS			  //
+	////////////////////////////////////////////////////////
 	void GUIAdminBar() const;
 	void GUIDeveloperBar(int devIndex) const;
 	void GUIClienteBar(int cliIndex) const;
 
+	////////////////////////////////////////////////////////
+	//			       GUI: CRUD OPERATIONS				  //
+	////////////////////////////////////////////////////////
+	void GUIAppCRUD();
+	void GUIClienteCRUD();
+	void GUIDeveloperCRUD();
+
 	void GUIAddFunds(int cliIndex);
 	void GUIAddToCart(int appIndex, int cliIndex);
 	void GUIActivateVoucher(int cliIndex);
+	void GUIBrowseApps(int cliIndex);
 	void GUICheckoutCart(int cliIndex);
 	void GUIFreeVoucher();
 	void GUIPendingApps(int devIndex);
@@ -111,6 +128,8 @@ public:
 
 	// APP
 
+
+
 	bool createApp(int devIndex);
 	bool deleteApp(int devIndex);
 	bool insertApp(App* app);
@@ -119,10 +138,13 @@ public:
 
 	int appIndex(string appName) const;
 
-	void App_list() const;
-	void App_menu();
+	void GUIListApps() const;
+	void GUIListPending() const;
+	void GUIPendingMenu();
+	void GUIDeveloperPending(int devIndex);
+
 	void App_comment(int appIndex, int cliIndex);
-	void App_publish();
+
 	void App_print(int appIndex, int cliIndex);
 	void App_checkout(int cliIndex, bool voucher);
 
@@ -164,11 +186,10 @@ public:
 	void GUIDeveloperMenu(int devIndex);
 	bool GUIClienteMenu(int cliIndex);
 
-	void resetCart();
 
+	void GUIListSales() const;
 	
 	// LIST
-
 
 	////////////////////////////////////////////////////////
 	//			    	  LIST CLIENTES					  //
@@ -190,13 +211,17 @@ public:
 	vector<App> listDeveloperRemoved(int devIndex) const;
 
 	void listDevPendingByName(const Developer* dev) const;
+	void listDevPendingByPrice(const Developer* dev) const;
 	void listDevPendingByPriority(const Developer* dev) const;
 
 	void listPendingByName() const;
+	void listPendingByDate() const;
+	void listPendingByPrice() const;
 	void listPendingByPriority() const;
 
 	void listRemovedByName(int devIndex) const;
 	void listRemovedByPrice(int devIndex) const;
+	void listRemovedBySales(int devIndex) const;
 
 	void listSalesByApps() const;
 	void listSalesByCliente() const;
@@ -236,6 +261,8 @@ private:
 	void queueInsertElement(App* elem);
 	bool queueRemoveElement(string name);
 	void queueUpdateElement(App* o, App* n);
+
+	void resetCart();
 
 //	bool tableInsertElement(const App &elem);
 //	bool tableRemoveElement(const App& elem);
