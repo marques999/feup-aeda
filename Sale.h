@@ -6,7 +6,7 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
@@ -18,84 +18,97 @@
 class Cliente;
 class App;
 
-class Sale {
-private:
-
-	Cliente* client;
-	vector<App*> appsBought;
-	double price;
+class Sale
+{
 
 public:
 
 	/**
 	 * @brief default constructor for 'Sale' class
 	 */
-	Sale() : client(NULL), price(0.0) {
+	Sale() : client(NULL), price(0.0)
+	{
 	}
 
 	/**
 	 * @brief constructor with parameters for 'Sale' class
-	 * @param Buyer a pointer to the customer who made the purchase
-	 * @param AppsSold a vector containing the apps bought by the customer in a purchase
-	 * @param value the amount paid by the customer
+	 * @param Buyer pointer to the customer who made the purchase
+	 * @param AppsSold vector containing the apps bought by the customer in a purchase
+	 * @param value amount paid by the customer
 	 */
-	Sale(Cliente* Buyer, vector<App*> AppsSold, double value) : client(Buyer), appsBought(AppsSold), price(value) {
+	Sale(Cliente* Buyer, vector<App*> AppsSold, double value)
+		: client(Buyer), appsBought(AppsSold), price(value)
+	{
 	}
 
 	/**
 	 * @brief default destructor for 'Sale' class
 	 */
-	~Sale() {
+	~Sale()
+	{
 	}
 
 	/**
 	 * @brief returns a pointer to the customer who made the purchase
 	 */
-	Cliente* getOwner() const {
+	Cliente* getOwner() const
+	{
 		return this->client;
 	}
 
 	/**
 	 * @brief associates the sale with a new customer
-	 * @param newClient a pointer to the new customer
+	 * @param newClient pointer to a customer
 	 */
-	void setOwner(Cliente* newClient) {
+	void setOwner(Cliente* newClient)
+	{
 		this->client = newClient;
 	}
 
 	/**
 	 * @brief returns the amount to be paid by the customer
 	 */
-	double getPrice() const {
+	double getPrice() const
+	{
 		return this->price;
 	}
 
 	/**
-	 * @brief sets the sale with a new amount (for voucher savings)
-	 * @param newPrice the new amount
+	 * @brief sets the cart with a new total price (for voucher savings)
+	 * @param newPrice new price
 	 */
-	void setPrice(double newPrice) {
+	void setPrice(double newPrice)
+	{
 		this->price = newPrice;
 	}
 
 	/**
 	 * @brief returns the apps bought by the customer
 	 */
-	vector<App*> getApps() const {
+	vector<App*> getApps() const
+	{
 		return this->appsBought;
 	}
 
 	/**
 	 * @brief adds a new app to the sale (for "add to cart")
-	 * @param a the application to be added
+	 * @param a new application to be added
 	 */
-	bool pushApp(App* a);
+	bool push(App* a);
 
 	/**
 	 * @brief removes an app from the sale (for "remove from cart")
-	 * @param a the application to be removed
+	 * @param a application to be removed
 	 */
-	bool pullApp(App* a);
+	bool pull(App* a);
+
+	void write(ofstream &fout) const;
+
+private:
+
+	Cliente* client;
+	vector<App*> appsBought;
+	double price;
 };
 
 #endif

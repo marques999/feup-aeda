@@ -6,123 +6,192 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
 #ifndef __DEVELOPER_H_
 #define __DEVELOPER_H_
 
-#define APP_NOT_FOUND App("", 0, "", "")
-
 #include <tr1/unordered_set>
 
 #include "App.h"
+
+#define APP_NOT_FOUND App("", 0, "", "")
 
 typedef enum {
 	DEVELOPER_INDIVIDUAL, DEVELOPER_EMPRESA
 } DevType;
 
-struct developerH {
-
-	int operator()(const App& lhs) const {
-
+struct developerH
+{
+	int operator()(const App& lhs) const
+	{
 		int appHash = 0;
 		string appName = lhs.getName();
 
-		for ( size_t i = 0; i < appName.size() ; i++ ) {
+		for ( size_t i = 0; i < appName.size() ; i++ )
+		{
 			appHash = 37*appHash + appName[i];
 		}
 
 		return appHash;
 	}
 
-	bool operator()(const App &lhs, const App &rhs) const {
-
+	bool operator()(const App &lhs, const App &rhs) const
+	{
 		return lhs.getName() == rhs.getName();
 	}
 };
 
 typedef tr1::unordered_set<App, developerH, developerH> hashDeveloper;
 
-class Developer {
+class Developer
+{
+
 public:
 
 	/**
 	 * @brief default constructor for 'Developer' abstract class
 	 */
-	Developer() {
+	Developer()
+	{
 		this->balance = 0.0;
 		this->numApps = 0;
+		this->numRemovedApps = 0;
 	}
 
 	/**
 	 * @brief constructor with parameters for 'Developer' abstract class
 	 * @param n customer's name / company official name
-	 * @param a the customer's / company address
+	 * @param a customer's address / company address
 	 */
-	Developer(string n, string a) {
-		this->balance = 0.0;
-		this->numApps = 0;
+	Developer(string n, string a)
+	{
 		this->name = n;
 		this->address = a;
+		this->balance = 0.0;
+		this->numApps = 0;
+		this->numRemovedApps = 0;
 	}
 
 	/**
 	 * @brief default destructor for 'Developer' class
 	 */
-	virtual ~Developer() {
-	}
-
-	/**
-	 * @brief returns the developer's address
-	 */
-	string getAddress() const {
-		return this->address;
-	}
-
-	/**
-	 * @brief returns the developer's current balance
-	 */
-	double getBalance() const {
-		return this->balance;
+	virtual ~Developer()
+	{
 	}
 
 	/**
 	 * @brief returns the developer's name
 	 */
-	string getName() const {
+	string getName() const
+	{
 		return this->name;
+	}
+
+	/**
+	 * @brief sets the developer with a new name
+	 * @param n new company/developer name
+	 */
+	void setName(string n)
+	{
+		this->name = n;
+	}
+
+	/**
+	 * @brief returns the developer's address
+	 */
+	string getAddress() const
+	{
+		return this->address;
+	}
+
+	/**
+	 * @brief sets the developer with a new address
+	 * @param new company/developer address
+	 */
+	void setAddress(string a)
+	{
+		this->address = a;
+	}
+
+	/**
+	 * @brief returns the developer's current balance
+	 */
+	double getBalance() const
+	{
+		return this->balance;
+	}
+
+	/**
+	 * @brief sets the developer with a new balance
+	 * @param n new developer balance
+	 */
+	void setBalance(double n)
+	{
+		this->balance = n;
 	}
 
 	/**
 	 * @brief returns the number of apps published by the developer
 	 */
-	int getNumApps() const {
+	unsigned getNumberApps() const
+	{
 		return numApps;
 	}
 
 	/**
-	 * @brief returns the removed apps from the developer
+	 * @brief sets the developer with a new number of apps
+	 * @param n new number of apps developed
 	 */
-	hashDeveloper getRemovedApps() const {
+	void setNumberApps(unsigned n)
+	{
+		this->numApps = n;
+	}
+
+	/**
+	 * @brief returns the removed apps table from the developer
+	 */
+	hashDeveloper getRemovedApps() const
+	{
 		return removedApps;
 	}
 
 	/**
-	 * @brief increments the number of apps associated with the developer by one
-	 * @return const reference to 'this' object
+	 * @brief returns the size of the removed apps table
 	 */
-	const Developer& operator++() {
+	unsigned getNumberRemovedApps() const
+	{
+		return numRemovedApps;
+	}
+
+	/**
+	 * @brief sets the developer with a new number of removed apps
+	 * @param n new number of apps removed from the App Store
+	 * @warning should be equal to the hash table size!
+	 */
+	void setNumberRemovedApps(unsigned n)
+	{
+		this->numRemovedApps = n;
+	}
+
+	/**
+	 * @brief increments the number of apps associated with this developer by one
+	 * @return returns a constant reference to 'this' object
+	 */
+	const Developer& operator++()
+	{
 		numApps++;
 		return *this;
 	}
 
 	/**
-	 * @brief decrements the number of apps associated with the developer by one
-	 * @return const reference to 'this' object
+	 * @brief decrements the number of apps associated with this developer by one
+	 * @return returns a const reference to 'this' object
 	 */
-	const Developer& operator--() {
+	const Developer& operator--()
+	{
 		numApps--;
 		return *this;
 	}
@@ -133,47 +202,45 @@ public:
 	virtual DevType getType() const = 0;
 
 	/**
-	 * @brief sets the developer with a new address
-	 * @param a the new address for the company/developer
+	 * @brief inserts a new app into the removed apps table
+	 * @param app const reference to the new app
 	 */
-	void setAddress(string a) {
-		this->address = a;
-	}
+	bool push(const App &app)
+	{
+		pair<hashDeveloper::iterator, bool> r = removedApps.insert(app);
 
-	/**
-	 * @brief sets the developer with a new name
-	 * @param n the new name for the company/developer
-	 */
-	void setName(string n) {
-		this->name = n;
-	}
-
-	/**
-	 * @brief pushes a new app to the published apps vector
-	 * @param app a pointer to the new app
-	 */
-	void push(const App &app) {
-		removedApps.insert(app);
+		return r.second;
 	}
 
 	/**
 	 * @brief removes an existing app from the removed apps table
+	 * @param app const reference to the app to be removed
 	 */
-	void pop(const App& app) {
-
+	bool pop(const App& app)
+	{
 		hashDeveloper::iterator it = removedApps.find(app);
 
-		if (it != removedApps.end()) {
+		if (it != removedApps.end())
+		{
 			removedApps.erase(it);
+			return true;
 		}
+
+		return false;
 	}
 
-	App find(string name) {
-
+	/**
+	 * @brief finds an app removed by the developer given its name
+	 * @param name application name
+	 * @return returns an App object if application was found; otherwise returns an empty object
+	 */
+	App find(string name)
+	{
 		App appProcurada = App(name, 0, "", "");
 		hashDeveloper::iterator it = removedApps.find(appProcurada);
 
-		if (it != removedApps.end()) {
+		if (it != removedApps.end())
+		{
 			return *it;
 		}
 
@@ -186,22 +253,17 @@ public:
 	virtual void print() const = 0;
 
 	/**
-	 * @brief reads developer information from a given file
-	 * @param fin the input filestream
-	 */
-	virtual bool read(ifstream &fin) = 0;
-
-	/**
 	 * @brief accumulates sales
 	 * @param amount transaction amount
 	 */
-	void sale(double amount) {
+	void sale(double amount)
+	{
 		balance += amount * 0.8;
 	}
 
 	/**
 	 * @brief writes developer information to a given file
-	 * @param fout the output filestream
+	 * @param fout the output file stream
 	 */
 	virtual void write(ofstream &fout) const = 0;
 
@@ -217,13 +279,16 @@ protected:
 	hashDeveloper removedApps;
 };
 
-class Developer_Individual: public Developer {
+class Developer_Individual: public Developer
+{
+
 public:
 
 	/**
 	 * @brief default constructor for 'Developer_Individual' class
 	 */
-	Developer_Individual() {
+	Developer_Individual()
+	{
 	}
 
 	/**
@@ -231,28 +296,24 @@ public:
 	 * @param n customer's name
 	 * @param a customer's address
 	 */
-	Developer_Individual(string n, string a) :
-			Developer(n, a) {
+	Developer_Individual(string n, string a) : Developer(n, a)
+	{
 	}
 
 	/**
 	 * @brief default destructor for 'Developer_Individual' class
 	 */
-	~Developer_Individual() {
+	~Developer_Individual()
+	{
 	}
 
 	/**
 	 * @brief returns the developer type (DEVELOPER_INDIVIDUAL)
 	 */
-	DevType getType() const {
+	DevType getType() const
+	{
 		return DEVELOPER_INDIVIDUAL;
 	}
-
-	/**
-	 * @brief reads developer information from a given file
-	 * @param fin the input filestream
-	 */
-	bool read(ifstream &fin);
 
 	/**
 	 * @brief writes developer information to a given file
@@ -266,14 +327,16 @@ public:
 	void print() const;
 };
 
-class Developer_Empresa: public Developer {
+class Developer_Empresa: public Developer
+{
 
 public:
 
 	/**
 	 * @brief default constructor for 'Developer_Empresa' class
 	 */
-	Developer_Empresa() : NIF(0) {
+	Developer_Empresa() : NIF(0)
+	{
 	}
 
 	/**
@@ -282,10 +345,12 @@ public:
 	 * @param a company address
 	 * @param id company tax ID number
 	 */
-	Developer_Empresa(string n, string a, unsigned id) : Developer(n, a) {
+	Developer_Empresa(string n, string a, unsigned id) : Developer(n, a)
+	{
 		ostringstream os;
 		os << id;
-		if (os.str().length() != 9) {
+		if (os.str().length() != 9)
+		{
 			throw InvalidParameter("NIF");
 		}
 		this->NIF = id;
@@ -294,13 +359,15 @@ public:
 	/**
 	 * @brief default destructor for 'Developer_Empresa' class
 	 */
-	~Developer_Empresa() {
+	~Developer_Empresa()
+	{
 	}
 
 	/**
 	 * @brief returns the company tax ID number (9 digits)
 	 */
-	unsigned getNIF() const {
+	unsigned getNIF() const
+	{
 		return this->NIF;
 	}
 
@@ -308,22 +375,18 @@ public:
 	 * @brief changes the company tax number
 	 * @param id new company tax ID
 	 */
-	void setNIF(unsigned id) {
+	void setNIF(unsigned id)
+	{
 		this->NIF = id;
 	}
 
 	/**
 	 * @brief returns the developer type (DEVELOPER_EMPRESA)
 	 */
-	DevType getType() const {
+	DevType getType() const
+	{
 		return DEVELOPER_EMPRESA;
 	}
-
-	/**
-	 * @brief reads developer information from a given file
-	 * @param fin the input filestream
-	 */
-	bool read(ifstream &fin);
 
 	/**
 	 * @brief writes developer information to a given file

@@ -6,64 +6,75 @@
 * \author Diogo Marques
 * \author Fabio Carneiro
 *
-* \date Dezembro 2014
+* \date Janeiro 2015
 *
 */
 
 #include "DateTime.h"
 
-struct tm tm_localtime() {
+Date::Date()
+{
 	struct tm * timeinfo = new struct tm;
+
 	time_t rawtime;
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	return *timeinfo;
+
+	this->day = timeinfo->tm_mday;
+	this->month = timeinfo->tm_mon + 1;
+	this->year = timeinfo->tm_year + 1900;
 }
 
-void tm_write(struct tm timeinfo, ofstream &fout) {
-	time_t rawtime = mktime(&timeinfo);
-	fout.write((char*)&rawtime, sizeof(time_t));
+Date::~Date()
+{
 }
 
-void tm_read(struct tm *timeinfo, ifstream &fin) {
-	time_t rawtime;
-	fin.read((char*)&rawtime, sizeof(time_t));
-	timeinfo = localtime(&rawtime);
+void Date::read(ifstream &fin)
+{
+	fin.read((char*)&day, sizeof(uint8_t));
+	fin.read((char*)&month, sizeof(uint8_t));
+	fin.read((char*)&year, sizeof(uint16_t));
 }
 
-bool operator<(struct tm t1, struct tm t2) {
-	if (t1.tm_year == t2.tm_year) {
-		if (t1.tm_mon == t2.tm_mon) {
-			return (t1.tm_mday < t2.tm_mday);
+void Date::write(ofstream &fout) const
+{
+	fout.write((char*)&day, sizeof(uint8_t));
+	fout.write((char*)&month, sizeof(uint8_t));
+	fout.write((char*)&year,sizeof(uint16_t));
+}
+
+bool Date::operator<(const Date &d) const
+{
+	if (year == d.year)
+	{
+		if (month == d.month)
+		{
+			return (day < d.day);
 		}
-		return (t1.tm_mon < t2.tm_mon);
+		return (month < d.month);
 	}
-	return (t1.tm_year < t2.tm_year);
+	return (year < d.year);
 }
 
-bool operator==(struct tm t1, struct tm t2) {
-	return (t1.tm_year == t2.tm_year && t1.tm_mon == t2.tm_mon && t1.tm_mday == t2.tm_mday);
+bool Date::operator==(const Date &d) const
+{
+	return (year == d.year && month == d.month && day == d.day);
 }
 
-string tm_converttime(struct tm t1) {
-	ostringstream os;
-	os << setw(2) << setfill('0') << t1.tm_hour;
-	os << ":";
-	os << setw(2) << setfill('0') << t1.tm_min;
-	return os.str();
-}
-
-string tm_convertdate(struct tm t1) {
-	ostringstream os;
-	os << setw(2) << setfill('0') << t1.tm_mday;
-	os << "/";
-	os << setw(2) << setfill('0') << t1.tm_mon;
-	os << "/";
-	os << setw(4) << left << setfill(' ') << t1.tm_year + 1900;
-	return os.str();
-}
-
-ostream &operator<<(ostream& os, struct tm t1) {
-	os << tm_convertdate(t1);
+ostream &operator<<(ostream& os, const Date &d)
+{
+	os << d.str();
 	return os;
 }
+
+string Date::str() const
+{
+	ostringstream os;
+	os << setw(2) << setfill('0') << int(day);
+	os << "/";
+	os << setw(2) << setfill('0') << int(month);
+	os << "/";
+	os << setw(4) << left << setfill(' ') << year;
+	return os.str();
+}
+

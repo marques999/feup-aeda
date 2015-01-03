@@ -20,73 +20,71 @@ namespace UI
 	/**
 	* @brief displays a frame (or header)
 	* @param s string to be displayed
-	* @return void
 	*/
-	void DisplayFrame(string s);
+	void DisplayFrame(const string &s);
+
+	/**
+	* @brief displays a frame (or header), doesn't clear console screen
+	* @param s string to be displayed
+	*/
+	void DisplayFrameNoCls(const string &s);
 
 	/**
 	* @brief displays text centered on screen
 	* @param s string to be displayed
-	* @return void
 	*/
-	void Display(string s);
+	void Display(const string &s);
 
 	/**
 	* @brief displays a brief error or informative message
 	* @param s string to be displayed
-	* @return void
 	*/
-	void DisplayMessage(string s);
+	void DisplayMessage(const string &s);
 
 	/**
 	* @brief displays the table header
 	* @param c the number of columns
-	* @param labels an array containing the labels
-	* @param length an array containing the width of each column (should be the same size as c)
-	* @return void
+	* @param labels array containing the labels
+	* @param length array containing the width of each column (should be the same size as c)
 	*/
-	void DisplayTable(int c, vector<string> labels, int length[]);
+	void DisplayTable(int c, const vector<string> &labels, const int length[]);
 
 	/**
 	* @brief displays a table row
 	* @param c the number of columns (same as DisplayTable())
-	* @param labels an array containing the row values
-	* @param length an array containing the width of each cell (should be the same size as c)
-	* @return void
+	* @param labels array containing the row values
+	* @param length array containing the width of each cell (should be the same size as c)
 	*/
-	void DisplayTableRow(int c, vector<string> labels, int length[]);
+	void DisplayTableRow(int c, const vector<string> &labels, const int length[]);
 
 	/**
 	* @brief displays a new menu item
 	* @param i index
 	* @param label an array containing the row values
-	* @return void
 	*/
-	void DisplayMenuItem(int i, string label);
+	void DisplayMenuItem(int i, const string &label);
 
 	/**
 	 * @brief displays top menu separator
-	 * @return void
 	 */
 	void DisplayMenuTop();
 
 	/**
-	 * @brief display bottom menu separator
-	 * @return void
+	 * @brief displays bottom menu separator
 	 */
 	void DisplayMenuBottom();
 
 	/**
 	* @brief formats the price in a user-friendly way (fixed point)
 	* @param p number to be formatted
-	* @return a string containing the formatted value
+	* @return returns a string containing the formatted value
 	*/
 	string FormatPrice(double p);
 
 	/**
 	* @brief formats ratings in a user-friendly way (fixed point)
 	* @param p number to be formatted
-	* @return a string containing the formatted value
+	* @return returns a string containing the formatted value
 	*/
 	string FormatRating(double r);
 
@@ -94,7 +92,7 @@ namespace UI
 	* @brief formats a fixed digit number (eg. the tax number)
 	* @param p number to be formatted
 	* @param r number of digits
-	* @return a string containing the formatted value
+	* @return returns a string containing the formatted value
 	*/
 	string Format(unsigned n, unsigned w);
 }

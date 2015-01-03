@@ -44,6 +44,7 @@ template<class Comparable>
 class BST
 {
 public:
+
 	explicit BST(const Comparable & notFound);
 	BST(const BST & rhs);
 	~BST();
@@ -132,28 +133,35 @@ const Comparable & BST<Comparable>::find(const Comparable & x) const
 }
 
 template<class Comparable>
-void BST<Comparable>::makeEmpty() {
+void BST<Comparable>::makeEmpty()
+{
 	makeEmpty(root);
 }
 
 template<class Comparable>
-bool BST<Comparable>::isEmpty() const {
+bool BST<Comparable>::isEmpty() const
+{
 	return root == NULL;
 }
 
 template<class Comparable>
-void BST<Comparable>::printTree() const {
-	if (isEmpty()) {
+void BST<Comparable>::printTree() const
+{
+	if (isEmpty())
+	{
 		cout << "Empty tree" << endl;
 	}
-	else {
+	else
+	{
 		printTree(root);
 	}
 }
 
 template<class Comparable>
-const BST<Comparable> &BST<Comparable>::operator=(const BST<Comparable> & rhs) {
-	if (this != &rhs) {
+const BST<Comparable> &BST<Comparable>::operator=(const BST<Comparable> &rhs)
+{
+	if (this != &rhs)
+	{
 		makeEmpty();
 		root = clone(rhs.root);
 	}
@@ -161,50 +169,60 @@ const BST<Comparable> &BST<Comparable>::operator=(const BST<Comparable> & rhs) {
 }
 
 template<class Comparable>
-const Comparable & BST<Comparable>::elementAt(BinaryNode<Comparable> *t) const {
-	if (t == NULL) {
+const Comparable & BST<Comparable>::elementAt(BinaryNode<Comparable> *t) const
+{
+	if (t == NULL)
+	{
 		return ITEM_NOT_FOUND;
 	}
-	else {
+	else
+	{
 		return t->element;
 	}
 }
 
 template<class Comparable>
-void BST<Comparable>::insert(const Comparable & x,
-	BinaryNode<Comparable> * & t) const {
-	if (t == NULL) {
+void BST<Comparable>::insert(const Comparable & x, BinaryNode<Comparable> * & t) const
+{
+	if (t == NULL)
+	{
 		t = new BinaryNode<Comparable>(x, NULL, NULL);
 	}
-	else if (x < t->element) {
+	else if (*x < *(t->element))
+	{
 		insert(x, t->left);
 	}
-	else if (t->element < x) {
+	else if (*(t->element) < *x)
+	{
 		insert(x, t->right);
 	}
-	else {
+	else
+	{
 	}
 }
 
 template<class Comparable>
-void BST<Comparable>::remove(const Comparable & x,
-	BinaryNode<Comparable> * & t) const
+void BST<Comparable>::remove(const Comparable & x, BinaryNode<Comparable> * & t) const
 {
-	if (t == NULL) {
-		return;   // Item not found; do nothing
+	if (t == NULL)
+	{
+		return;
 	}
-	if (x < t->element) {
+	if (*x < *(t->element))
+	{
 		remove(x, t->left);
 	}
-	else if (t->element < x) {
+	else if (*(t->element) < *x)
+	{
 		remove(x, t->right);
 	}
-	else if (t->left != NULL && t->right != NULL) // Two children
+	else if (t->left != NULL && t->right != NULL)
 	{
 		t->element = findMin(t->right)->element;
 		remove(t->element, t->right);
 	}
-	else {
+	else
+	{
 		BinaryNode<Comparable> *oldNode = t;
 		t = (t->left != NULL) ? t->left : t->right;
 		delete oldNode;
@@ -239,15 +257,24 @@ BinaryNode<Comparable> *BST<Comparable>::findMax(BinaryNode<Comparable> *t) cons
 }
 
 template<class Comparable>
-BinaryNode<Comparable> *BST<Comparable>::find(const Comparable & x, BinaryNode<Comparable> *t) const {
+BinaryNode<Comparable> *BST<Comparable>::find(const Comparable & x, BinaryNode<Comparable> *t) const
+{
 	if (t == NULL)
+	{
 		return NULL;
-	else if (x < t->element)
+	}
+	else if (*x < *(t->element))
+	{
 		return find(x, t->left);
-	else if (t->element < x)
+	}
+	else if (*(t->element) < *x)
+	{
 		return find(x, t->right);
+	}
 	else
-		return t;    // Match
+	{
+		return t;
+	}
 }
 
 template<class Comparable>
@@ -274,8 +301,7 @@ void BST<Comparable>::printTree(BinaryNode<Comparable> *t) const
 }
 
 template<class Comparable>
-BinaryNode<Comparable> *
-BST<Comparable>::clone(BinaryNode<Comparable> * t) const
+BinaryNode<Comparable> *BST<Comparable>::clone(BinaryNode<Comparable> * t) const
 {
 	if (t == NULL)
 	{
@@ -283,25 +309,31 @@ BST<Comparable>::clone(BinaryNode<Comparable> * t) const
 	}
 	else
 	{
-		return new BinaryNode<Comparable>(t->element, clone(t->left),
-			clone(t->right));
+		return new BinaryNode<Comparable>(t->element, clone(t->left), clone(t->right));
 	}
 }
 
 template<class Comparable>
-class BSTItrPost {
+class BSTItrPost
+{
 public:
+
 	BSTItrPost(const BST<Comparable> &bt);
 
 	void advance();
-	Comparable &retrieve() {
+
+	Comparable &retrieve()
+	{
 		return itrStack.top()->element;
 	}
-	bool isAtEnd() {
+
+	bool isAtEnd()
+	{
 		return itrStack.empty();
 	}
 
 private:
+
 	stack<BinaryNode<Comparable> *> itrStack;
 	stack<bool> visitStack;
 	void slideDown(BinaryNode<Comparable> *n);
@@ -311,7 +343,9 @@ template<class Comparable>
 BSTItrPost<Comparable>::BSTItrPost(const BST<Comparable> &bt)
 {
 	if (!bt.isEmpty())
+	{
 		slideDown(bt.root);
+	}
 }
 
 template<class Comparable>
@@ -386,17 +420,23 @@ BSTItrPre<Comparable>::BSTItrPre(const BST<Comparable> &bt)
 }
 
 template<class Comparable>
-void BSTItrPre<Comparable>::advance() {
+void BSTItrPre<Comparable>::advance()
+{
 	BinaryNode<Comparable> * actual = itrStack.top();
 	BinaryNode<Comparable> * seguinte = actual->left;
 	if (seguinte)
+	{
 		itrStack.push(seguinte);
-	else {
-		while (!itrStack.empty()) {
+	}
+	else
+	{
+		while (!itrStack.empty())
+		{
 			actual = itrStack.top();
 			itrStack.pop();
 			seguinte = actual->right;
-			if (seguinte) {
+			if (seguinte)
+			{
 				itrStack.push(seguinte);
 				break;
 			}

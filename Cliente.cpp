@@ -6,20 +6,31 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
 #include "App.h"
 #include "Cliente.h"
 
-void Cliente::write(ofstream &fout) {
+void Cliente::write(ofstream &fout)
+{
+	// CUSTOMER NAME
 	fout << name << endl;
+
+	// CUSTOMER BALANCE
 	fout.write((char*) &saldo, sizeof(double));
+
+	// CUSTOMER VOUCHER
 	fout.write((char*) &voucher, sizeof(uint8_t));
+
+	// CUSTOMER NUMBER OF APPS
 	unsigned numApps = owned.size();
 	fout.write((char*) &numApps, sizeof(unsigned));
-	for (int i = 0; i < numApps; i++) {
-		fout << owned[i]->getName() << endl;
+
+	// CUSTOMER OWNED APPS
+	for (auto &x : owned)
+	{
+		fout << x->getName() << endl;
 	}
 }

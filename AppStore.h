@@ -35,6 +35,24 @@ typedef enum {
 	SALES_CLIENTE, SALES_PRICE, SALES_APPS
 } SaleSort;
 
+struct sortQueue
+{
+	bool operator()(App* &lhs, App* &rhs) const
+	{
+		if (lhs->getDate() == rhs->getDate())
+		{
+			if (lhs->getPrice() == rhs->getPrice())
+			{
+				return !(lhs->getName() < rhs->getName());
+			}
+			return !(lhs->getPrice() < rhs->getPrice());
+		}
+		return (lhs->getDate() < rhs->getDate());
+	}
+};
+
+typedef priority_queue<App*,vector<App*>,sortQueue> queuePending;
+
 class AppStore
 {
 public:
@@ -162,6 +180,7 @@ public:
 
 	void IOReadClientes();
 	void IOWriteClientes() const;
+	bool IOReadDeveloper(ifstream &fin);
 	void IOReadDevelopers();
 	void IOWriteDeveloper(Developer* dev, ofstream &fout) const;
 	void IOWriteDevelopers() const;
@@ -281,15 +300,11 @@ private:
 
 	void resetCart();
 
-//	bool tableInsertElement(const App &elem);
-//	bool tableRemoveElement(const App& elem);
-//	bool tableUpdateElement(const App& o, const App &n);
-
 	string nome;
 	Sale cart;
 
 	vector<App*> apps;
-	priority_queue<App*> appsPendentes;
+	queuePending pending;
 	BST<App*> appsRanking;
 
 	vector<Cliente*> clientes;

@@ -6,7 +6,7 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
@@ -87,6 +87,7 @@ public:
 		return os;
 	}
 };
+
 class AppInexistente {
 
 	string appName;
@@ -182,16 +183,6 @@ public:
 		return os;
 	}
 };
-
-template<class Comparable>
-bool sequentialSearch(const vector<Comparable> &v, Comparable value) {
-	for (size_t i = 0; i < v.size(); i++) {
-		if (v[i] == value) {
-			return true;
-		}
-	}
-	return false;
-}
 
 string to_upper(const string &s);
 

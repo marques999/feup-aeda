@@ -6,7 +6,7 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
@@ -24,10 +24,11 @@ public:
 
 	/**
 	* @brief default constructor for 'Cliente' class
-	* @param n the customer's name
+	* @param n customer's name
 	* @param s initial account balance (may add some funds later)
 	*/
-	Cliente(string n, double s) {
+	Cliente(string n, double s)
+	{
 		this->name = n;
 		this->saldo = s;
 		this->voucher = false;
@@ -36,20 +37,24 @@ public:
 	/**
 	* @brief default destructor for 'Cliente' class
 	*/
-	virtual ~Cliente() {
+	virtual ~Cliente()
+	{
 	}
 
 	/**
 	* @brief returns the customer's name
 	*/
-	string getName() const {
+	string getName() const
+	{
 		return this->name;
 	}
 
 	/**
 	* @brief sets the customer with a new name
+	* @param n new customer name
 	*/
-	void setName(string n) {
+	void setName(string n)
+	{
 		this->name = n;
 	}
 
@@ -61,22 +66,24 @@ public:
 	}
 
 	/**
-	* @brief sets the customer's account balance to s
+	* @brief sets the customer's with a new account balance
+	* @param new customer account balance
 	*/
 	void setSaldo(double s) {
 		this->saldo = s;
 	}
 
 	/**
-	* @brief returns true if customer owns a voucher, otherwise false
+	* @brief gets customer voucher status
+	* @return returns true if customer owns a voucher; false otherwise
 	*/
 	bool getVoucher() const {
 		return this->voucher;
 	}
 
 	/**
-	* @brief sets new status for voucher
-	* @param v new status (true/false)
+	* @brief sets new status for customer voucher
+	* @param v new status (must be true OR false)
 	*/
 	void setVoucher(bool v) {
 		this->voucher = v;
@@ -98,7 +105,7 @@ public:
 
 	/**
 	* @brief pushes an app purchased by the customer to its "collection"
-	* @param a the recently bought app
+	* @param a recently purchased app
 	*/
 	void own(App *a) {
 		owned.push_back(a);
