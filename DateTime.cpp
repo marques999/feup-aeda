@@ -56,6 +56,11 @@ bool Date::operator<(const Date &d) const
 	return (year < d.year);
 }
 
+bool Date::operator>(const Date &d) const
+{
+	return (!operator<(d) && !operator==(d));
+}
+
 bool Date::operator==(const Date &d) const
 {
 	return (year == d.year && month == d.month && day == d.day);
@@ -77,4 +82,3 @@ string Date::str() const
 	os << setw(4) << left << setfill(' ') << year;
 	return os.str();
 }
-

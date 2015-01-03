@@ -38,6 +38,13 @@ public:
 	bool operator<(const Date &d) const;
 
 	/**
+	 * @brief compares two dates
+	 * @param d right operand for comparison
+	 * @return returns true if date is after date 'd' (happens later); false otherwise
+	 */
+	bool operator>(const Date &d) const;
+
+	/**
 	 * @brief compares two dates for equality
 	 * @param d right operand for comparison
 	 * @return returns true if dates are equal; false otherwise

@@ -152,6 +152,7 @@ public:
 
 	void GUIListApps() const;
 	void GUIListPending() const;
+	void GUIListPublished(int devIndex) const;
 	void GUIPendingMenu();
 	void GUIDeveloperPending(int devIndex);
 
@@ -209,14 +210,19 @@ public:
 	void listAppsByName() const;
 	void listAppsByCategory(string cat) const;
 	void listAppsByCliente(int cliIndex) const;
-	void listAppsByDateAscending() const;
-	void listAppsByDateDescending() const;
+	void listAppsByDate() const;
 	void listAppsByPrice() const;
 	void listAppsByPrice(double min, double max) const;
 	void listAppsByRating() const;
 	void listAppsByRating(unsigned value) const;
+	void listAppsBySales() const;
+
+	////////////////////////////////////////////////////////
+	//				   LIST PENDING APPS				  //
+	////////////////////////////////////////////////////////
 	void listAppsPending() const;
 	void listAppsPendingByName() const;
+
 
 	////////////////////////////////////////////////////////
 	//			    	  LIST CLIENTES					  //
@@ -229,7 +235,9 @@ public:
 	//			      LIST APPS BY DEVELOPER			  //
 	////////////////////////////////////////////////////////
 	vector<App*> listDeveloperApps(const Developer* dev) const;
+	void listDeveloperAppsByDate(const Developer* dev) const;
 	void listDeveloperAppsByName(const Developer* dev) const;
+	void listDeveloperAppsByPrice(const Developer* dev) const;
 	void listDeveloperAppsBySales(const Developer* dev) const;
 
 	////////////////////////////////////////////////////////
