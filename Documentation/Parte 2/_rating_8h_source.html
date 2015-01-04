@@ -90,25 +90,31 @@ $(document).ready(function(){initNavTree('_rating_8h_source.html','');});
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_rating.html#a7835cc01d52f5571baed76ffc0904629">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_rating.html">Rating</a> &amp;<a class="code" href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">r</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">   62</a></span>&#160;    vector&lt;uint8_t&gt; <a class="code" href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">r</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_rating.html#adf73b43621423d9c7ff9f700bd6eb223">operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="class_rating.html">Rating</a> &amp;r) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __RATING_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_rating.html#a4ea155aea59365592b4c0406c8731c9c">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_rating.html">Rating</a> &amp;r) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">   74</a></span>&#160;    vector&lt;uint8_t&gt; <a class="code" href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">r</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __RATING_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="class_rating_html_adf73b43621423d9c7ff9f700bd6eb223"><div class="ttname"><a href="class_rating.html#adf73b43621423d9c7ff9f700bd6eb223">Rating::operator&gt;</a></div><div class="ttdeci">bool operator&gt;(const Rating &amp;r) const </div><div class="ttdoc">compares two ratings </div><div class="ttdef"><b>Definition:</b> Rating.cpp:68</div></div>
 <div class="ttc" id="class_rating_html_a7835cc01d52f5571baed76ffc0904629"><div class="ttname"><a href="class_rating.html#a7835cc01d52f5571baed76ffc0904629">Rating::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const Rating &amp;r) const </div><div class="ttdoc">compares two ratings </div><div class="ttdef"><b>Definition:</b> Rating.cpp:63</div></div>
-<div class="ttc" id="class_rating_html_ada09ac2e319c5ee98b640c33db7a22cd"><div class="ttname"><a href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">Rating::r</a></div><div class="ttdeci">vector&lt; uint8_t &gt; r</div><div class="ttdoc">vector containing the ratings given by customers </div><div class="ttdef"><b>Definition:</b> Rating.h:62</div></div>
+<div class="ttc" id="class_rating_html_ada09ac2e319c5ee98b640c33db7a22cd"><div class="ttname"><a href="class_rating.html#ada09ac2e319c5ee98b640c33db7a22cd">Rating::r</a></div><div class="ttdeci">vector&lt; uint8_t &gt; r</div><div class="ttdoc">vector containing the ratings given by customers </div><div class="ttdef"><b>Definition:</b> Rating.h:74</div></div>
 <div class="ttc" id="class_rating_html"><div class="ttname"><a href="class_rating.html">Rating</a></div><div class="ttdef"><b>Definition:</b> Rating.h:18</div></div>
 <div class="ttc" id="_common_8h_html"><div class="ttname"><a href="_common_8h.html">Common.h</a></div></div>
-<div class="ttc" id="class_rating_html_a4acebf402e678dea5e6efb550786c6f6"><div class="ttname"><a href="class_rating.html#a4acebf402e678dea5e6efb550786c6f6">Rating::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes ratings data to a file in binary format </div><div class="ttdef"><b>Definition:</b> Rating.cpp:82</div></div>
+<div class="ttc" id="class_rating_html_a4ea155aea59365592b4c0406c8731c9c"><div class="ttname"><a href="class_rating.html#a4ea155aea59365592b4c0406c8731c9c">Rating::operator==</a></div><div class="ttdeci">bool operator==(const Rating &amp;r) const </div><div class="ttdoc">compares two ratings for equality </div><div class="ttdef"><b>Definition:</b> Rating.cpp:73</div></div>
+<div class="ttc" id="class_rating_html_a4acebf402e678dea5e6efb550786c6f6"><div class="ttname"><a href="class_rating.html#a4acebf402e678dea5e6efb550786c6f6">Rating::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes ratings data to a file in binary format </div><div class="ttdef"><b>Definition:</b> Rating.cpp:92</div></div>
 <div class="ttc" id="class_rating_html_a41aa69cd7cde52341d80b1ea8eb78fca"><div class="ttname"><a href="class_rating.html#a41aa69cd7cde52341d80b1ea8eb78fca">Rating::to_string</a></div><div class="ttdeci">string to_string() const </div><div class="ttdoc">converts the ratings to a more user-friendly representation </div><div class="ttdef"><b>Definition:</b> Rating.cpp:32</div></div>
 <div class="ttc" id="class_rating_html_a2e82f9d48a176c216bcba340d572e6c3"><div class="ttname"><a href="class_rating.html#a2e82f9d48a176c216bcba340d572e6c3">Rating::floor</a></div><div class="ttdeci">unsigned floor() const </div><div class="ttdoc">rounds the value computed by the method get() to the nearest integer </div><div class="ttdef"><b>Definition:</b> Rating.cpp:51</div></div>
-<div class="ttc" id="class_rating_html_a69e5d116d6180702899c683bc83a210c"><div class="ttname"><a href="class_rating.html#a69e5d116d6180702899c683bc83a210c">Rating::read</a></div><div class="ttdeci">void read(ifstream &amp;fin)</div><div class="ttdoc">reads ratings data from a file in binary format </div><div class="ttdef"><b>Definition:</b> Rating.cpp:68</div></div>
+<div class="ttc" id="class_rating_html_a69e5d116d6180702899c683bc83a210c"><div class="ttname"><a href="class_rating.html#a69e5d116d6180702899c683bc83a210c">Rating::read</a></div><div class="ttdeci">void read(ifstream &amp;fin)</div><div class="ttdoc">reads ratings data from a file in binary format </div><div class="ttdef"><b>Definition:</b> Rating.cpp:78</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="_rating_8h.html">Rating.h</a></li>
-    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <li class="footer">Generated on Sun Jan 4 2015 19:42:15 for FEUP_AEDA1415_2MIEIC03_D by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
   </ul>

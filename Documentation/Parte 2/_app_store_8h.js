@@ -1,8 +1,9 @@
 var _app_store_8h =
 [
+    [ "AppWrapper", "class_app_wrapper.html", "class_app_wrapper" ],
     [ "sortQueue", "structsort_queue.html", "structsort_queue" ],
     [ "AppStore", "class_app_store.html", "class_app_store" ],
-    [ "queuePending", "_app_store_8h.html#a45ed5ca251f9090782625f57f1084dac", null ],
+    [ "queuePending", "_app_store_8h.html#aaa71fc1cc4368eaa449a5bfef7a670b1", null ],
     [ "AppSort", "_app_store_8h.html#a4dd7beba82539a48c81b3e127ab35692", [
       [ "APP_NAME", "_app_store_8h.html#a4dd7beba82539a48c81b3e127ab35692a7845d0281db6c68682e8cb60b49bbb41", null ],
       [ "APP_DATE", "_app_store_8h.html#a4dd7beba82539a48c81b3e127ab35692a1b10377beceeb29d3e6758c46ce661ec", null ],

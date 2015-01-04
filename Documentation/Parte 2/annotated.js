@@ -5,6 +5,7 @@ var annotated =
     [ "AppInexistente", "class_app_inexistente.html", "class_app_inexistente" ],
     [ "AppJaExiste", "class_app_ja_existe.html", "class_app_ja_existe" ],
     [ "AppStore", "class_app_store.html", "class_app_store" ],
+    [ "AppWrapper", "class_app_wrapper.html", "class_app_wrapper" ],
     [ "BinaryNode", "class_binary_node.html", "class_binary_node" ],
     [ "BST", "class_b_s_t.html", "class_b_s_t" ],
     [ "BSTItrIn", "class_b_s_t_itr_in.html", "class_b_s_t_itr_in" ],
