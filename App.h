@@ -68,8 +68,8 @@ public:
 	}
 
 	/**
-	 * @brief sets the app with a new name
-	 * @param newName a new app name
+	 * @brief sets the application with a new name
+	 * @param newName string containing the new application name
 	 */
 	void setName(const string &newName)
 	{
@@ -77,7 +77,7 @@ public:
 	}
 
 	/**
-	 * @brief returns the app price
+	 * @brief returns the application price
 	 */
 	double getPrice() const
 	{
@@ -85,8 +85,8 @@ public:
 	}
 
 	/**
-	 * @brief sets the app with a new price
-	 * @param newPrice a new price for the app
+	 * @brief sets the application with a new price
+	 * @param newPrice new application price
 	 */
 	void setPrice(double newPrice)
 	{
@@ -94,7 +94,7 @@ public:
 	}
 
 	/**
-	 * @brief returns the app category
+	 * @brief returns the application category
 	 */
 	string getCategory() const
 	{
@@ -102,12 +102,80 @@ public:
 	}
 
 	/**
-	 * @brief sets the app with a new category
-	 * @param newCategory a new category for the app
+	 * @brief sets the application with a new category
+	 * @param newCategory string containing the new category for the application
 	 */
 	void setCategory(const string &newCategory)
 	{
 		this->category = newCategory;
+	}
+
+	/**
+	 * @brief returns a Date object containing the publish date
+	 */
+	Date getDate() const
+	{
+		return date;
+	}
+
+	/**
+	 * @brief sets the application with a new publish date
+	 * @param d Date object containing the new publish date
+	 */
+	void setDate(const Date &d)
+	{
+		this->date = d;
+	}
+
+	/**
+	* @brief returns the application description
+	*/
+	string getDescription() const
+	{
+		return this->description;
+	}
+
+	/**
+	* @brief sets the application with a new description
+	* @param newDescription string containing the new description
+	*/
+	void setDescription(string newDescription)
+	{
+		this->description = newDescription;
+	}
+
+	/**
+	 * @brief returns the developer who published this application
+	 */
+	Developer* getDeveloper() const
+	{
+		return this->dev;
+	}
+
+	/**
+	 * @brief associates the application with a new developer
+	 * @param newDev pointer to the new application developer
+	 */
+	void setDeveloper(Developer* newDev)
+	{
+		this->dev = newDev;
+	}
+
+	/**
+	 * @brief returns the number of customers who have purchased this application
+	 */
+	int getSales() const
+	{
+		return this->sales;
+	}
+
+	/**
+	 * @brief sets a new value for the application sales
+	 * @param s new sales value
+	 */
+	void setSales(int s)
+	{
+		this->sales = s;
 	}
 
 	/**
@@ -119,74 +187,6 @@ public:
 	}
 
 	/**
-	 * @brief sets the app with a new publish date
-	 * @param timeinfo a data structure containing the new date
-	 */
-	void setDate(const Date &d)
-	{
-		this->date = d;
-	}
-
-	/**
-	 * @brief returns a data structure containing the publish date
-	 */
-	Date getDate() const
-	{
-		return date;
-	}
-
-	/**
-	* @brief returns the app description
-	*/
-	string getDescription() const
-	{
-		return this->description;
-	}
-
-	/**
-	* @brief sets the app with a new description
-	* @param newDescription a string containing the new description
-	*/
-	void setDescription(string newDescription)
-	{
-		this->description = newDescription;
-	}
-
-	/**
-	 * @brief returns the developer who published this app
-	 */
-	Developer* getDeveloper() const
-	{
-		return this->dev;
-	}
-
-	/**
-	 * @brief associates the app with a new developer
-	 * @param newDev a pointer to the new app developer
-	 */
-	void setDeveloper(Developer* newDev)
-	{
-		this->dev = newDev;
-	}
-
-	/**
-	 * @brief returns the number of customers who have purchased this app
-	 */
-	int getSales() const
-	{
-		return this->sales;
-	}
-
-	/**
-	 * @brief sets a new value for the number of app sales
-	 * @param s the updated value
-	 */
-	void setSales(int s)
-	{
-		this->sales = s;
-	}
-
-	/**
 	 * @brief returns an object containing the ratings given by customers
 	 */
 	Rating getRating() const
@@ -195,9 +195,9 @@ public:
 	}
 
 	/**
-	 * @brief compares two apps by name for equality
+	 * @brief compares two applications by name for equality
 	 * @param ap right operand
-	 * @return returns true if two apps have the same name; false otherwise
+	 * @return returns true if two applications have the same name; false otherwise
 	 */
 	bool operator==(const App &ap) const
 	{
@@ -205,7 +205,7 @@ public:
 	}
 
 	/**
-	 * @brief compares two apps
+	 * @brief compares two applications
 	 * @param ap right operand
 	 * @return returns true if left operand should appear before right operand; false otherwise
 	 */
@@ -223,8 +223,8 @@ public:
 	}
 
 	/**
-	 * @brief updates the application rating
-	 * @param r the rating given by the customer
+	 * @brief updates application ratings
+	 * @param r new rating given by a customer
 	 */
 	void classificar(unsigned r)
 	{
@@ -233,8 +233,8 @@ public:
 
 	/**
 	 * @brief writes a new comment
-	 * @param cli the customer's name
-	 * @param c the comment left by the customer
+	 * @param cli customer's name
+	 * @param c comment written by the customer
 	 * @return returns true if comment was added successfully; false otherwise
 	 */
 	bool comentar(string cli, string c);

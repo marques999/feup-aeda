@@ -6,22 +6,24 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
 #include "AppStore.h"
 
-string to_upper(const string &s) {
+string to_upper(const string &s)
+{
 	string r = s;
-	for (unsigned i = 0; i < s.size(); i++) {
+	for (unsigned i = 0; i < s.size(); i++)
+	{
 		r[i] = toupper(r[i]);
 	}
 	return r;
 }
 
-void GUIDeveloperLogin(AppStore &as) {
-
+void GUIDeveloperLogin(AppStore &as)
+{
 	string developerName;
 
 	UI::DisplayFrame("DEVELOPER LOGIN");
@@ -30,15 +32,16 @@ void GUIDeveloperLogin(AppStore &as) {
 	getline(cin, developerName);
 
 	int i = as.indexDeveloper(developerName);
-	if (i == -1) {
+	if (i == -1)
+	{
 		throw DeveloperInexistente(developerName);
 	}
 
 	as.GUIDeveloperMenu(i);
 }
 
-void GUIClienteLogin(AppStore &as) {
-
+void GUIClienteLogin(AppStore &as)
+{
 	string clienteName;
 
 	UI::DisplayFrame("CUSTOMER LOGIN");
@@ -47,21 +50,24 @@ void GUIClienteLogin(AppStore &as) {
 	getline(cin, clienteName);
 
 	int i = as.indexCliente(clienteName);
-	if (i == -1) {
+	if (i == -1)
+	{
 		throw ClienteInexistente(clienteName);
 	}
 
 	as.GUIClienteMenu(i);
 }
 
-int main() {
-
+int main()
+{
 	AppStore appStore("BL@CK M@RKET");
 
-	try {
+	try
+	{
 		appStore.IOReadStore();
 	}
-	catch (FileIOException &e) {
+	catch (FileIOException &e)
+	{
 		cout << e;
 		system("pause");
 	}
@@ -70,10 +76,10 @@ int main() {
 	string tempUser;
 	int userChoice;
 
-	while (true) {
-
-		try {
-
+	while (true)
+	{
+		try
+		{
 			UI::DisplayFrame("APPSTORE SIMULATOR");
 			UI::Display("");
 			UI::Display("FEUP_AEDA1415_2MIEIC03_D");
@@ -90,17 +96,17 @@ int main() {
 			UI::Display("\n");
 			UI::Display("Press <0> to save and exit");
 
-			cout << endl;
-			cout << "Please select an option: ";
+			cout << "\nPlease select an option: ";
 			getline(cin, tempStr);
-			userChoice = atoi(tempStr.c_str());
 
-			if (userChoice < 0 || userChoice > 3) {
+			userChoice = atoi(tempStr.c_str());
+			if (userChoice < 0 || userChoice > 3)
+			{
 				throw InvalidParameter("choice");
 			}
 
-			switch (userChoice) {
-
+			switch (userChoice)
+			{
 			case 0:
 
 				appStore.IOWriteStore();
@@ -122,16 +128,18 @@ int main() {
 				break;
 			}
 		}
-
-		catch (DeveloperInexistente &e) {
+		catch (DeveloperInexistente &e)
+		{
 			cout << e;
 			system("pause");
 		}
-		catch (ClienteInexistente &e) {
+		catch (ClienteInexistente &e)
+		{
 			cout << e;
 			system("pause");
 		}
-		catch (InvalidParameter &e) {
+		catch (InvalidParameter &e)
+		{
 			cout << e;
 			system("pause");
 		}

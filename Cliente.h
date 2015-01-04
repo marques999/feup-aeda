@@ -51,7 +51,7 @@ public:
 
 	/**
 	* @brief sets the customer with a new name
-	* @param n new customer name
+	* @param n string containing the new customer name
 	*/
 	void setName(string n)
 	{
@@ -59,58 +59,69 @@ public:
 	}
 
 	/**
-	* @brief reurns the customer's account balance
+	* @brief returns the customer's account balance
 	*/
-	double getSaldo() const {
+	double getSaldo() const
+	{
 		return this->saldo;
 	}
 
 	/**
-	* @brief sets the customer's with a new account balance
-	* @param new customer account balance
+	* @brief sets the customer with a new account balance
+	* @param s new customer account balance
 	*/
-	void setSaldo(double s) {
+	void setSaldo(double s)
+	{
 		this->saldo = s;
 	}
 
 	/**
-	* @brief gets customer voucher status
+	* @brief gets customer's voucher status
 	* @return returns true if customer owns a voucher; false otherwise
 	*/
-	bool getVoucher() const {
+	bool getVoucher() const
+	{
 		return this->voucher;
 	}
 
 	/**
-	* @brief sets new status for customer voucher
-	* @param v new status (must be true OR false)
+	* @brief sets new status for the customer voucher
+	* @param v new status for the voucher (must be true OR false)
 	*/
-	void setVoucher(bool v) {
+	void setVoucher(bool v)
+	{
 		this->voucher = v;
 	}
 
 	/**
-	* @brief returns number of apps bought by the customer
+	* @brief returns number of applications bought by the customer
 	*/
-	unsigned int getNumApps() const {
+	unsigned int getNumberApps() const
+	{
 		return owned.size();
 	}
 
 	/**
-	* @brief returns a vector containing all the apps owned by the customer
+	* @brief returns a vector containing all the applications bought by the customer
 	*/
-	vector<App*> getOwnedApps() const {
+	vector<App*> getOwnedApps() const
+	{
 		return owned;
 	}
 
 	/**
-	* @brief pushes an app purchased by the customer to its "collection"
+	* @brief pushes an application purchased by the customer to its "collection"
 	* @param a recently purchased app
 	*/
-	void own(App *a) {
+	void own(App *a)
+	{
 		owned.push_back(a);
 	}
 
+	/**
+	 * @brief writes customer information to a given file
+	 * @param fout the output file stream
+	 */
 	void write(ofstream &fout);
 
 private:

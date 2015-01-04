@@ -58,7 +58,7 @@ public:
 
 	/**
 	 * @brief associates the sale with a new customer
-	 * @param newClient pointer to a customer
+	 * @param newClient pointer to customer object
 	 */
 	void setOwner(Cliente* newClient)
 	{
@@ -75,7 +75,7 @@ public:
 
 	/**
 	 * @brief sets the cart with a new total price (for voucher savings)
-	 * @param newPrice new price
+	 * @param newPrice application price
 	 */
 	void setPrice(double newPrice)
 	{
@@ -92,7 +92,7 @@ public:
 
 	/**
 	 * @brief adds a new app to the sale (for "add to cart")
-	 * @param a new application to be added
+	 * @param a application to be added
 	 */
 	bool push(App* a);
 

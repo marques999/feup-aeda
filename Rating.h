@@ -57,7 +57,7 @@ public:
 	bool operator<(const Rating &r) const;
 
 	/**
-	 * @biref vector containing the ratings given by customers
+	 * @brief vector containing the ratings given by customers
 	 */
 	vector<uint8_t> r;
 };

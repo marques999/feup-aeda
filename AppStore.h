@@ -62,16 +62,7 @@ public:
 
 	virtual ~AppStore();
 
-	////////////////////////////////////////////////////////
-	// CUTE tests related								  //
-	unsigned int getNumAppsTotal() const;				  //
-	unsigned int getNumClientes() const;				  //
-	unsigned int getNumDevelopers() const;				  //
-	unsigned int getNumAppsDev(Developer* dev) const;	  //
-	vector<App*> getAppsFromDev(Developer* dev) const;    //
-	string getName() const;								  //
-	vector<App*> getApps() const;						  //
-	////////////////////////////////////////////////////////
+	string getName() const;
 
 	////////////////////////////////////////////////////////
 	//					   APP C/R/U/D					  //
@@ -107,15 +98,13 @@ public:
 	bool deleteDeveloper();
 	bool updateDeveloper();
 
-	int indexCliente(string cliName);
-	int indexDeveloper(string devName) const;
-
 	////////////////////////////////////////////////////////
 	//			       		GUI: TABLES			 		  //
 	////////////////////////////////////////////////////////
 	void GUIAppsTable(const vector<App> &v) const;
 	void GUIAppsTable(const vector<App*> &v) const;
-	void GUIAppsTable2(const vector<App*> &v) const;
+	void GUIAppsTableD(const vector<App*> &v) const;
+	void GUIAppsTableS(const vector<App*> &v) const;
 	void GUIClienteTable(const vector<Cliente*> &v) const;
 	void GUIDeveloperAppsTable(const vector<App*> &v) const;
 	void GUIDeveloperTable(const vector<Developer*> &v) const;
@@ -154,10 +143,17 @@ public:
 	void GUISearchRating() const;
 	bool GUIRemoveFromCart();
 
-	// APP
+	////////////////////////////////////////////////////////
+	//				   	 INDEX FUNCTIONS				  //
+	////////////////////////////////////////////////////////
 
 	int appIndex(string appName) const;
+	int indexCliente(string cliName);
+	int indexDeveloper(string devName) const;
 
+	////////////////////////////////////////////////////////
+	//				     	LIST MENUS					  //
+	////////////////////////////////////////////////////////
 	void GUIListApps() const;
 	void GUIListPending() const;
 	void GUIListPublished(int devIndex) const;
@@ -167,17 +163,8 @@ public:
 	void GUIDeveloperPending(int devIndex);
 
 	void App_comment(int appIndex, int cliIndex);
-
 	void App_print(int appIndex, int cliIndex);
 	void App_checkout(int cliIndex, bool voucher);
-
-	////////////////////////////////////////////////////////
-	//				   BINARY SEARCH TREE				  //
-	////////////////////////////////////////////////////////
-	BST<App*> BSTGetApps() const;
-	bool BSTInsertApp(App* a);
-	bool BSTRemoveApp(App* a);
-	bool BSTRemoveApp(string appName);
 
 	////////////////////////////////////////////////////////
 	//				     I/O OPERATIONS					  //
@@ -205,15 +192,13 @@ public:
 	bool IOReadStore();
 	bool IOWriteStore() const;
 	
-	// MENU
-
+	////////////////////////////////////////////////////////
+	//					    USER MENUS					  //
+	////////////////////////////////////////////////////////
 	void GUIAdminMenu();
 	void GUIPendingMenu();
 	void GUIDeveloperMenu(int devIndex);
 	bool GUIClienteMenu(int cliIndex);
-
-	App* queueFindElement(string name) const;
-	
 
 	////////////////////////////////////////////////////////
 	//					     LIST APPS					  //
@@ -289,22 +274,33 @@ public:
 	void listSalesByID() const;
 	void listSalesByPrice() const;
 
-
 	void listTopNApps(int topN) const;
 	void listTop10Apps() const;
 
-	void freeVoucher();
-
 private:
 
+	////////////////////////////////////////////////////////
+	//				   SORTING ALGORITHMS	 			  //
+	////////////////////////////////////////////////////////
 	vector<App> sortApps(const vector<App> &v, AppSort s) const;
 	vector<App*> sortApps(const vector<App*> &v, AppSort s) const;
 	vector<Cliente*> sortClientes(vector<Cliente*> v, ClienteSort s) const;
 	vector<Developer*> sortDevelopers(const vector<Developer*> &v, DeveloperSort s) const;
 	vector<Sale> sortSales(const vector<Sale> v, SaleSort s) const;
 
+	////////////////////////////////////////////////////////
+	//				   BINARY SEARCH TREE				  //
+	////////////////////////////////////////////////////////
+	BST<App*> BSTGetApps() const;
+	bool BSTRemoveApp(App* a);
+	bool BSTRemoveApp(string appName);
+
+	////////////////////////////////////////////////////////
+	//					  PRIORITY QUEUE				  //
+	////////////////////////////////////////////////////////
 	vector<App*> queueToVector() const;
 	App* queueFindElement(string name, int devIndex) const;
+	App* queueFindElement(string name) const;
 	bool queueRemoveElement(App* elem);
 	void queueInsertElement(App* elem);
 	bool queueRemoveElement(string name);
@@ -325,6 +321,5 @@ private:
 	vector<Sale> vendas;
 
 };
-
 
 #endif /* APPSTORE_H_ */

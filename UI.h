@@ -42,8 +42,8 @@ namespace UI
 	void DisplayMessage(const string &s);
 
 	/**
-	* @brief displays the table header
-	* @param c the number of columns
+	* @brief displays table header
+	* @param c number of columns
 	* @param labels array containing the labels
 	* @param length array containing the width of each column (should be the same size as c)
 	*/
@@ -51,16 +51,16 @@ namespace UI
 
 	/**
 	* @brief displays a table row
-	* @param c the number of columns (same as DisplayTable())
+	* @param c number of columns (same as DisplayTable())
 	* @param labels array containing the row values
 	* @param length array containing the width of each cell (should be the same size as c)
 	*/
 	void DisplayTableRow(int c, const vector<string> &labels, const int length[]);
 
 	/**
-	* @brief displays a new menu item
-	* @param i index
-	* @param label an array containing the row values
+	* @brief displays menu item
+	* @param i row index
+	* @param label array containing the row values
 	*/
 	void DisplayMenuItem(int i, const string &label);
 
@@ -83,15 +83,15 @@ namespace UI
 
 	/**
 	* @brief formats ratings in a user-friendly way (fixed point)
-	* @param p number to be formatted
+	* @param r number
 	* @return returns a string containing the formatted value
 	*/
 	string FormatRating(double r);
 
 	/**
 	* @brief formats a fixed digit number (eg. the tax number)
-	* @param p number to be formatted
-	* @param r number of digits
+	* @param n number
+	* @param w number of digits (field width)
 	* @return returns a string containing the formatted value
 	*/
 	string Format(unsigned n, unsigned w);
