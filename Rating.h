@@ -57,6 +57,18 @@ public:
 	bool operator<(const Rating &r) const;
 
 	/**
+	 * @brief compares two ratings
+	 * @return returns true if left operand rating is higher; false otherwise
+	 */
+	bool operator>(const Rating &r) const;
+
+	/**
+	 * @brief compares two ratings for equality
+	 * @return returns true if ratings are equalr; false otherwise
+	 */
+	bool operator==(const Rating &r) const;
+
+	/**
 	 * @brief vector containing the ratings given by customers
 	 */
 	vector<uint8_t> r;

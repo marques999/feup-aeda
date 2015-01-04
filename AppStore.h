@@ -35,6 +35,22 @@ typedef enum {
 	SALES_CLIENTE, SALES_PRICE, SALES_APPS
 } SaleSort;
 
+class AppWrapper
+{
+public:
+
+	App* app;
+
+	AppWrapper(App* a): app(a)
+	{
+	};
+
+	bool operator< (const AppWrapper &o) const
+	{
+		return *app < *(o.app);
+	};
+};
+
 struct sortQueue
 {
 	bool operator()(App* &lhs, App* &rhs) const
@@ -45,13 +61,13 @@ struct sortQueue
 			{
 				return !(lhs->getName() < rhs->getName());
 			}
-			return !(lhs->getPrice() < rhs->getPrice());
+			return (lhs->getPrice() < rhs->getPrice());
 		}
-		return (lhs->getDate() < rhs->getDate());
+		return !(lhs->getDate() < rhs->getDate());
 	}
 };
 
-typedef priority_queue<App*,vector<App*>,sortQueue> queuePending;
+typedef priority_queue<App*, vector<App*>, sortQueue> queuePending;
 
 class AppStore
 {
@@ -291,8 +307,9 @@ private:
 	////////////////////////////////////////////////////////
 	//				   BINARY SEARCH TREE				  //
 	////////////////////////////////////////////////////////
-	BST<App*> BSTGetApps() const;
+	BST<AppWrapper> BSTGetApps() const;
 	bool BSTRemoveApp(App* a);
+	bool BSTInsertApp(App* a);
 	bool BSTRemoveApp(string appName);
 
 	////////////////////////////////////////////////////////
@@ -314,7 +331,7 @@ private:
 
 	vector<App*> apps;
 	queuePending pending;
-	BST<App*> ranking;
+	BST<AppWrapper> ranking;
 
 	vector<Cliente*> clientes;
 	vector<Developer*> developers;

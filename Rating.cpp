@@ -65,6 +65,16 @@ bool Rating::operator<(const Rating &r) const
 	return get() < r.get();
 }
 
+bool Rating::operator>(const Rating &r) const
+{
+	return get() > r.get();
+}
+
+bool Rating::operator==(const Rating &r) const
+{
+	return get() == r.get();
+}
+
 void Rating::read(ifstream &fin)
 {
 	unsigned int sizeTemp;

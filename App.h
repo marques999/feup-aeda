@@ -211,7 +211,7 @@ public:
 	 */
 	bool operator<(const App &ap)
 	{
-		if (rating < ap.rating)
+		if (rating == ap.rating)
 		{
 			if (price == ap.price)
 			{
@@ -219,7 +219,7 @@ public:
 			}
 			return (price < ap.price);
 		}
-		return !(rating < ap.rating);
+		return (rating > ap.rating);
 	}
 
 	/**
@@ -263,7 +263,7 @@ private:
 
 	string name;
 	double price;
-	int sales;
+	unsigned sales;
 	string category;
 	Date date;
 	string description;
