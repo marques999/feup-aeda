@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -41,6 +48,20 @@
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_app_8h.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a>  </div>
@@ -49,7 +70,22 @@
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_cliente_8h_source.html">Cliente.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_date_time_8h_source.html">DateTime.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_rating_8h_source.html">Rating.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for App.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="_app_8h__incl.png" border="0" usemap="#_app_8h" alt=""/></div>
+<map name="_app_8h" id="_app_8h">
+<area shape="rect" id="node2" href="_cliente_8h.html" title="Cliente.h" alt="" coords="268,80,341,107"/><area shape="rect" id="node13" href="_date_time_8h.html" title="DateTime.h" alt="" coords="351,155,439,181"/><area shape="rect" id="node14" href="_rating_8h.html" title="Rating.h" alt="" coords="437,80,508,107"/><area shape="rect" id="node3" href="_common_8h.html" title="Common.h" alt="" coords="307,229,393,256"/><area shape="rect" id="node12" href="_u_i_8h.html" title="UI.h" alt="" coords="282,155,327,181"/></map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="_app_8h__dep__incl.png" border="0" usemap="#_app_8hdep" alt=""/></div>
+<map name="_app_8hdep" id="_app_8hdep">
+<area shape="rect" id="node2" href="_app_8cpp.html" title="App.cpp" alt="" coords="5,155,76,181"/><area shape="rect" id="node3" href="_developer_8h.html" title="Developer.h" alt="" coords="112,80,201,107"/><area shape="rect" id="node8" href="_sale_8h.html" title="Sale.h" alt="" coords="235,80,294,107"/><area shape="rect" id="node10" href="_cliente_8cpp.html" title="Cliente.cpp" alt="" coords="319,80,405,107"/><area shape="rect" id="node4" href="_app_store_8h.html" title="AppStore.h" alt="" coords="227,155,313,181"/><area shape="rect" id="node7" href="_developer_8cpp.html" title="Developer.cpp" alt="" coords="100,155,203,181"/><area shape="rect" id="node5" href="_app_store_8cpp.html" title="AppStore.cpp" alt="" coords="159,229,261,256"/><area shape="rect" id="node6" href="_source_8cpp.html" title="Source.cpp" alt="" coords="285,229,373,256"/><area shape="rect" id="node9" href="_sale_8cpp.html" title="Sale.cpp" alt="" coords="337,155,411,181"/></map>
+</div>
 </div>
 <p><a href="_app_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -66,13 +102,17 @@ Classes</h2></td></tr>
 Diogo Marques </dd>
 <dd>
 Fabio Carneiro</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Dezembro 2014 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>Janeiro 2015 </dd></dl>
 </div></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:12 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="_app_8h.html">App.h</a></li>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -38,11 +45,25 @@
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_sale.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -77,18 +98,21 @@ double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cl
 <tr class="memdesc:ab20c0261e7f5fc64d8c3053cc39f6a0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the amount to be paid by the customer <br /></td></tr>
 <tr class="separator:ab20c0261e7f5fc64d8c3053cc39f6a0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa749dbbff68ce85849d98a1ebb8dcfc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sale.html#aa749dbbff68ce85849d98a1ebb8dcfc5">setPrice</a> (double newPrice)</td></tr>
-<tr class="memdesc:aa749dbbff68ce85849d98a1ebb8dcfc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the sale with a new amount (for voucher savings)  <a href="#aa749dbbff68ce85849d98a1ebb8dcfc5">More...</a><br /></td></tr>
+<tr class="memdesc:aa749dbbff68ce85849d98a1ebb8dcfc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the cart with a new total price (for voucher savings)  <a href="#aa749dbbff68ce85849d98a1ebb8dcfc5">More...</a><br /></td></tr>
 <tr class="separator:aa749dbbff68ce85849d98a1ebb8dcfc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5de4ab2582511c6cff749c7a105dd1ba"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5de4ab2582511c6cff749c7a105dd1ba"></a>
 vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sale.html#a5de4ab2582511c6cff749c7a105dd1ba">getApps</a> () const </td></tr>
 <tr class="memdesc:a5de4ab2582511c6cff749c7a105dd1ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the apps bought by the customer <br /></td></tr>
 <tr class="separator:a5de4ab2582511c6cff749c7a105dd1ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a028a6afa10dd2dc08b7759db27de75aa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sale.html#a028a6afa10dd2dc08b7759db27de75aa">pushApp</a> (<a class="el" href="class_app.html">App</a> *a)</td></tr>
-<tr class="memdesc:a028a6afa10dd2dc08b7759db27de75aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a new app to the sale (for "add to cart")  <a href="#a028a6afa10dd2dc08b7759db27de75aa">More...</a><br /></td></tr>
-<tr class="separator:a028a6afa10dd2dc08b7759db27de75aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9736ea863df81091b86a9b9f0d7c9a43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sale.html#a9736ea863df81091b86a9b9f0d7c9a43">pullApp</a> (<a class="el" href="class_app.html">App</a> *a)</td></tr>
-<tr class="memdesc:a9736ea863df81091b86a9b9f0d7c9a43"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes an app from the sale (for "remove from cart")  <a href="#a9736ea863df81091b86a9b9f0d7c9a43">More...</a><br /></td></tr>
-<tr class="separator:a9736ea863df81091b86a9b9f0d7c9a43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1bd7c6cd1d55e2ccb90cf715125e005"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sale.html#aa1bd7c6cd1d55e2ccb90cf715125e005">push</a> (<a class="el" href="class_app.html">App</a> *a)</td></tr>
+<tr class="memdesc:aa1bd7c6cd1d55e2ccb90cf715125e005"><td class="mdescLeft">&#160;</td><td class="mdescRight">adds a new app to the sale (for "add to cart")  <a href="#aa1bd7c6cd1d55e2ccb90cf715125e005">More...</a><br /></td></tr>
+<tr class="separator:aa1bd7c6cd1d55e2ccb90cf715125e005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c6f931b60a78ea268a4c3872bdc8297"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sale.html#a6c6f931b60a78ea268a4c3872bdc8297">pull</a> (<a class="el" href="class_app.html">App</a> *a)</td></tr>
+<tr class="memdesc:a6c6f931b60a78ea268a4c3872bdc8297"><td class="mdescLeft">&#160;</td><td class="mdescRight">removes an app from the sale (for "remove from cart")  <a href="#a6c6f931b60a78ea268a4c3872bdc8297">More...</a><br /></td></tr>
+<tr class="separator:a6c6f931b60a78ea268a4c3872bdc8297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ecba3df29ecddc2de72d24e965e0a93"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ecba3df29ecddc2de72d24e965e0a93"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (ofstream &amp;fout) const </td></tr>
+<tr class="separator:a5ecba3df29ecddc2de72d24e965e0a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a571c32cc73ffb285a1e43443d087a53a"></a>
@@ -132,9 +156,9 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 <p>constructor with parameters for '<a class="el" href="class_sale.html">Sale</a>' class </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Buyer</td><td>a pointer to the customer who made the purchase </td></tr>
-    <tr><td class="paramname">AppSold</td><td>a vector containing the apps bought by the customer in a purchase </td></tr>
-    <tr><td class="paramname">value</td><td>the amount paid by the customer </td></tr>
+    <tr><td class="paramname">Buyer</td><td>pointer to the customer who made the purchase </td></tr>
+    <tr><td class="paramname">AppsSold</td><td>vector containing the apps bought by the customer in a purchase </td></tr>
+    <tr><td class="paramname">value</td><td>amount paid by the customer </td></tr>
   </table>
   </dd>
 </dl>
@@ -142,12 +166,12 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a9736ea863df81091b86a9b9f0d7c9a43"></a>
+<a class="anchor" id="a6c6f931b60a78ea268a4c3872bdc8297"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Sale::pullApp </td>
+          <td class="memname">bool Sale::pull </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_app.html">App</a> *&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
@@ -159,19 +183,19 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 <p>removes an app from the sale (for "remove from cart") </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>the application to be removed </td></tr>
+    <tr><td class="paramname">a</td><td>application to be removed </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="a028a6afa10dd2dc08b7759db27de75aa"></a>
+<a class="anchor" id="aa1bd7c6cd1d55e2ccb90cf715125e005"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Sale::pushApp </td>
+          <td class="memname">bool Sale::push </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_app.html">App</a> *&#160;</td>
           <td class="paramname"><em>a</em></td><td>)</td>
@@ -183,7 +207,7 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 <p>adds a new app to the sale (for "add to cart") </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">a</td><td>the application to be added </td></tr>
+    <tr><td class="paramname">a</td><td>application to be added </td></tr>
   </table>
   </dd>
 </dl>
@@ -215,7 +239,7 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 <p>associates the sale with a new customer </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newClient</td><td>a pointer to the new customer </td></tr>
+    <tr><td class="paramname">newClient</td><td>pointer to customer object </td></tr>
   </table>
   </dd>
 </dl>
@@ -244,10 +268,10 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 </table>
 </div><div class="memdoc">
 
-<p>sets the sale with a new amount (for voucher savings) </p>
+<p>sets the cart with a new total price (for voucher savings) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newPrice</td><td>the new amount </td></tr>
+    <tr><td class="paramname">newPrice</td><td>application price </td></tr>
   </table>
   </dd>
 </dl>
@@ -259,11 +283,15 @@ vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td clas
 <li><a class="el" href="_sale_8cpp.html">Sale.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:13 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_sale.html">Sale</a></li>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

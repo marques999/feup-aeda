@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -38,11 +45,25 @@
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_app.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -61,72 +82,75 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af49ae10710b7361cd3ff23237b997251"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#af49ae10710b7361cd3ff23237b997251">App</a> (string n, double p, string c, string d)</td></tr>
 <tr class="memdesc:af49ae10710b7361cd3ff23237b997251"><td class="mdescLeft">&#160;</td><td class="mdescRight">constructor with parameters for '<a class="el" href="class_app.html">App</a>' class  <a href="#af49ae10710b7361cd3ff23237b997251">More...</a><br /></td></tr>
 <tr class="separator:af49ae10710b7361cd3ff23237b997251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34f1f253b1cef5f4ecbac66eaf6964ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34f1f253b1cef5f4ecbac66eaf6964ec"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a34f1f253b1cef5f4ecbac66eaf6964ec">~App</a> ()</td></tr>
-<tr class="memdesc:a34f1f253b1cef5f4ecbac66eaf6964ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">default destructor for '<a class="el" href="class_app.html">App</a>' class <br /></td></tr>
-<tr class="separator:a34f1f253b1cef5f4ecbac66eaf6964ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cd2e94ed9ccba8dd2a56d6fe8c7ba46"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2cd2e94ed9ccba8dd2a56d6fe8c7ba46"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a2cd2e94ed9ccba8dd2a56d6fe8c7ba46">~App</a> ()</td></tr>
+<tr class="memdesc:a2cd2e94ed9ccba8dd2a56d6fe8c7ba46"><td class="mdescLeft">&#160;</td><td class="mdescRight">default destructor for '<a class="el" href="class_app.html">App</a>' class <br /></td></tr>
+<tr class="separator:a2cd2e94ed9ccba8dd2a56d6fe8c7ba46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32eb5fb345735dd5545e31e540b00969"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32eb5fb345735dd5545e31e540b00969"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a> () const </td></tr>
 <tr class="memdesc:a32eb5fb345735dd5545e31e540b00969"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the app name <br /></td></tr>
 <tr class="separator:a32eb5fb345735dd5545e31e540b00969"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6decb76241ba4bb98fade8fe584597fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a6decb76241ba4bb98fade8fe584597fa">setName</a> (string newName)</td></tr>
-<tr class="memdesc:a6decb76241ba4bb98fade8fe584597fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the app with a new name  <a href="#a6decb76241ba4bb98fade8fe584597fa">More...</a><br /></td></tr>
-<tr class="separator:a6decb76241ba4bb98fade8fe584597fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa53d232eb1aaab37ee52f1d79a812d43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aa53d232eb1aaab37ee52f1d79a812d43">setName</a> (const string &amp;newName)</td></tr>
+<tr class="memdesc:aa53d232eb1aaab37ee52f1d79a812d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the application with a new name  <a href="#aa53d232eb1aaab37ee52f1d79a812d43">More...</a><br /></td></tr>
+<tr class="separator:aa53d232eb1aaab37ee52f1d79a812d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adff5bc7c1cea570aef534ffc892a107e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adff5bc7c1cea570aef534ffc892a107e"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#adff5bc7c1cea570aef534ffc892a107e">getPrice</a> () const </td></tr>
-<tr class="memdesc:adff5bc7c1cea570aef534ffc892a107e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the app price <br /></td></tr>
+<tr class="memdesc:adff5bc7c1cea570aef534ffc892a107e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the application price <br /></td></tr>
 <tr class="separator:adff5bc7c1cea570aef534ffc892a107e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a098863f957c06cb210c6593647f7affc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a098863f957c06cb210c6593647f7affc">setPrice</a> (double newPrice)</td></tr>
-<tr class="memdesc:a098863f957c06cb210c6593647f7affc"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the app with a new price  <a href="#a098863f957c06cb210c6593647f7affc">More...</a><br /></td></tr>
+<tr class="memdesc:a098863f957c06cb210c6593647f7affc"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the application with a new price  <a href="#a098863f957c06cb210c6593647f7affc">More...</a><br /></td></tr>
 <tr class="separator:a098863f957c06cb210c6593647f7affc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaca45decd05fd41da9317b5e9f5add7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaca45decd05fd41da9317b5e9f5add7b"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aaca45decd05fd41da9317b5e9f5add7b">getCategory</a> () const </td></tr>
-<tr class="memdesc:aaca45decd05fd41da9317b5e9f5add7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the app category <br /></td></tr>
+<tr class="memdesc:aaca45decd05fd41da9317b5e9f5add7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the application category <br /></td></tr>
 <tr class="separator:aaca45decd05fd41da9317b5e9f5add7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0f1cc9e5f619176fed4f884d3045757"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aa0f1cc9e5f619176fed4f884d3045757">setCategory</a> (string newCategory)</td></tr>
-<tr class="memdesc:aa0f1cc9e5f619176fed4f884d3045757"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the app with a new category  <a href="#aa0f1cc9e5f619176fed4f884d3045757">More...</a><br /></td></tr>
-<tr class="separator:aa0f1cc9e5f619176fed4f884d3045757"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9f90e99114bdb17e84fa900b075287"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ade9f90e99114bdb17e84fa900b075287">setCategory</a> (const string &amp;newCategory)</td></tr>
+<tr class="memdesc:ade9f90e99114bdb17e84fa900b075287"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the application with a new category  <a href="#ade9f90e99114bdb17e84fa900b075287">More...</a><br /></td></tr>
+<tr class="separator:ade9f90e99114bdb17e84fa900b075287"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb26d02831564b0e7143f8f4b603020"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1eb26d02831564b0e7143f8f4b603020"></a>
+<a class="el" href="class_date.html">Date</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a1eb26d02831564b0e7143f8f4b603020">getDate</a> () const </td></tr>
+<tr class="memdesc:a1eb26d02831564b0e7143f8f4b603020"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a <a class="el" href="class_date.html">Date</a> object containing the publish date <br /></td></tr>
+<tr class="separator:a1eb26d02831564b0e7143f8f4b603020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47ac3969041b6e10f1cf3c2fe5e0f6f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a47ac3969041b6e10f1cf3c2fe5e0f6f9">setDate</a> (const <a class="el" href="class_date.html">Date</a> &amp;d)</td></tr>
+<tr class="memdesc:a47ac3969041b6e10f1cf3c2fe5e0f6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the application with a new publish date  <a href="#a47ac3969041b6e10f1cf3c2fe5e0f6f9">More...</a><br /></td></tr>
+<tr class="separator:a47ac3969041b6e10f1cf3c2fe5e0f6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd6cc03ee6fe958227ea45344e078b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbd6cc03ee6fe958227ea45344e078b0"></a>
+string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#acbd6cc03ee6fe958227ea45344e078b0">getDescription</a> () const </td></tr>
+<tr class="memdesc:acbd6cc03ee6fe958227ea45344e078b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the application description <br /></td></tr>
+<tr class="separator:acbd6cc03ee6fe958227ea45344e078b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8d4cff7e6b33e9616bfadfc49dfa6c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ac8d4cff7e6b33e9616bfadfc49dfa6c3">setDescription</a> (string newDescription)</td></tr>
+<tr class="memdesc:ac8d4cff7e6b33e9616bfadfc49dfa6c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the application with a new description  <a href="#ac8d4cff7e6b33e9616bfadfc49dfa6c3">More...</a><br /></td></tr>
+<tr class="separator:ac8d4cff7e6b33e9616bfadfc49dfa6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9704105d6acef41ba5b92e0505e4644"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad9704105d6acef41ba5b92e0505e4644"></a>
+<a class="el" href="class_developer.html">Developer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ad9704105d6acef41ba5b92e0505e4644">getDeveloper</a> () const </td></tr>
+<tr class="memdesc:ad9704105d6acef41ba5b92e0505e4644"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the developer who published this application <br /></td></tr>
+<tr class="separator:ad9704105d6acef41ba5b92e0505e4644"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aada370489d979e5557ea8750af4f94de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aada370489d979e5557ea8750af4f94de">setDeveloper</a> (<a class="el" href="class_developer.html">Developer</a> *newDev)</td></tr>
+<tr class="memdesc:aada370489d979e5557ea8750af4f94de"><td class="mdescLeft">&#160;</td><td class="mdescRight">associates the application with a new developer  <a href="#aada370489d979e5557ea8750af4f94de">More...</a><br /></td></tr>
+<tr class="separator:aada370489d979e5557ea8750af4f94de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af00b948f59a71d0c1e7797017dfee56e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af00b948f59a71d0c1e7797017dfee56e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#af00b948f59a71d0c1e7797017dfee56e">getSales</a> () const </td></tr>
+<tr class="memdesc:af00b948f59a71d0c1e7797017dfee56e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of customers who have purchased this application <br /></td></tr>
+<tr class="separator:af00b948f59a71d0c1e7797017dfee56e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36a070d29290bad043dd25427dbd90fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a36a070d29290bad043dd25427dbd90fb">setSales</a> (int s)</td></tr>
+<tr class="memdesc:a36a070d29290bad043dd25427dbd90fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets a new value for the application sales  <a href="#a36a070d29290bad043dd25427dbd90fb">More...</a><br /></td></tr>
+<tr class="separator:a36a070d29290bad043dd25427dbd90fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3aff5cb69613f4d6b82f9201ca49dfb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3aff5cb69613f4d6b82f9201ca49dfb2"></a>
 vector&lt; <a class="el" href="struct_comentario.html">Comentario</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a3aff5cb69613f4d6b82f9201ca49dfb2">getComments</a> () const </td></tr>
 <tr class="memdesc:a3aff5cb69613f4d6b82f9201ca49dfb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a vector containing comments written by customers <br /></td></tr>
 <tr class="separator:a3aff5cb69613f4d6b82f9201ca49dfb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fc25323f7d354f0baabc5c7b9c6a084"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a1fc25323f7d354f0baabc5c7b9c6a084">setDate</a> (struct tm timeinfo)</td></tr>
-<tr class="memdesc:a1fc25323f7d354f0baabc5c7b9c6a084"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the app with a new publish date  <a href="#a1fc25323f7d354f0baabc5c7b9c6a084">More...</a><br /></td></tr>
-<tr class="separator:a1fc25323f7d354f0baabc5c7b9c6a084"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae990d376a6c15e9d3b79600f68b369ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae990d376a6c15e9d3b79600f68b369ff"></a>
-struct tm&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ae990d376a6c15e9d3b79600f68b369ff">getDate</a> () const </td></tr>
-<tr class="memdesc:ae990d376a6c15e9d3b79600f68b369ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns a data structure containing the publish date <br /></td></tr>
-<tr class="separator:ae990d376a6c15e9d3b79600f68b369ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8d4cff7e6b33e9616bfadfc49dfa6c3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ac8d4cff7e6b33e9616bfadfc49dfa6c3">setDescription</a> (string newDescription)</td></tr>
-<tr class="memdesc:ac8d4cff7e6b33e9616bfadfc49dfa6c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the app with a new description  <a href="#ac8d4cff7e6b33e9616bfadfc49dfa6c3">More...</a><br /></td></tr>
-<tr class="separator:ac8d4cff7e6b33e9616bfadfc49dfa6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbd6cc03ee6fe958227ea45344e078b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acbd6cc03ee6fe958227ea45344e078b0"></a>
-string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#acbd6cc03ee6fe958227ea45344e078b0">getDescription</a> () const </td></tr>
-<tr class="memdesc:acbd6cc03ee6fe958227ea45344e078b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the app description <br /></td></tr>
-<tr class="separator:acbd6cc03ee6fe958227ea45344e078b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9704105d6acef41ba5b92e0505e4644"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad9704105d6acef41ba5b92e0505e4644"></a>
-<a class="el" href="class_developer.html">Developer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ad9704105d6acef41ba5b92e0505e4644">getDeveloper</a> () const </td></tr>
-<tr class="memdesc:ad9704105d6acef41ba5b92e0505e4644"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the developer who published this app <br /></td></tr>
-<tr class="separator:ad9704105d6acef41ba5b92e0505e4644"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aada370489d979e5557ea8750af4f94de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aada370489d979e5557ea8750af4f94de">setDeveloper</a> (<a class="el" href="class_developer.html">Developer</a> *newDev)</td></tr>
-<tr class="memdesc:aada370489d979e5557ea8750af4f94de"><td class="mdescLeft">&#160;</td><td class="mdescRight">associates the app with a new developer  <a href="#aada370489d979e5557ea8750af4f94de">More...</a><br /></td></tr>
-<tr class="separator:aada370489d979e5557ea8750af4f94de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8634c216ac1d3936007ad9f73757d889"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8634c216ac1d3936007ad9f73757d889"></a>
 <a class="el" href="class_rating.html">Rating</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a8634c216ac1d3936007ad9f73757d889">getRating</a> () const </td></tr>
 <tr class="memdesc:a8634c216ac1d3936007ad9f73757d889"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns an object containing the ratings given by customers <br /></td></tr>
 <tr class="separator:a8634c216ac1d3936007ad9f73757d889"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af00b948f59a71d0c1e7797017dfee56e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af00b948f59a71d0c1e7797017dfee56e"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#af00b948f59a71d0c1e7797017dfee56e">getSales</a> () const </td></tr>
-<tr class="memdesc:af00b948f59a71d0c1e7797017dfee56e"><td class="mdescLeft">&#160;</td><td class="mdescRight">returns the number of customers who have purchased this app <br /></td></tr>
-<tr class="separator:af00b948f59a71d0c1e7797017dfee56e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36a070d29290bad043dd25427dbd90fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a36a070d29290bad043dd25427dbd90fb">setSales</a> (int s)</td></tr>
-<tr class="memdesc:a36a070d29290bad043dd25427dbd90fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets a new value for the number of app sales  <a href="#a36a070d29290bad043dd25427dbd90fb">More...</a><br /></td></tr>
-<tr class="separator:a36a070d29290bad043dd25427dbd90fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aafd18094192a133b6709a0e90d68cd4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#aafd18094192a133b6709a0e90d68cd4b">operator==</a> (const <a class="el" href="class_app.html">App</a> &amp;ap) const </td></tr>
-<tr class="memdesc:aafd18094192a133b6709a0e90d68cd4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares two apps by name  <a href="#aafd18094192a133b6709a0e90d68cd4b">More...</a><br /></td></tr>
+<tr class="memdesc:aafd18094192a133b6709a0e90d68cd4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares two applications by name for equality  <a href="#aafd18094192a133b6709a0e90d68cd4b">More...</a><br /></td></tr>
 <tr class="separator:aafd18094192a133b6709a0e90d68cd4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae24763025feaa805b11e1868c3ec8a64"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#ae24763025feaa805b11e1868c3ec8a64">operator&lt;</a> (const <a class="el" href="class_app.html">App</a> &amp;ap)</td></tr>
+<tr class="memdesc:ae24763025feaa805b11e1868c3ec8a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">compares two applications  <a href="#ae24763025feaa805b11e1868c3ec8a64">More...</a><br /></td></tr>
+<tr class="separator:ae24763025feaa805b11e1868c3ec8a64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc24565627985856833eb06839d23a05"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#afc24565627985856833eb06839d23a05">classificar</a> (unsigned r)</td></tr>
-<tr class="memdesc:afc24565627985856833eb06839d23a05"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates the application rating  <a href="#afc24565627985856833eb06839d23a05">More...</a><br /></td></tr>
+<tr class="memdesc:afc24565627985856833eb06839d23a05"><td class="mdescLeft">&#160;</td><td class="mdescRight">updates application ratings  <a href="#afc24565627985856833eb06839d23a05">More...</a><br /></td></tr>
 <tr class="separator:afc24565627985856833eb06839d23a05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b3f0bd6793c224553c3d9cc5dd329fa"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app.html#a8b3f0bd6793c224553c3d9cc5dd329fa">comentar</a> (string cli, string c)</td></tr>
 <tr class="memdesc:a8b3f0bd6793c224553c3d9cc5dd329fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes a new comment  <a href="#a8b3f0bd6793c224553c3d9cc5dd329fa">More...</a><br /></td></tr>
@@ -192,7 +216,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   <table class="params">
     <tr><td class="paramname">n</td><td>app name </td></tr>
     <tr><td class="paramname">p</td><td>app price </td></tr>
-    <tr><td class="paramname">c</td><td>app category (games, produtividade, multimédia, web, etc...) </td></tr>
+    <tr><td class="paramname">c</td><td>app category (games, office, audio, video, internet, etc...) </td></tr>
     <tr><td class="paramname">d</td><td>app description </td></tr>
   </table>
   </dd>
@@ -223,10 +247,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>updates the application rating </p>
+<p>updates application ratings </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">r</td><td>the rating given by the customer </td></tr>
+    <tr><td class="paramname">r</td><td>new rating given by a customer </td></tr>
   </table>
   </dd>
 </dl>
@@ -260,11 +284,45 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>writes a new comment </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">cli</td><td>the customer's name </td></tr>
-    <tr><td class="paramname">c</td><td>the comment left by the customer </td></tr>
+    <tr><td class="paramname">cli</td><td>customer's name </td></tr>
+    <tr><td class="paramname">c</td><td>comment written by the customer </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>returns true if comment was added successfully; false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae24763025feaa805b11e1868c3ec8a64"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool App::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_app.html">App</a> &amp;&#160;</td>
+          <td class="paramname"><em>ap</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>compares two applications </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ap</td><td>right operand </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>returns true if left operand should appear before right operand; false otherwise </dd></dl>
 
 </div>
 </div>
@@ -290,13 +348,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>compares two apps by name </p>
+<p>compares two applications by name for equality </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ap</td><td>the second comparable term </td></tr>
+    <tr><td class="paramname">ap</td><td>right operand </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>returns true if two applications have the same name; false otherwise </dd></dl>
 
 </div>
 </div>
@@ -324,7 +383,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a class="anchor" id="aa0f1cc9e5f619176fed4f884d3045757"></a>
+<a class="anchor" id="ade9f90e99114bdb17e84fa900b075287"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -334,7 +393,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void App::setCategory </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
+          <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>newCategory</em></td><td>)</td>
           <td></td>
         </tr>
@@ -346,17 +405,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>sets the app with a new category </p>
+<p>sets the application with a new category </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newCategory</td><td>a new category for the app </td></tr>
+    <tr><td class="paramname">newCategory</td><td>string containing the new category for the application </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="a1fc25323f7d354f0baabc5c7b9c6a084"></a>
+<a class="anchor" id="a47ac3969041b6e10f1cf3c2fe5e0f6f9"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -366,8 +425,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void App::setDate </td>
           <td>(</td>
-          <td class="paramtype">struct tm&#160;</td>
-          <td class="paramname"><em>timeinfo</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="class_date.html">Date</a> &amp;&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -378,10 +437,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>sets the app with a new publish date </p>
+<p>sets the application with a new publish date </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">timeinfo</td><td>a data structure containing the new date </td></tr>
+    <tr><td class="paramname">d</td><td><a class="el" href="class_date.html">Date</a> object containing the new publish date </td></tr>
   </table>
   </dd>
 </dl>
@@ -410,10 +469,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>sets the app with a new description </p>
+<p>sets the application with a new description </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newDescription</td><td>a string containing the new description </td></tr>
+    <tr><td class="paramname">newDescription</td><td>string containing the new description </td></tr>
   </table>
   </dd>
 </dl>
@@ -442,17 +501,17 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>associates the app with a new developer </p>
+<p>associates the application with a new developer </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newDev</td><td>a pointer to the new app developer </td></tr>
+    <tr><td class="paramname">newDev</td><td>pointer to the new application developer </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a class="anchor" id="a6decb76241ba4bb98fade8fe584597fa"></a>
+<a class="anchor" id="aa53d232eb1aaab37ee52f1d79a812d43"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -462,7 +521,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
         <tr>
           <td class="memname">void App::setName </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
+          <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>newName</em></td><td>)</td>
           <td></td>
         </tr>
@@ -474,10 +533,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>sets the app with a new name </p>
+<p>sets the application with a new name </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newName</td><td>a new app name </td></tr>
+    <tr><td class="paramname">newName</td><td>string containing the new application name </td></tr>
   </table>
   </dd>
 </dl>
@@ -506,10 +565,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>sets the app with a new price </p>
+<p>sets the application with a new price </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">newPrice</td><td>a new price for the app </td></tr>
+    <tr><td class="paramname">newPrice</td><td>new application price </td></tr>
   </table>
   </dd>
 </dl>
@@ -538,10 +597,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table>
 </div><div class="memdoc">
 
-<p>sets a new value for the number of app sales </p>
+<p>sets a new value for the application sales </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>the updated value </td></tr>
+    <tr><td class="paramname">s</td><td>new sales value </td></tr>
   </table>
   </dd>
 </dl>
@@ -577,11 +636,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li><a class="el" href="_app_8cpp.html">App.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:13 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_app.html">App</a></li>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

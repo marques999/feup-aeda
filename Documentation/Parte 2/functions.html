@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -38,7 +45,7 @@
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li class="current"><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -47,16 +54,17 @@
       <li class="current"><a href="functions.html"><span>All</span></a></li>
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
+      <li><a href="functions_rela.html"><span>Related&#160;Functions</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
       <li><a href="#index_a"><span>a</span></a></li>
-      <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
       <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
+      <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
@@ -67,19 +75,26 @@
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('functions.html','');});
+</script>
+<div id="doc-content">
 <div class="contents">
 <div class="textblock">Here is a list of all documented class members with links to the class documentation for each member:</div>
 
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
 <li>App()
 : <a class="el" href="class_app.html#acb8cbf3e285b91d0170ffe87df5989c5">App</a>
-</li>
-</ul>
-
-
-<h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
-<li>BSTGetApps()
-: <a class="el" href="class_app_store.html#a625f41c701daa179a03fffff7cc5e51f">AppStore</a>
 </li>
 </ul>
 
@@ -98,6 +113,9 @@
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>Date()
+: <a class="el" href="class_date.html#a4e59ed4ba66eec61c27460c5d09fa1bd">Date</a>
+</li>
 <li>Developer()
 : <a class="el" href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">Developer</a>
 </li>
@@ -105,12 +123,15 @@
 : <a class="el" href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">Developer_Empresa</a>
 </li>
 <li>Developer_Individual()
-: <a class="el" href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">Developer_Individual</a>
+: <a class="el" href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">Developer_Individual</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>find()
+: <a class="el" href="class_developer.html#aa0fbfc019d1a372132e7655fffe02f15">Developer</a>
+</li>
 <li>floor()
 : <a class="el" href="class_rating.html#a2e82f9d48a176c216bcba340d572e6c3">Rating</a>
 </li>
@@ -137,7 +158,7 @@
 : <a class="el" href="class_app.html#a3aff5cb69613f4d6b82f9201ca49dfb2">App</a>
 </li>
 <li>getDate()
-: <a class="el" href="class_app.html#ae990d376a6c15e9d3b79600f68b369ff">App</a>
+: <a class="el" href="class_app.html#a1eb26d02831564b0e7143f8f4b603020">App</a>
 </li>
 <li>getDescription()
 : <a class="el" href="class_app.html#acbd6cc03ee6fe958227ea45344e078b0">App</a>
@@ -153,9 +174,12 @@
 <li>getNIF()
 : <a class="el" href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">Developer_Empresa</a>
 </li>
-<li>getNumApps()
-: <a class="el" href="class_cliente.html#a82c32dfe8049732f9ffe00c6976c9aa5">Cliente</a>
-, <a class="el" href="class_developer.html#a95165b44dc16ad71dcebd598f0a192b8">Developer</a>
+<li>getNumberApps()
+: <a class="el" href="class_cliente.html#ab838b9b64e209ffe37e3c2eb0a4838b9">Cliente</a>
+, <a class="el" href="class_developer.html#a136e204479307eb805986d3518585a44">Developer</a>
+</li>
+<li>getNumberRemovedApps()
+: <a class="el" href="class_developer.html#af2ac0a4a582ba5e050bca656afd320a9">Developer</a>
 </li>
 <li>getOwnedApps()
 : <a class="el" href="class_cliente.html#ae57448f7bed8bf23fd45edc5673e5db4">Cliente</a>
@@ -166,9 +190,6 @@
 <li>getPrice()
 : <a class="el" href="class_app.html#adff5bc7c1cea570aef534ffc892a107e">App</a>
 , <a class="el" href="class_sale.html#ab20c0261e7f5fc64d8c3053cc39f6a0f">Sale</a>
-</li>
-<li>getPublishedApps()
-: <a class="el" href="class_developer.html#a46863e6022f17a15181604df3cf7614b">Developer</a>
 </li>
 <li>getRating()
 : <a class="el" href="class_app.html#a8634c216ac1d3936007ad9f73757d889">App</a>
@@ -190,8 +211,15 @@
 <li>getVoucher()
 : <a class="el" href="class_cliente.html#a1c4e54f7b49c0e0cb46cc36c57f3b08d">Cliente</a>
 </li>
-<li>GUIRateApp()
-: <a class="el" href="class_app_store.html#a54d3ea03a0c13f9c915aed13772fbc2b">AppStore</a>
+</ul>
+
+
+<h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
+<li>IOReadApps()
+: <a class="el" href="class_app_store.html#acc95f2d1e0003dc36f7ae36a9c19c75e">AppStore</a>
+</li>
+<li>IOWriteApps()
+: <a class="el" href="class_app_store.html#a8a7fb3e415b875f832ec9ded4986aa02">AppStore</a>
 </li>
 </ul>
 
@@ -203,8 +231,20 @@
 <li>operator--()
 : <a class="el" href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">Developer</a>
 </li>
+<li>operator&lt;()
+: <a class="el" href="class_app.html#ae24763025feaa805b11e1868c3ec8a64">App</a>
+, <a class="el" href="class_date.html#a8a3bccb05f00086e64c5b5518a37949f">Date</a>
+, <a class="el" href="class_rating.html#a7835cc01d52f5571baed76ffc0904629">Rating</a>
+</li>
+<li>operator&lt;&lt;
+: <a class="el" href="class_date.html#a8e8b3d76200d2f9bc2eefc5c30b1f326">Date</a>
+</li>
 <li>operator==()
 : <a class="el" href="class_app.html#aafd18094192a133b6709a0e90d68cd4b">App</a>
+, <a class="el" href="class_date.html#aa8208298c0efe5dbf661c66a284fd163">Date</a>
+</li>
+<li>operator&gt;()
+: <a class="el" href="class_date.html#af5289b4792041bd78b151f33cc79f642">Date</a>
 </li>
 <li>own()
 : <a class="el" href="class_cliente.html#ac3d5cebbe41f7cdd58180fae94d7a9ca">Cliente</a>
@@ -214,21 +254,19 @@
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>pop()
-: <a class="el" href="class_developer.html#a842c22cb9b9ebbabd32e6fbdaca595f2">Developer</a>
+: <a class="el" href="class_developer.html#a58f5a5290cc755d9c8f71608f8372a05">Developer</a>
 </li>
 <li>print()
 : <a class="el" href="class_developer.html#af87a58e795ae45855426183555db70d4">Developer</a>
 , <a class="el" href="class_developer___empresa.html#a1480003363f1ca90aa00dd3e284a431a">Developer_Empresa</a>
 , <a class="el" href="class_developer___individual.html#a0988dc9fb6aa9efe8c15f8fd68b9772d">Developer_Individual</a>
 </li>
-<li>pullApp()
-: <a class="el" href="class_sale.html#a9736ea863df81091b86a9b9f0d7c9a43">Sale</a>
+<li>pull()
+: <a class="el" href="class_sale.html#a6c6f931b60a78ea268a4c3872bdc8297">Sale</a>
 </li>
 <li>push()
-: <a class="el" href="class_developer.html#abda23a3adff98fb7111e497d26e3df22">Developer</a>
-</li>
-<li>pushApp()
-: <a class="el" href="class_sale.html#a028a6afa10dd2dc08b7759db27de75aa">Sale</a>
+: <a class="el" href="class_developer.html#a7c762f9f8a453e13482747a1be16edbc">Developer</a>
+, <a class="el" href="class_sale.html#aa1bd7c6cd1d55e2ccb90cf715125e005">Sale</a>
 </li>
 </ul>
 
@@ -239,9 +277,7 @@
 </li>
 <li>read()
 : <a class="el" href="class_app.html#a084b4b9ad752b923a2ebc3198557e304">App</a>
-, <a class="el" href="class_developer.html#a19f6b56f9acd32444905ffd0ecaed6cd">Developer</a>
-, <a class="el" href="class_developer___empresa.html#a5ddff78d27fc9424a01f2df9cb059c5d">Developer_Empresa</a>
-, <a class="el" href="class_developer___individual.html#a1f0a91b631f2402963706094f433c464">Developer_Individual</a>
+, <a class="el" href="class_date.html#a762ccd9be6d656b190b3df9dd0768fae">Date</a>
 , <a class="el" href="class_rating.html#a69e5d116d6180702899c683bc83a210c">Rating</a>
 </li>
 </ul>
@@ -258,11 +294,14 @@
 <li>setAddress()
 : <a class="el" href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">Developer</a>
 </li>
+<li>setBalance()
+: <a class="el" href="class_developer.html#a539bded2a2ba1e2819c6282588f5951a">Developer</a>
+</li>
 <li>setCategory()
-: <a class="el" href="class_app.html#aa0f1cc9e5f619176fed4f884d3045757">App</a>
+: <a class="el" href="class_app.html#ade9f90e99114bdb17e84fa900b075287">App</a>
 </li>
 <li>setDate()
-: <a class="el" href="class_app.html#a1fc25323f7d354f0baabc5c7b9c6a084">App</a>
+: <a class="el" href="class_app.html#a47ac3969041b6e10f1cf3c2fe5e0f6f9">App</a>
 </li>
 <li>setDescription()
 : <a class="el" href="class_app.html#ac8d4cff7e6b33e9616bfadfc49dfa6c3">App</a>
@@ -271,12 +310,18 @@
 : <a class="el" href="class_app.html#aada370489d979e5557ea8750af4f94de">App</a>
 </li>
 <li>setName()
-: <a class="el" href="class_app.html#a6decb76241ba4bb98fade8fe584597fa">App</a>
+: <a class="el" href="class_app.html#aa53d232eb1aaab37ee52f1d79a812d43">App</a>
 , <a class="el" href="class_cliente.html#a86afe299a3dc75cb3b70ad2a9f25787c">Cliente</a>
 , <a class="el" href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">Developer</a>
 </li>
 <li>setNIF()
 : <a class="el" href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">Developer_Empresa</a>
+</li>
+<li>setNumberApps()
+: <a class="el" href="class_developer.html#a3aa8fae1c16ada4c50544995ce0bc597">Developer</a>
+</li>
+<li>setNumberRemovedApps()
+: <a class="el" href="class_developer.html#ac2dc02913f7e0d47c262241b034fc114">Developer</a>
 </li>
 <li>setOwner()
 : <a class="el" href="class_sale.html#a5a32a03219f00a8d7d243d8b116b1e2f">Sale</a>
@@ -284,9 +329,6 @@
 <li>setPrice()
 : <a class="el" href="class_app.html#a098863f957c06cb210c6593647f7affc">App</a>
 , <a class="el" href="class_sale.html#aa749dbbff68ce85849d98a1ebb8dcfc5">Sale</a>
-</li>
-<li>setRemovedApps()
-: <a class="el" href="class_developer.html#a8312bbc037e97b8c4545edd2557630cd">Developer</a>
 </li>
 <li>setSaldo()
 : <a class="el" href="class_cliente.html#ab79e8eaadbc601d0fdba3224352d1af5">Cliente</a>
@@ -296,6 +338,9 @@
 </li>
 <li>setVoucher()
 : <a class="el" href="class_cliente.html#a9a20bbc5f3c9e0c5c069ab55688851b7">Cliente</a>
+</li>
+<li>str()
+: <a class="el" href="class_date.html#a13151b0c602df2d15d069aa810ba545a">Date</a>
 </li>
 </ul>
 
@@ -310,6 +355,8 @@
 <h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
 <li>write()
 : <a class="el" href="class_app.html#a8ab4e0eccdb0d5ae47a0a1c1602f0504">App</a>
+, <a class="el" href="class_cliente.html#ae3c2627675934f66fb4eb6e42826d33c">Cliente</a>
+, <a class="el" href="class_date.html#a071e9e19c14f73de19ec40ccb1457904">Date</a>
 , <a class="el" href="class_developer.html#a277f1e4a85a29d6a1b78e44b1d4d6766">Developer</a>
 , <a class="el" href="class_developer___empresa.html#a48bbbcdc61db2ed3e2cf165ba33020e6">Developer_Empresa</a>
 , <a class="el" href="class_developer___individual.html#ad08d381576cf33cf52de9f5d4c3e69db">Developer_Individual</a>
@@ -320,10 +367,13 @@
 
 <h3><a class="anchor" id="index_~"></a>- ~ -</h3><ul>
 <li>~App()
-: <a class="el" href="class_app.html#a34f1f253b1cef5f4ecbac66eaf6964ec">App</a>
+: <a class="el" href="class_app.html#a2cd2e94ed9ccba8dd2a56d6fe8c7ba46">App</a>
 </li>
 <li>~Cliente()
 : <a class="el" href="class_cliente.html#ae3fcc70b9461c776eaf5f38100c5ac6b">Cliente</a>
+</li>
+<li>~Date()
+: <a class="el" href="class_date.html#ade4b469433b7966cc034cbcc6799233b">Date</a>
 </li>
 <li>~Developer()
 : <a class="el" href="class_developer.html#a50226e9534a76bea284d861a55ab815a">Developer</a>
@@ -339,11 +389,14 @@
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:13 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:31 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

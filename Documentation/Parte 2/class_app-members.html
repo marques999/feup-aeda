@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -38,11 +45,25 @@
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_app.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="headertitle">
 <div class="title">App Member List</div>  </div>
@@ -57,31 +78,35 @@
   <tr><td class="entry"><a class="el" href="class_app.html#a8b3f0bd6793c224553c3d9cc5dd329fa">comentar</a>(string cli, string c)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_app.html#aaca45decd05fd41da9317b5e9f5add7b">getCategory</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_app.html#a3aff5cb69613f4d6b82f9201ca49dfb2">getComments</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#ae990d376a6c15e9d3b79600f68b369ff">getDate</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a1eb26d02831564b0e7143f8f4b603020">getDate</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_app.html#acbd6cc03ee6fe958227ea45344e078b0">getDescription</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_app.html#ad9704105d6acef41ba5b92e0505e4644">getDeveloper</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_app.html#adff5bc7c1cea570aef534ffc892a107e">getPrice</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr><td class="entry"><a class="el" href="class_app.html#a8634c216ac1d3936007ad9f73757d889">getRating</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_app.html#af00b948f59a71d0c1e7797017dfee56e">getSales</a>() const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_app.html#aafd18094192a133b6709a0e90d68cd4b">operator==</a>(const App &amp;ap) const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a084b4b9ad752b923a2ebc3198557e304">read</a>(ifstream &amp;fin)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_app.html#acce2d15a5566ad143858307ee2731029">sale</a>()</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#aa0f1cc9e5f619176fed4f884d3045757">setCategory</a>(string newCategory)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_app.html#a1fc25323f7d354f0baabc5c7b9c6a084">setDate</a>(struct tm timeinfo)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#ac8d4cff7e6b33e9616bfadfc49dfa6c3">setDescription</a>(string newDescription)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_app.html#aada370489d979e5557ea8750af4f94de">setDeveloper</a>(Developer *newDev)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a6decb76241ba4bb98fade8fe584597fa">setName</a>(string newName)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_app.html#a098863f957c06cb210c6593647f7affc">setPrice</a>(double newPrice)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a36a070d29290bad043dd25427dbd90fb">setSales</a>(int s)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr><td class="entry"><a class="el" href="class_app.html#a8ab4e0eccdb0d5ae47a0a1c1602f0504">write</a>(ofstream &amp;fout) const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a34f1f253b1cef5f4ecbac66eaf6964ec">~App</a>()</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#ae24763025feaa805b11e1868c3ec8a64">operator&lt;</a>(const App &amp;ap)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#aafd18094192a133b6709a0e90d68cd4b">operator==</a>(const App &amp;ap) const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#a084b4b9ad752b923a2ebc3198557e304">read</a>(ifstream &amp;fin)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#acce2d15a5566ad143858307ee2731029">sale</a>()</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#ade9f90e99114bdb17e84fa900b075287">setCategory</a>(const string &amp;newCategory)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a47ac3969041b6e10f1cf3c2fe5e0f6f9">setDate</a>(const Date &amp;d)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#ac8d4cff7e6b33e9616bfadfc49dfa6c3">setDescription</a>(string newDescription)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#aada370489d979e5557ea8750af4f94de">setDeveloper</a>(Developer *newDev)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#aa53d232eb1aaab37ee52f1d79a812d43">setName</a>(const string &amp;newName)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a098863f957c06cb210c6593647f7affc">setPrice</a>(double newPrice)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#a36a070d29290bad043dd25427dbd90fb">setSales</a>(int s)</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_app.html#a8ab4e0eccdb0d5ae47a0a1c1602f0504">write</a>(ofstream &amp;fout) const </td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_app.html#a2cd2e94ed9ccba8dd2a56d6fe8c7ba46">~App</a>()</td><td class="entry"><a class="el" href="class_app.html">App</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:13 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

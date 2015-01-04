@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -41,6 +48,20 @@
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_developer_8h_source.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="headertitle">
 <div class="title">Developer.h</div>  </div>
@@ -54,252 +75,316 @@
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_app_8h.html">App.h</a>&quot;</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    DEVELOPER_INDIVIDUAL, DEVELOPER_EMPRESA</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;} DevType;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="structdeveloper_h.html">   24</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structdeveloper_h.html">developerH</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define APP_NOT_FOUND App(&quot;&quot;, 0, &quot;&quot;, &quot;&quot;)</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    DEVELOPER_INDIVIDUAL, DEVELOPER_EMPRESA</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;} DevType;</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> operator()(<span class="keyword">const</span> <a class="code" href="class_app.html">App</a>&amp; lhs) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">int</span> appHash = 0;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">string</span> appName = lhs.<a class="code" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>();</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">for</span> ( <span class="keywordtype">size_t</span> i = 0; i &lt; appName.size() ; i++ ) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            appHash = 37*appHash + appName[i];</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">return</span> appHash;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structdeveloper_h.html">   26</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structdeveloper_h.html">developerH</a></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> operator()(<span class="keyword">const</span> <a class="code" href="class_app.html">App</a>&amp; lhs)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordtype">int</span> appHash = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordtype">string</span> appName = lhs.<a class="code" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="keywordflow">for</span> ( <span class="keywordtype">size_t</span> i = 0; i &lt; appName.size() ; i++ )</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            appHash = 37*appHash + appName[i];</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span> operator()(<span class="keyword">const</span> <a class="code" href="class_app.html">App</a> &amp;lhs, <span class="keyword">const</span> <a class="code" href="class_app.html">App</a> &amp;rhs) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> lhs.<a class="code" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>() == rhs.<a class="code" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">typedef</span> tr1::unordered_set&lt;App, developerH, developerH&gt; hashDeveloper;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_developer.html">   46</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_developer.html">Developer</a> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">return</span> appHash;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> operator()(<span class="keyword">const</span> <a class="code" href="class_app.html">App</a> &amp;lhs, <span class="keyword">const</span> <a class="code" href="class_app.html">App</a> &amp;rhs)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> lhs.<a class="code" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>() == rhs.<a class="code" href="class_app.html#a32eb5fb345735dd5545e31e540b00969">getName</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">typedef</span> tr1::unordered_set&lt;App, developerH, developerH&gt; hashDeveloper;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">   52</a></span>&#160;    <a class="code" href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">Developer</a>() {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        this-&gt;balance = 0.0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        this-&gt;numApps = 0;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_developer.html#a9e6851b29e5e3eddb65d3fead20fcc11">   62</a></span>&#160;    <a class="code" href="class_developer.html#a9e6851b29e5e3eddb65d3fead20fcc11">Developer</a>(<span class="keywordtype">string</span> n, <span class="keywordtype">string</span> a) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        this-&gt;balance = 0.0;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        this-&gt;numApps = 0;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        this-&gt;name = n;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        this-&gt;address = a;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_developer.html#a50226e9534a76bea284d861a55ab815a">   72</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_developer.html#a50226e9534a76bea284d861a55ab815a">~Developer</a>() {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_developer.html#ab4e0bd9ec4a725ea0074686f624a4dd5">   78</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_developer.html#ab4e0bd9ec4a725ea0074686f624a4dd5">getAddress</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> this-&gt;address;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_developer.html#a49e1640789385588479205dbe182fa58">   85</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_developer.html#a49e1640789385588479205dbe182fa58">getBalance</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> this-&gt;balance;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="class_developer.html#ab596fa3410bc9ec868ae57cf81461ce7">   92</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_developer.html#ab596fa3410bc9ec868ae57cf81461ce7">getName</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">return</span> this-&gt;name;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="class_developer.html#a95165b44dc16ad71dcebd598f0a192b8">   99</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_developer.html#a95165b44dc16ad71dcebd598f0a192b8">getNumApps</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">return</span> numApps;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    }</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="class_developer.html#adf6e283d1e55f200491b925773064bbe">  106</a></span>&#160;    hashDeveloper <a class="code" href="class_developer.html#adf6e283d1e55f200491b925773064bbe">getRemovedApps</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> removedApps;</div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_developer.html">   49</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_developer.html">Developer</a></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">   57</a></span>&#160;    <a class="code" href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">Developer</a>()</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        this-&gt;balance = 0.0;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        this-&gt;numApps = 0;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        this-&gt;numRemovedApps = 0;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_developer.html#a9e6851b29e5e3eddb65d3fead20fcc11">   69</a></span>&#160;    <a class="code" href="class_developer.html#a9e6851b29e5e3eddb65d3fead20fcc11">Developer</a>(<span class="keywordtype">string</span> n, <span class="keywordtype">string</span> a)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        this-&gt;name = n;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        this-&gt;address = a;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        this-&gt;balance = 0.0;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        this-&gt;numApps = 0;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        this-&gt;numRemovedApps = 0;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="class_developer.html#a50226e9534a76bea284d861a55ab815a">   81</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_developer.html#a50226e9534a76bea284d861a55ab815a">~Developer</a>()</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    }</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_developer.html#ab596fa3410bc9ec868ae57cf81461ce7">   88</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_developer.html#ab596fa3410bc9ec868ae57cf81461ce7">getName</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">return</span> this-&gt;name;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">   97</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">setName</a>(<span class="keywordtype">string</span> n)</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        this-&gt;name = n;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="class_developer.html#ab4e0bd9ec4a725ea0074686f624a4dd5">  105</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_developer.html#ab4e0bd9ec4a725ea0074686f624a4dd5">getAddress</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">return</span> this-&gt;address;</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="line" href="class_developer.html#a46863e6022f17a15181604df3cf7614b">  113</a></span>&#160;    hashDeveloper <a class="code" href="class_developer.html#a46863e6022f17a15181604df3cf7614b">getPublishedApps</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="keywordflow">return</span> removedApps;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00121"></a><span class="lineno"><a class="line" href="class_developer.html#a5f9757f9b4f09c8782a9a5ac46af4570">  121</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="class_developer.html">Developer</a>&amp; <a class="code" href="class_developer.html#a5f9757f9b4f09c8782a9a5ac46af4570">operator++</a>() {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        numApps++;</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    }</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;</div>
-<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">  130</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="class_developer.html">Developer</a>&amp; <a class="code" href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">operator--</a>() {</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        numApps--;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keyword">virtual</span> DevType <a class="code" href="class_developer.html#a41a1f3b462a81a668becc5bdacf1fa3a">getType</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;</div>
-<div class="line"><a name="l00144"></a><span class="lineno"><a class="line" href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">  144</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">setAddress</a>(<span class="keywordtype">string</span> a) {</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        this-&gt;address = a;</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    }</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;</div>
-<div class="line"><a name="l00152"></a><span class="lineno"><a class="line" href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">  152</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">setName</a>(<span class="keywordtype">string</span> n) {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        this-&gt;name = n;</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    }</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;</div>
-<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="class_developer.html#a8312bbc037e97b8c4545edd2557630cd">  160</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a8312bbc037e97b8c4545edd2557630cd">setRemovedApps</a>(<span class="keyword">const</span> hashDeveloper &amp;ht) {</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;        this-&gt;removedApps.clear();</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        this-&gt;removedApps = ht;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;</div>
-<div class="line"><a name="l00169"></a><span class="lineno"><a class="line" href="class_developer.html#abda23a3adff98fb7111e497d26e3df22">  169</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#abda23a3adff98fb7111e497d26e3df22">push</a>(<a class="code" href="class_app.html">App</a>* app) {</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        publishedApps.push_back(app);</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    }</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;</div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="class_developer.html#a842c22cb9b9ebbabd32e6fbdaca595f2">  176</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a842c22cb9b9ebbabd32e6fbdaca595f2">pop</a>(<a class="code" href="class_app.html">App</a>* app) {</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        vector&lt;App*&gt;::iterator it = find(publishedApps.begin(), publishedApps.end(), *app);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">if</span> (it != publishedApps.end()) {</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            publishedApps.erase(it);</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_developer.html#af87a58e795ae45855426183555db70d4">print</a>() <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="class_developer.html#a19f6b56f9acd32444905ffd0ecaed6cd">read</a>(ifstream &amp;fin) = 0;</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;</div>
-<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="class_developer.html#a83e90e626cebe2d0bbb70cb927a07a53">  200</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a83e90e626cebe2d0bbb70cb927a07a53">sale</a>(<span class="keywordtype">double</span> amount) {</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        balance += amount * 0.8;</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    }</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">  114</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">setAddress</a>(<span class="keywordtype">string</span> a)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        this-&gt;address = a;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00122"></a><span class="lineno"><a class="line" href="class_developer.html#a49e1640789385588479205dbe182fa58">  122</a></span>&#160;    <span class="keywordtype">double</span> <a class="code" href="class_developer.html#a49e1640789385588479205dbe182fa58">getBalance</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">return</span> this-&gt;balance;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="class_developer.html#a539bded2a2ba1e2819c6282588f5951a">  131</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a539bded2a2ba1e2819c6282588f5951a">setBalance</a>(<span class="keywordtype">double</span> n)</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        this-&gt;balance = n;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;</div>
+<div class="line"><a name="l00139"></a><span class="lineno"><a class="line" href="class_developer.html#a136e204479307eb805986d3518585a44">  139</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="class_developer.html#a136e204479307eb805986d3518585a44">getNumberApps</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">return</span> numApps;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;</div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="class_developer.html#a3aa8fae1c16ada4c50544995ce0bc597">  148</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a3aa8fae1c16ada4c50544995ce0bc597">setNumberApps</a>(<span class="keywordtype">unsigned</span> n)</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    {</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        this-&gt;numApps = n;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    }</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;</div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="class_developer.html#adf6e283d1e55f200491b925773064bbe">  156</a></span>&#160;    hashDeveloper <a class="code" href="class_developer.html#adf6e283d1e55f200491b925773064bbe">getRemovedApps</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">return</span> removedApps;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    }</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;</div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="class_developer.html#af2ac0a4a582ba5e050bca656afd320a9">  164</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="class_developer.html#af2ac0a4a582ba5e050bca656afd320a9">getNumberRemovedApps</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">return</span> numRemovedApps;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    }</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;</div>
+<div class="line"><a name="l00174"></a><span class="lineno"><a class="line" href="class_developer.html#ac2dc02913f7e0d47c262241b034fc114">  174</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#ac2dc02913f7e0d47c262241b034fc114">setNumberRemovedApps</a>(<span class="keywordtype">unsigned</span> n)</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    {</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        this-&gt;numRemovedApps = n;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="class_developer.html#a5f9757f9b4f09c8782a9a5ac46af4570">  183</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="class_developer.html">Developer</a>&amp; <a class="code" href="class_developer.html#a5f9757f9b4f09c8782a9a5ac46af4570">operator++</a>()</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    {</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        numApps++;</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    }</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;</div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">  193</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="class_developer.html">Developer</a>&amp; <a class="code" href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">operator--</a>()</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        numApps--;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    }</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keyword">virtual</span> DevType <a class="code" href="class_developer.html#a41a1f3b462a81a668becc5bdacf1fa3a">getType</a>() <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a277f1e4a85a29d6a1b78e44b1d4d6766">write</a>(ofstream &amp;fout) <span class="keyword">const</span> = 0;</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">protected</span>:</div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="class_developer.html#a7c762f9f8a453e13482747a1be16edbc">  208</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_developer.html#a7c762f9f8a453e13482747a1be16edbc">push</a>(<span class="keyword">const</span> <a class="code" href="class_app.html">App</a> &amp;app)</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        pair&lt;hashDeveloper::iterator, bool&gt; r = removedApps.insert(app);</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <span class="keywordtype">string</span> address;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordtype">string</span> name;</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordtype">double</span> balance;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="keywordtype">int</span> numApps;</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    vector&lt;App*&gt; publishedApps;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    hashDeveloper removedApps;</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;};</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;</div>
-<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="class_developer___individual.html">  221</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_developer___individual.html">Developer_Individual</a>: <span class="keyword">public</span> <a class="code" href="class_developer.html">Developer</a> {</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;</div>
-<div class="line"><a name="l00227"></a><span class="lineno"><a class="line" href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">  227</a></span>&#160;    <a class="code" href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">Developer_Individual</a>() {</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    }</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno"><a class="line" href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">  235</a></span>&#160;    <a class="code" href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">Developer_Individual</a>(<span class="keywordtype">string</span> n, <span class="keywordtype">string</span> a) :</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <a class="code" href="class_developer.html">Developer</a>(n, a) {</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    }</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;</div>
-<div class="line"><a name="l00242"></a><span class="lineno"><a class="line" href="class_developer___individual.html#a6c57205184476c7356b0d9efc3d99712">  242</a></span>&#160;    <a class="code" href="class_developer___individual.html#a6c57205184476c7356b0d9efc3d99712">~Developer_Individual</a>() {</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    }</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;</div>
-<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="class_developer___individual.html#ae211e31392b25a4fc2e2bf4a5138b04c">  248</a></span>&#160;    DevType <a class="code" href="class_developer___individual.html#ae211e31392b25a4fc2e2bf4a5138b04c">getType</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">return</span> DEVELOPER_INDIVIDUAL;</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        <span class="keywordflow">return</span> r.second;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;</div>
+<div class="line"><a name="l00219"></a><span class="lineno"><a class="line" href="class_developer.html#a58f5a5290cc755d9c8f71608f8372a05">  219</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_developer.html#a58f5a5290cc755d9c8f71608f8372a05">pop</a>(<span class="keyword">const</span> <a class="code" href="class_app.html">App</a>&amp; app)</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        hashDeveloper::iterator it = removedApps.find(app);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keywordflow">if</span> (it != removedApps.end())</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            removedApps.erase(it);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        }</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    }</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;</div>
+<div class="line"><a name="l00237"></a><span class="lineno"><a class="line" href="class_developer.html#aa0fbfc019d1a372132e7655fffe02f15">  237</a></span>&#160;    <a class="code" href="class_app.html">App</a> <a class="code" href="class_developer.html#aa0fbfc019d1a372132e7655fffe02f15">find</a>(<span class="keywordtype">string</span> name)</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    {</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        hashDeveloper::const_iterator it = removedApps.begin();</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;        <span class="keywordflow">for</span> (; it != removedApps.end(); it++)</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        {</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            <span class="keywordflow">if</span> (it-&gt;getName() == name)</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            {</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                <span class="keywordflow">return</span> *it;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            }</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        }</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">return</span> APP_NOT_FOUND;</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    }</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_developer___individual.html#a1f0a91b631f2402963706094f433c464">read</a>(ifstream &amp;fin);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___individual.html#ad08d381576cf33cf52de9f5d4c3e69db">write</a>(ofstream &amp;fout) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___individual.html#a0988dc9fb6aa9efe8c15f8fd68b9772d">print</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;};</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;</div>
-<div class="line"><a name="l00270"></a><span class="lineno"><a class="line" href="class_developer___empresa.html">  270</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_developer___empresa.html">Developer_Empresa</a>: <span class="keyword">public</span> <a class="code" href="class_developer.html">Developer</a> {</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_developer.html#af87a58e795ae45855426183555db70d4">print</a>() <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;</div>
+<div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="class_developer.html#a83e90e626cebe2d0bbb70cb927a07a53">  261</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a83e90e626cebe2d0bbb70cb927a07a53">sale</a>(<span class="keywordtype">double</span> amount)</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        balance += amount * 0.8;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    }</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_developer.html#a277f1e4a85a29d6a1b78e44b1d4d6766">write</a>(ofstream &amp;fout) <span class="keyword">const</span> = 0;</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;</div>
-<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#ab663065d2b6fb5b165686fa96e0bb2b1">  277</a></span>&#160;    <a class="code" href="class_developer___empresa.html#ab663065d2b6fb5b165686fa96e0bb2b1">Developer_Empresa</a>() {</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    }</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;</div>
-<div class="line"><a name="l00286"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">  286</a></span>&#160;    <a class="code" href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">Developer_Empresa</a>(<span class="keywordtype">string</span> n, <span class="keywordtype">string</span> a, <span class="keywordtype">unsigned</span> <span class="keywordtype">id</span>) :</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            <a class="code" href="class_developer.html">Developer</a>(n, a) {</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;        ostringstream os;</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        os &lt;&lt; id;</div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;        <span class="keywordflow">if</span> (os.str().length() != 9) {</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="class_invalid_parameter.html">InvalidParameter</a>(<span class="stringliteral">&quot;NIF&quot;</span>);</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        }</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        this-&gt;NIF = id;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    <span class="keywordtype">string</span> address;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordtype">string</span> name;</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordtype">double</span> balance;</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keywordtype">int</span> numApps;</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordtype">int</span> numRemovedApps;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    hashDeveloper removedApps;</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;};</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;</div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="class_developer___individual.html">  284</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_developer___individual.html">Developer_Individual</a>: <span class="keyword">public</span> <a class="code" href="class_developer.html">Developer</a></div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;{</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">  292</a></span>&#160;    <a class="code" href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">Developer_Individual</a>()</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    {</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    }</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;</div>
-<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#af85d8170ce90fd306ff66f3ee04cec2d">  299</a></span>&#160;    <a class="code" href="class_developer___empresa.html#af85d8170ce90fd306ff66f3ee04cec2d">~Developer_Empresa</a>() {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    }</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;</div>
-<div class="line"><a name="l00305"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">  305</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">getNIF</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        <span class="keywordflow">return</span> this-&gt;NIF;</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    }</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;</div>
-<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">  313</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">setNIF</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">id</span>) {</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        this-&gt;NIF = id;</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    }</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;</div>
-<div class="line"><a name="l00320"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#af642d01ce7bff26fc8c7e0a16c446a3e">  320</a></span>&#160;    DevType <a class="code" href="class_developer___empresa.html#af642d01ce7bff26fc8c7e0a16c446a3e">getType</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;        <span class="keywordflow">return</span> DEVELOPER_EMPRESA;</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    }</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_developer___empresa.html#a5ddff78d27fc9424a01f2df9cb059c5d">read</a>(ifstream &amp;fin);</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___empresa.html#a48bbbcdc61db2ed3e2cf165ba33020e6">write</a>(ofstream &amp;fout) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;</div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___empresa.html#a1480003363f1ca90aa00dd3e284a431a">print</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;</div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">unsigned</span> NIF;</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;};</div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __DEVELOPER_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="class_developer___empresa_html_af642d01ce7bff26fc8c7e0a16c446a3e"><div class="ttname"><a href="class_developer___empresa.html#af642d01ce7bff26fc8c7e0a16c446a3e">Developer_Empresa::getType</a></div><div class="ttdeci">DevType getType() const </div><div class="ttdoc">returns the developer type (DEVELOPER_EMPRESA) </div><div class="ttdef"><b>Definition:</b> Developer.h:320</div></div>
-<div class="ttc" id="class_developer___individual_html_ae211e31392b25a4fc2e2bf4a5138b04c"><div class="ttname"><a href="class_developer___individual.html#ae211e31392b25a4fc2e2bf4a5138b04c">Developer_Individual::getType</a></div><div class="ttdeci">DevType getType() const </div><div class="ttdoc">returns the developer type (DEVELOPER_INDIVIDUAL) </div><div class="ttdef"><b>Definition:</b> Developer.h:248</div></div>
-<div class="ttc" id="class_developer___individual_html_a07ee2c285ec4adc50d02a5a0ca77e0ea"><div class="ttname"><a href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">Developer_Individual::Developer_Individual</a></div><div class="ttdeci">Developer_Individual()</div><div class="ttdoc">default constructor for &#39;Developer_Individual&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:227</div></div>
+<div class="line"><a name="l00301"></a><span class="lineno"><a class="line" href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">  301</a></span>&#160;    <a class="code" href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">Developer_Individual</a>(<span class="keywordtype">string</span> n, <span class="keywordtype">string</span> a) : <a class="code" href="class_developer.html">Developer</a>(n, a)</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    {</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;</div>
+<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="class_developer___individual.html#a6c57205184476c7356b0d9efc3d99712">  308</a></span>&#160;    <a class="code" href="class_developer___individual.html#a6c57205184476c7356b0d9efc3d99712">~Developer_Individual</a>()</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    }</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;</div>
+<div class="line"><a name="l00315"></a><span class="lineno"><a class="line" href="class_developer___individual.html#ae211e31392b25a4fc2e2bf4a5138b04c">  315</a></span>&#160;    DevType <a class="code" href="class_developer___individual.html#ae211e31392b25a4fc2e2bf4a5138b04c">getType</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;        <span class="keywordflow">return</span> DEVELOPER_INDIVIDUAL;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    }</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___individual.html#ad08d381576cf33cf52de9f5d4c3e69db">write</a>(ofstream &amp;fout) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___individual.html#a0988dc9fb6aa9efe8c15f8fd68b9772d">print</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;};</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;</div>
+<div class="line"><a name="l00332"></a><span class="lineno"><a class="line" href="class_developer___empresa.html">  332</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_developer___empresa.html">Developer_Empresa</a>: <span class="keyword">public</span> <a class="code" href="class_developer.html">Developer</a></div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;{</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;</div>
+<div class="line"><a name="l00340"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#ab663065d2b6fb5b165686fa96e0bb2b1">  340</a></span>&#160;    <a class="code" href="class_developer___empresa.html#ab663065d2b6fb5b165686fa96e0bb2b1">Developer_Empresa</a>() : NIF(0)</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    {</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    }</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;</div>
+<div class="line"><a name="l00350"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">  350</a></span>&#160;    <a class="code" href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">Developer_Empresa</a>(<span class="keywordtype">string</span> n, <span class="keywordtype">string</span> a, <span class="keywordtype">unsigned</span> <span class="keywordtype">id</span>) : <a class="code" href="class_developer.html">Developer</a>(n, a)</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    {</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        ostringstream os;</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        os &lt;&lt; id;</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;        <span class="keywordflow">if</span> (os.str().length() != 9)</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;        {</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="class_invalid_parameter.html">InvalidParameter</a>(<span class="stringliteral">&quot;NIF&quot;</span>);</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;        }</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        this-&gt;NIF = id;</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    }</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;</div>
+<div class="line"><a name="l00364"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#af85d8170ce90fd306ff66f3ee04cec2d">  364</a></span>&#160;    <a class="code" href="class_developer___empresa.html#af85d8170ce90fd306ff66f3ee04cec2d">~Developer_Empresa</a>()</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    {</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    }</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;</div>
+<div class="line"><a name="l00371"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">  371</a></span>&#160;    <span class="keywordtype">unsigned</span> <a class="code" href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">getNIF</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;        <span class="keywordflow">return</span> this-&gt;NIF;</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    }</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;</div>
+<div class="line"><a name="l00380"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">  380</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">setNIF</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    {</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;        this-&gt;NIF = id;</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    }</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;</div>
+<div class="line"><a name="l00388"></a><span class="lineno"><a class="line" href="class_developer___empresa.html#af642d01ce7bff26fc8c7e0a16c446a3e">  388</a></span>&#160;    DevType <a class="code" href="class_developer___empresa.html#af642d01ce7bff26fc8c7e0a16c446a3e">getType</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="keywordflow">return</span> DEVELOPER_EMPRESA;</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___empresa.html#a48bbbcdc61db2ed3e2cf165ba33020e6">write</a>(ofstream &amp;fout) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_developer___empresa.html#a1480003363f1ca90aa00dd3e284a431a">print</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    <span class="keywordtype">unsigned</span> NIF;</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;};</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __DEVELOPER_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="class_developer___empresa_html_af642d01ce7bff26fc8c7e0a16c446a3e"><div class="ttname"><a href="class_developer___empresa.html#af642d01ce7bff26fc8c7e0a16c446a3e">Developer_Empresa::getType</a></div><div class="ttdeci">DevType getType() const </div><div class="ttdoc">returns the developer type (DEVELOPER_EMPRESA) </div><div class="ttdef"><b>Definition:</b> Developer.h:388</div></div>
+<div class="ttc" id="class_developer___individual_html_ae211e31392b25a4fc2e2bf4a5138b04c"><div class="ttname"><a href="class_developer___individual.html#ae211e31392b25a4fc2e2bf4a5138b04c">Developer_Individual::getType</a></div><div class="ttdeci">DevType getType() const </div><div class="ttdoc">returns the developer type (DEVELOPER_INDIVIDUAL) </div><div class="ttdef"><b>Definition:</b> Developer.h:315</div></div>
+<div class="ttc" id="class_developer_html_a539bded2a2ba1e2819c6282588f5951a"><div class="ttname"><a href="class_developer.html#a539bded2a2ba1e2819c6282588f5951a">Developer::setBalance</a></div><div class="ttdeci">void setBalance(double n)</div><div class="ttdoc">sets the developer with a new balance </div><div class="ttdef"><b>Definition:</b> Developer.h:131</div></div>
+<div class="ttc" id="class_developer___individual_html_a07ee2c285ec4adc50d02a5a0ca77e0ea"><div class="ttname"><a href="class_developer___individual.html#a07ee2c285ec4adc50d02a5a0ca77e0ea">Developer_Individual::Developer_Individual</a></div><div class="ttdeci">Developer_Individual()</div><div class="ttdoc">default constructor for &#39;Developer_Individual&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:292</div></div>
+<div class="ttc" id="class_developer_html_a58f5a5290cc755d9c8f71608f8372a05"><div class="ttname"><a href="class_developer.html#a58f5a5290cc755d9c8f71608f8372a05">Developer::pop</a></div><div class="ttdeci">bool pop(const App &amp;app)</div><div class="ttdoc">removes an existing app from the removed apps table </div><div class="ttdef"><b>Definition:</b> Developer.h:219</div></div>
+<div class="ttc" id="class_developer_html_aa0fbfc019d1a372132e7655fffe02f15"><div class="ttname"><a href="class_developer.html#aa0fbfc019d1a372132e7655fffe02f15">Developer::find</a></div><div class="ttdeci">App find(string name)</div><div class="ttdoc">finds an app removed by the developer given its name </div><div class="ttdef"><b>Definition:</b> Developer.h:237</div></div>
 <div class="ttc" id="_app_8h_html"><div class="ttname"><a href="_app_8h.html">App.h</a></div></div>
-<div class="ttc" id="class_developer___empresa_html_af85d8170ce90fd306ff66f3ee04cec2d"><div class="ttname"><a href="class_developer___empresa.html#af85d8170ce90fd306ff66f3ee04cec2d">Developer_Empresa::~Developer_Empresa</a></div><div class="ttdeci">~Developer_Empresa()</div><div class="ttdoc">default destructor for &#39;Developer_Empresa&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:299</div></div>
-<div class="ttc" id="class_developer_html_a46863e6022f17a15181604df3cf7614b"><div class="ttname"><a href="class_developer.html#a46863e6022f17a15181604df3cf7614b">Developer::getPublishedApps</a></div><div class="ttdeci">hashDeveloper getPublishedApps() const </div><div class="ttdoc">returns the apps published by this developer </div><div class="ttdef"><b>Definition:</b> Developer.h:113</div></div>
-<div class="ttc" id="class_developer___empresa_html_a48bbbcdc61db2ed3e2cf165ba33020e6"><div class="ttname"><a href="class_developer___empresa.html#a48bbbcdc61db2ed3e2cf165ba33020e6">Developer_Empresa::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes developer information to a given file </div><div class="ttdef"><b>Definition:</b> Developer.cpp:59</div></div>
-<div class="ttc" id="class_invalid_parameter_html"><div class="ttname"><a href="class_invalid_parameter.html">InvalidParameter</a></div><div class="ttdef"><b>Definition:</b> Common.h:153</div></div>
+<div class="ttc" id="class_developer___empresa_html_af85d8170ce90fd306ff66f3ee04cec2d"><div class="ttname"><a href="class_developer___empresa.html#af85d8170ce90fd306ff66f3ee04cec2d">Developer_Empresa::~Developer_Empresa</a></div><div class="ttdeci">~Developer_Empresa()</div><div class="ttdoc">default destructor for &#39;Developer_Empresa&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:364</div></div>
+<div class="ttc" id="class_developer___empresa_html_a48bbbcdc61db2ed3e2cf165ba33020e6"><div class="ttname"><a href="class_developer___empresa.html#a48bbbcdc61db2ed3e2cf165ba33020e6">Developer_Empresa::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes developer information to a given file </div><div class="ttdef"><b>Definition:</b> Developer.cpp:39</div></div>
+<div class="ttc" id="class_developer_html_a136e204479307eb805986d3518585a44"><div class="ttname"><a href="class_developer.html#a136e204479307eb805986d3518585a44">Developer::getNumberApps</a></div><div class="ttdeci">unsigned getNumberApps() const </div><div class="ttdoc">returns the number of apps published by the developer </div><div class="ttdef"><b>Definition:</b> Developer.h:139</div></div>
+<div class="ttc" id="class_invalid_parameter_html"><div class="ttname"><a href="class_invalid_parameter.html">InvalidParameter</a></div><div class="ttdef"><b>Definition:</b> Common.h:155</div></div>
 <div class="ttc" id="class_developer_html_af87a58e795ae45855426183555db70d4"><div class="ttname"><a href="class_developer.html#af87a58e795ae45855426183555db70d4">Developer::print</a></div><div class="ttdeci">virtual void print() const =0</div><div class="ttdoc">prints the developer information in a user-friendly way </div></div>
-<div class="ttc" id="class_developer___empresa_html_a5ddff78d27fc9424a01f2df9cb059c5d"><div class="ttname"><a href="class_developer___empresa.html#a5ddff78d27fc9424a01f2df9cb059c5d">Developer_Empresa::read</a></div><div class="ttdeci">bool read(ifstream &amp;fin)</div><div class="ttdoc">reads developer information from a given file </div><div class="ttdef"><b>Definition:</b> Developer.cpp:47</div></div>
-<div class="ttc" id="class_developer___empresa_html_acc65e28b73f4db41d95920766c72e460"><div class="ttname"><a href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">Developer_Empresa::setNIF</a></div><div class="ttdeci">void setNIF(unsigned id)</div><div class="ttdoc">changes the company tax number </div><div class="ttdef"><b>Definition:</b> Developer.h:313</div></div>
-<div class="ttc" id="class_developer_html_adf6e283d1e55f200491b925773064bbe"><div class="ttname"><a href="class_developer.html#adf6e283d1e55f200491b925773064bbe">Developer::getRemovedApps</a></div><div class="ttdeci">hashDeveloper getRemovedApps() const </div><div class="ttdoc">returns the removed apps from the developer </div><div class="ttdef"><b>Definition:</b> Developer.h:106</div></div>
-<div class="ttc" id="class_developer_html_a83e90e626cebe2d0bbb70cb927a07a53"><div class="ttname"><a href="class_developer.html#a83e90e626cebe2d0bbb70cb927a07a53">Developer::sale</a></div><div class="ttdeci">void sale(double amount)</div><div class="ttdoc">accumulates sales </div><div class="ttdef"><b>Definition:</b> Developer.h:200</div></div>
-<div class="ttc" id="class_developer_html_abda23a3adff98fb7111e497d26e3df22"><div class="ttname"><a href="class_developer.html#abda23a3adff98fb7111e497d26e3df22">Developer::push</a></div><div class="ttdeci">void push(App *app)</div><div class="ttdoc">pushes a new app to the published apps vector </div><div class="ttdef"><b>Definition:</b> Developer.h:169</div></div>
-<div class="ttc" id="class_developer___empresa_html_ab663065d2b6fb5b165686fa96e0bb2b1"><div class="ttname"><a href="class_developer___empresa.html#ab663065d2b6fb5b165686fa96e0bb2b1">Developer_Empresa::Developer_Empresa</a></div><div class="ttdeci">Developer_Empresa()</div><div class="ttdoc">default constructor for &#39;Developer_Empresa&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:277</div></div>
-<div class="ttc" id="class_developer_html_aeda44bdd0b1cde36b0f4d7a101a1e146"><div class="ttname"><a href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">Developer::operator--</a></div><div class="ttdeci">const Developer &amp; operator--()</div><div class="ttdoc">decrements the number of apps associated with the developer by one </div><div class="ttdef"><b>Definition:</b> Developer.h:130</div></div>
-<div class="ttc" id="class_developer___empresa_html_a1480003363f1ca90aa00dd3e284a431a"><div class="ttname"><a href="class_developer___empresa.html#a1480003363f1ca90aa00dd3e284a431a">Developer_Empresa::print</a></div><div class="ttdeci">void print() const </div><div class="ttdoc">prints the developer info in a user-friendly way </div><div class="ttdef"><b>Definition:</b> Developer.cpp:22</div></div>
-<div class="ttc" id="class_developer_html_a9e6851b29e5e3eddb65d3fead20fcc11"><div class="ttname"><a href="class_developer.html#a9e6851b29e5e3eddb65d3fead20fcc11">Developer::Developer</a></div><div class="ttdeci">Developer(string n, string a)</div><div class="ttdoc">constructor with parameters for &#39;Developer&#39; abstract class </div><div class="ttdef"><b>Definition:</b> Developer.h:62</div></div>
-<div class="ttc" id="class_developer___individual_html_a6c57205184476c7356b0d9efc3d99712"><div class="ttname"><a href="class_developer___individual.html#a6c57205184476c7356b0d9efc3d99712">Developer_Individual::~Developer_Individual</a></div><div class="ttdeci">~Developer_Individual()</div><div class="ttdoc">default destructor for &#39;Developer_Individual&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:242</div></div>
-<div class="ttc" id="class_developer_html_a5f9757f9b4f09c8782a9a5ac46af4570"><div class="ttname"><a href="class_developer.html#a5f9757f9b4f09c8782a9a5ac46af4570">Developer::operator++</a></div><div class="ttdeci">const Developer &amp; operator++()</div><div class="ttdoc">increments the number of apps associated with the developer by one </div><div class="ttdef"><b>Definition:</b> Developer.h:121</div></div>
-<div class="ttc" id="class_developer_html_a842c22cb9b9ebbabd32e6fbdaca595f2"><div class="ttname"><a href="class_developer.html#a842c22cb9b9ebbabd32e6fbdaca595f2">Developer::pop</a></div><div class="ttdeci">void pop(App *app)</div><div class="ttdoc">removes an existing app from the published apps vector </div><div class="ttdef"><b>Definition:</b> Developer.h:176</div></div>
-<div class="ttc" id="class_developer___individual_html_a1f0a91b631f2402963706094f433c464"><div class="ttname"><a href="class_developer___individual.html#a1f0a91b631f2402963706094f433c464">Developer_Individual::read</a></div><div class="ttdeci">bool read(ifstream &amp;fin)</div><div class="ttdoc">reads developer information from a given file </div><div class="ttdef"><b>Definition:</b> Developer.cpp:29</div></div>
-<div class="ttc" id="structdeveloper_h_html"><div class="ttname"><a href="structdeveloper_h.html">developerH</a></div><div class="ttdef"><b>Definition:</b> Developer.h:24</div></div>
-<div class="ttc" id="class_developer_html_a19f6b56f9acd32444905ffd0ecaed6cd"><div class="ttname"><a href="class_developer.html#a19f6b56f9acd32444905ffd0ecaed6cd">Developer::read</a></div><div class="ttdeci">virtual bool read(ifstream &amp;fin)=0</div><div class="ttdoc">reads developer information from a given file </div></div>
-<div class="ttc" id="class_developer_html_ab596fa3410bc9ec868ae57cf81461ce7"><div class="ttname"><a href="class_developer.html#ab596fa3410bc9ec868ae57cf81461ce7">Developer::getName</a></div><div class="ttdeci">string getName() const </div><div class="ttdoc">returns the developer&#39;s name </div><div class="ttdef"><b>Definition:</b> Developer.h:92</div></div>
-<div class="ttc" id="class_developer_html_a95165b44dc16ad71dcebd598f0a192b8"><div class="ttname"><a href="class_developer.html#a95165b44dc16ad71dcebd598f0a192b8">Developer::getNumApps</a></div><div class="ttdeci">int getNumApps() const </div><div class="ttdoc">returns the number of apps published by the developer </div><div class="ttdef"><b>Definition:</b> Developer.h:99</div></div>
-<div class="ttc" id="class_developer___empresa_html_af31f20bd61fa9b41bf16b5ca555499a8"><div class="ttname"><a href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">Developer_Empresa::Developer_Empresa</a></div><div class="ttdeci">Developer_Empresa(string n, string a, unsigned id)</div><div class="ttdoc">constructor with parameters for &#39;Developer_Empresa&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:286</div></div>
-<div class="ttc" id="class_developer___individual_html_aaf08cb2127a6b4339d852dc76aff108e"><div class="ttname"><a href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">Developer_Individual::Developer_Individual</a></div><div class="ttdeci">Developer_Individual(string n, string a)</div><div class="ttdoc">constructor with parameters for &#39;Developer_Individual&#39; class (same as &#39;Developer&#39;) ...</div><div class="ttdef"><b>Definition:</b> Developer.h:235</div></div>
+<div class="ttc" id="class_developer_html_ac2dc02913f7e0d47c262241b034fc114"><div class="ttname"><a href="class_developer.html#ac2dc02913f7e0d47c262241b034fc114">Developer::setNumberRemovedApps</a></div><div class="ttdeci">void setNumberRemovedApps(unsigned n)</div><div class="ttdoc">sets the developer with a new number of removed apps </div><div class="ttdef"><b>Definition:</b> Developer.h:174</div></div>
+<div class="ttc" id="class_developer___empresa_html_acc65e28b73f4db41d95920766c72e460"><div class="ttname"><a href="class_developer___empresa.html#acc65e28b73f4db41d95920766c72e460">Developer_Empresa::setNIF</a></div><div class="ttdeci">void setNIF(unsigned id)</div><div class="ttdoc">changes the company tax number </div><div class="ttdef"><b>Definition:</b> Developer.h:380</div></div>
+<div class="ttc" id="class_developer_html_adf6e283d1e55f200491b925773064bbe"><div class="ttname"><a href="class_developer.html#adf6e283d1e55f200491b925773064bbe">Developer::getRemovedApps</a></div><div class="ttdeci">hashDeveloper getRemovedApps() const </div><div class="ttdoc">returns the removed apps table from the developer </div><div class="ttdef"><b>Definition:</b> Developer.h:156</div></div>
+<div class="ttc" id="class_developer_html_a83e90e626cebe2d0bbb70cb927a07a53"><div class="ttname"><a href="class_developer.html#a83e90e626cebe2d0bbb70cb927a07a53">Developer::sale</a></div><div class="ttdeci">void sale(double amount)</div><div class="ttdoc">accumulates sales </div><div class="ttdef"><b>Definition:</b> Developer.h:261</div></div>
+<div class="ttc" id="class_developer___empresa_html_ab663065d2b6fb5b165686fa96e0bb2b1"><div class="ttname"><a href="class_developer___empresa.html#ab663065d2b6fb5b165686fa96e0bb2b1">Developer_Empresa::Developer_Empresa</a></div><div class="ttdeci">Developer_Empresa()</div><div class="ttdoc">default constructor for &#39;Developer_Empresa&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:340</div></div>
+<div class="ttc" id="class_developer_html_aeda44bdd0b1cde36b0f4d7a101a1e146"><div class="ttname"><a href="class_developer.html#aeda44bdd0b1cde36b0f4d7a101a1e146">Developer::operator--</a></div><div class="ttdeci">const Developer &amp; operator--()</div><div class="ttdoc">decrements the number of apps associated with this developer by one </div><div class="ttdef"><b>Definition:</b> Developer.h:193</div></div>
+<div class="ttc" id="class_developer___empresa_html_a1480003363f1ca90aa00dd3e284a431a"><div class="ttname"><a href="class_developer___empresa.html#a1480003363f1ca90aa00dd3e284a431a">Developer_Empresa::print</a></div><div class="ttdeci">void print() const </div><div class="ttdoc">prints the developer info in a user-friendly way </div><div class="ttdef"><b>Definition:</b> Developer.cpp:23</div></div>
+<div class="ttc" id="class_developer_html_a9e6851b29e5e3eddb65d3fead20fcc11"><div class="ttname"><a href="class_developer.html#a9e6851b29e5e3eddb65d3fead20fcc11">Developer::Developer</a></div><div class="ttdeci">Developer(string n, string a)</div><div class="ttdoc">constructor with parameters for &#39;Developer&#39; abstract class </div><div class="ttdef"><b>Definition:</b> Developer.h:69</div></div>
+<div class="ttc" id="class_developer___individual_html_a6c57205184476c7356b0d9efc3d99712"><div class="ttname"><a href="class_developer___individual.html#a6c57205184476c7356b0d9efc3d99712">Developer_Individual::~Developer_Individual</a></div><div class="ttdeci">~Developer_Individual()</div><div class="ttdoc">default destructor for &#39;Developer_Individual&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:308</div></div>
+<div class="ttc" id="class_developer_html_a5f9757f9b4f09c8782a9a5ac46af4570"><div class="ttname"><a href="class_developer.html#a5f9757f9b4f09c8782a9a5ac46af4570">Developer::operator++</a></div><div class="ttdeci">const Developer &amp; operator++()</div><div class="ttdoc">increments the number of apps associated with this developer by one </div><div class="ttdef"><b>Definition:</b> Developer.h:183</div></div>
+<div class="ttc" id="class_developer_html_af2ac0a4a582ba5e050bca656afd320a9"><div class="ttname"><a href="class_developer.html#af2ac0a4a582ba5e050bca656afd320a9">Developer::getNumberRemovedApps</a></div><div class="ttdeci">unsigned getNumberRemovedApps() const </div><div class="ttdoc">returns the size of the removed apps table </div><div class="ttdef"><b>Definition:</b> Developer.h:164</div></div>
+<div class="ttc" id="structdeveloper_h_html"><div class="ttname"><a href="structdeveloper_h.html">developerH</a></div><div class="ttdef"><b>Definition:</b> Developer.h:26</div></div>
+<div class="ttc" id="class_developer_html_ab596fa3410bc9ec868ae57cf81461ce7"><div class="ttname"><a href="class_developer.html#ab596fa3410bc9ec868ae57cf81461ce7">Developer::getName</a></div><div class="ttdeci">string getName() const </div><div class="ttdoc">returns the developer&#39;s name </div><div class="ttdef"><b>Definition:</b> Developer.h:88</div></div>
+<div class="ttc" id="class_developer___empresa_html_af31f20bd61fa9b41bf16b5ca555499a8"><div class="ttname"><a href="class_developer___empresa.html#af31f20bd61fa9b41bf16b5ca555499a8">Developer_Empresa::Developer_Empresa</a></div><div class="ttdeci">Developer_Empresa(string n, string a, unsigned id)</div><div class="ttdoc">constructor with parameters for &#39;Developer_Empresa&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:350</div></div>
+<div class="ttc" id="class_developer___individual_html_aaf08cb2127a6b4339d852dc76aff108e"><div class="ttname"><a href="class_developer___individual.html#aaf08cb2127a6b4339d852dc76aff108e">Developer_Individual::Developer_Individual</a></div><div class="ttdeci">Developer_Individual(string n, string a)</div><div class="ttdoc">constructor with parameters for &#39;Developer_Individual&#39; class (same as &#39;Developer&#39;) ...</div><div class="ttdef"><b>Definition:</b> Developer.h:301</div></div>
 <div class="ttc" id="class_developer_html_a277f1e4a85a29d6a1b78e44b1d4d6766"><div class="ttname"><a href="class_developer.html#a277f1e4a85a29d6a1b78e44b1d4d6766">Developer::write</a></div><div class="ttdeci">virtual void write(ofstream &amp;fout) const =0</div><div class="ttdoc">writes developer information to a given file </div></div>
 <div class="ttc" id="class_developer___individual_html_a0988dc9fb6aa9efe8c15f8fd68b9772d"><div class="ttname"><a href="class_developer___individual.html#a0988dc9fb6aa9efe8c15f8fd68b9772d">Developer_Individual::print</a></div><div class="ttdeci">void print() const </div><div class="ttdoc">prints the developer information in a user-friendly way </div><div class="ttdef"><b>Definition:</b> Developer.cpp:15</div></div>
-<div class="ttc" id="class_developer_html_a8312bbc037e97b8c4545edd2557630cd"><div class="ttname"><a href="class_developer.html#a8312bbc037e97b8c4545edd2557630cd">Developer::setRemovedApps</a></div><div class="ttdeci">void setRemovedApps(const hashDeveloper &amp;ht)</div><div class="ttdoc">sets the developer with a new removed apps table </div><div class="ttdef"><b>Definition:</b> Developer.h:160</div></div>
-<div class="ttc" id="class_developer___individual_html_ad08d381576cf33cf52de9f5d4c3e69db"><div class="ttname"><a href="class_developer___individual.html#ad08d381576cf33cf52de9f5d4c3e69db">Developer_Individual::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes developer information to a given file </div><div class="ttdef"><b>Definition:</b> Developer.cpp:40</div></div>
-<div class="ttc" id="class_developer_html_ab4e0bd9ec4a725ea0074686f624a4dd5"><div class="ttname"><a href="class_developer.html#ab4e0bd9ec4a725ea0074686f624a4dd5">Developer::getAddress</a></div><div class="ttdeci">string getAddress() const </div><div class="ttdoc">returns the developer&#39;s address </div><div class="ttdef"><b>Definition:</b> Developer.h:78</div></div>
-<div class="ttc" id="class_app_html"><div class="ttname"><a href="class_app.html">App</a></div><div class="ttdef"><b>Definition:</b> App.h:26</div></div>
-<div class="ttc" id="class_developer_html_a50226e9534a76bea284d861a55ab815a"><div class="ttname"><a href="class_developer.html#a50226e9534a76bea284d861a55ab815a">Developer::~Developer</a></div><div class="ttdeci">virtual ~Developer()</div><div class="ttdoc">default destructor for &#39;Developer&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:72</div></div>
-<div class="ttc" id="class_developer___empresa_html"><div class="ttname"><a href="class_developer___empresa.html">Developer_Empresa</a></div><div class="ttdef"><b>Definition:</b> Developer.h:270</div></div>
+<div class="ttc" id="class_developer___individual_html_ad08d381576cf33cf52de9f5d4c3e69db"><div class="ttname"><a href="class_developer___individual.html#ad08d381576cf33cf52de9f5d4c3e69db">Developer_Individual::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes developer information to a given file </div><div class="ttdef"><b>Definition:</b> Developer.cpp:31</div></div>
+<div class="ttc" id="class_developer_html_ab4e0bd9ec4a725ea0074686f624a4dd5"><div class="ttname"><a href="class_developer.html#ab4e0bd9ec4a725ea0074686f624a4dd5">Developer::getAddress</a></div><div class="ttdeci">string getAddress() const </div><div class="ttdoc">returns the developer&#39;s address </div><div class="ttdef"><b>Definition:</b> Developer.h:105</div></div>
+<div class="ttc" id="class_app_html"><div class="ttname"><a href="class_app.html">App</a></div><div class="ttdef"><b>Definition:</b> App.h:27</div></div>
+<div class="ttc" id="class_developer_html_a3aa8fae1c16ada4c50544995ce0bc597"><div class="ttname"><a href="class_developer.html#a3aa8fae1c16ada4c50544995ce0bc597">Developer::setNumberApps</a></div><div class="ttdeci">void setNumberApps(unsigned n)</div><div class="ttdoc">sets the developer with a new number of apps </div><div class="ttdef"><b>Definition:</b> Developer.h:148</div></div>
+<div class="ttc" id="class_developer_html_a50226e9534a76bea284d861a55ab815a"><div class="ttname"><a href="class_developer.html#a50226e9534a76bea284d861a55ab815a">Developer::~Developer</a></div><div class="ttdeci">virtual ~Developer()</div><div class="ttdoc">default destructor for &#39;Developer&#39; class </div><div class="ttdef"><b>Definition:</b> Developer.h:81</div></div>
+<div class="ttc" id="class_developer___empresa_html"><div class="ttname"><a href="class_developer___empresa.html">Developer_Empresa</a></div><div class="ttdef"><b>Definition:</b> Developer.h:332</div></div>
 <div class="ttc" id="class_developer_html_a41a1f3b462a81a668becc5bdacf1fa3a"><div class="ttname"><a href="class_developer.html#a41a1f3b462a81a668becc5bdacf1fa3a">Developer::getType</a></div><div class="ttdeci">virtual DevType getType() const =0</div><div class="ttdoc">returns the developer type (individual/company) </div></div>
-<div class="ttc" id="class_developer_html"><div class="ttname"><a href="class_developer.html">Developer</a></div><div class="ttdef"><b>Definition:</b> Developer.h:46</div></div>
-<div class="ttc" id="class_developer___individual_html"><div class="ttname"><a href="class_developer___individual.html">Developer_Individual</a></div><div class="ttdef"><b>Definition:</b> Developer.h:221</div></div>
-<div class="ttc" id="class_app_html_a32eb5fb345735dd5545e31e540b00969"><div class="ttname"><a href="class_app.html#a32eb5fb345735dd5545e31e540b00969">App::getName</a></div><div class="ttdeci">string getName() const </div><div class="ttdoc">returns the app name </div><div class="ttdef"><b>Definition:</b> App.h:59</div></div>
-<div class="ttc" id="class_developer_html_a28749fe8c0fa05bfd73c0f757ef134d8"><div class="ttname"><a href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">Developer::setAddress</a></div><div class="ttdeci">void setAddress(string a)</div><div class="ttdoc">sets the developer with a new address </div><div class="ttdef"><b>Definition:</b> Developer.h:144</div></div>
-<div class="ttc" id="class_developer___empresa_html_a0b6f8ad3e9e40d8034524af762782ca4"><div class="ttname"><a href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">Developer_Empresa::getNIF</a></div><div class="ttdeci">unsigned getNIF() const </div><div class="ttdoc">returns the company tax ID number (9 digits) </div><div class="ttdef"><b>Definition:</b> Developer.h:305</div></div>
-<div class="ttc" id="class_developer_html_a1acf937b03598b68b93c010bfc90f702"><div class="ttname"><a href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">Developer::Developer</a></div><div class="ttdeci">Developer()</div><div class="ttdoc">default constructor for &#39;Developer&#39; abstract class </div><div class="ttdef"><b>Definition:</b> Developer.h:52</div></div>
-<div class="ttc" id="class_developer_html_a49e1640789385588479205dbe182fa58"><div class="ttname"><a href="class_developer.html#a49e1640789385588479205dbe182fa58">Developer::getBalance</a></div><div class="ttdeci">double getBalance() const </div><div class="ttdoc">returns the developer&#39;s current balance </div><div class="ttdef"><b>Definition:</b> Developer.h:85</div></div>
-<div class="ttc" id="class_developer_html_a98717ed7e5e6f72e24ec49d210c2e086"><div class="ttname"><a href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">Developer::setName</a></div><div class="ttdeci">void setName(string n)</div><div class="ttdoc">sets the developer with a new name </div><div class="ttdef"><b>Definition:</b> Developer.h:152</div></div>
+<div class="ttc" id="class_developer_html"><div class="ttname"><a href="class_developer.html">Developer</a></div><div class="ttdef"><b>Definition:</b> Developer.h:49</div></div>
+<div class="ttc" id="class_developer___individual_html"><div class="ttname"><a href="class_developer___individual.html">Developer_Individual</a></div><div class="ttdef"><b>Definition:</b> Developer.h:284</div></div>
+<div class="ttc" id="class_app_html_a32eb5fb345735dd5545e31e540b00969"><div class="ttname"><a href="class_app.html#a32eb5fb345735dd5545e31e540b00969">App::getName</a></div><div class="ttdeci">string getName() const </div><div class="ttdoc">returns the app name </div><div class="ttdef"><b>Definition:</b> App.h:65</div></div>
+<div class="ttc" id="class_developer_html_a28749fe8c0fa05bfd73c0f757ef134d8"><div class="ttname"><a href="class_developer.html#a28749fe8c0fa05bfd73c0f757ef134d8">Developer::setAddress</a></div><div class="ttdeci">void setAddress(string a)</div><div class="ttdoc">sets the developer with a new address </div><div class="ttdef"><b>Definition:</b> Developer.h:114</div></div>
+<div class="ttc" id="class_developer___empresa_html_a0b6f8ad3e9e40d8034524af762782ca4"><div class="ttname"><a href="class_developer___empresa.html#a0b6f8ad3e9e40d8034524af762782ca4">Developer_Empresa::getNIF</a></div><div class="ttdeci">unsigned getNIF() const </div><div class="ttdoc">returns the company tax ID number (9 digits) </div><div class="ttdef"><b>Definition:</b> Developer.h:371</div></div>
+<div class="ttc" id="class_developer_html_a1acf937b03598b68b93c010bfc90f702"><div class="ttname"><a href="class_developer.html#a1acf937b03598b68b93c010bfc90f702">Developer::Developer</a></div><div class="ttdeci">Developer()</div><div class="ttdoc">default constructor for &#39;Developer&#39; abstract class </div><div class="ttdef"><b>Definition:</b> Developer.h:57</div></div>
+<div class="ttc" id="class_developer_html_a49e1640789385588479205dbe182fa58"><div class="ttname"><a href="class_developer.html#a49e1640789385588479205dbe182fa58">Developer::getBalance</a></div><div class="ttdeci">double getBalance() const </div><div class="ttdoc">returns the developer&#39;s current balance </div><div class="ttdef"><b>Definition:</b> Developer.h:122</div></div>
+<div class="ttc" id="class_developer_html_a98717ed7e5e6f72e24ec49d210c2e086"><div class="ttname"><a href="class_developer.html#a98717ed7e5e6f72e24ec49d210c2e086">Developer::setName</a></div><div class="ttdeci">void setName(string n)</div><div class="ttdoc">sets the developer with a new name </div><div class="ttdef"><b>Definition:</b> Developer.h:97</div></div>
+<div class="ttc" id="class_developer_html_a7c762f9f8a453e13482747a1be16edbc"><div class="ttname"><a href="class_developer.html#a7c762f9f8a453e13482747a1be16edbc">Developer::push</a></div><div class="ttdeci">bool push(const App &amp;app)</div><div class="ttdoc">inserts a new app into the removed apps table </div><div class="ttdef"><b>Definition:</b> Developer.h:208</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:12 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="_developer_8h.html">Developer.h</a></li>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

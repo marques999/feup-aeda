@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -38,11 +45,25 @@
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_app_store.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -57,78 +78,69 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a6e1a287f9511667306509e542d0eae4e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e1a287f9511667306509e542d0eae4e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AppStore</b> (string n)</td></tr>
 <tr class="separator:a6e1a287f9511667306509e542d0eae4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af53c20d93e1330246e2664fe7af8fe5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af53c20d93e1330246e2664fe7af8fe5b"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumAppsTotal</b> () const </td></tr>
-<tr class="separator:af53c20d93e1330246e2664fe7af8fe5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35d1df60b223a424b8afb2ebbc7630c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a35d1df60b223a424b8afb2ebbc7630c5"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumClientes</b> () const </td></tr>
-<tr class="separator:a35d1df60b223a424b8afb2ebbc7630c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f7148c27ea70c2d6135c20f8fa3420b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f7148c27ea70c2d6135c20f8fa3420b"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumDevelopers</b> () const </td></tr>
-<tr class="separator:a0f7148c27ea70c2d6135c20f8fa3420b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7df3010498fd2b26fd32ea7fadd57229"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7df3010498fd2b26fd32ea7fadd57229"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getNumAppsDev</b> (<a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
-<tr class="separator:a7df3010498fd2b26fd32ea7fadd57229"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3443971f488383e24b1ff0bf383b3324"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3443971f488383e24b1ff0bf383b3324"></a>
-vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getAppsFromDev</b> (<a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
-<tr class="separator:a3443971f488383e24b1ff0bf383b3324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a923af977b3ceacfb73b660de94f2e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0a923af977b3ceacfb73b660de94f2e8"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> () const </td></tr>
 <tr class="separator:a0a923af977b3ceacfb73b660de94f2e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cb52541cc5077b62a42a6fa5b190715"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1cb52541cc5077b62a42a6fa5b190715"></a>
-vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getApps</b> () const </td></tr>
-<tr class="separator:a1cb52541cc5077b62a42a6fa5b190715"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ae6c344379e49071caa9b160a57e1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81ae6c344379e49071caa9b160a57e1f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>createApp</b> (int devIndex)</td></tr>
+<tr class="separator:a81ae6c344379e49071caa9b160a57e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b34961fb63dad32b8fba1870296c82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16b34961fb63dad32b8fba1870296c82"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteApp</b> (int devIndex)</td></tr>
+<tr class="separator:a16b34961fb63dad32b8fba1870296c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a72333753bd8f9cc1602647f1a55ab8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a72333753bd8f9cc1602647f1a55ab8"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateApp</b> (int devIndex)</td></tr>
+<tr class="separator:a2a72333753bd8f9cc1602647f1a55ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ac5441696a33cf8be6857c2206f1211"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ac5441696a33cf8be6857c2206f1211"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>updateApp</b> (<a class="el" href="class_app.html">App</a> *app)</td></tr>
+<tr class="separator:a0ac5441696a33cf8be6857c2206f1211"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2f957be7b5ac815f092bc08e80cd896"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af2f957be7b5ac815f092bc08e80cd896"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>deletePendingApp</b> (int devIndex)</td></tr>
+<tr class="separator:af2f957be7b5ac815f092bc08e80cd896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745f4703187718ea357e833f46ca7603"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a745f4703187718ea357e833f46ca7603"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>updatePendingApp</b> (int devIndex)</td></tr>
+<tr class="separator:a745f4703187718ea357e833f46ca7603"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05c344efffbffae9fde31caf53e9d353"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05c344efffbffae9fde31caf53e9d353"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>publishRemovedApp</b> (int devIndex)</td></tr>
+<tr class="separator:a05c344efffbffae9fde31caf53e9d353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7e6cc9c0028336bfcf3bfb72fa1c820"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab7e6cc9c0028336bfcf3bfb72fa1c820"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateRemovedApp</b> (int devIndex)</td></tr>
+<tr class="separator:ab7e6cc9c0028336bfcf3bfb72fa1c820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a462c2c4425607ea0972c850a63815592"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a462c2c4425607ea0972c850a63815592"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>createCliente</b> ()</td></tr>
 <tr class="separator:a462c2c4425607ea0972c850a63815592"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c4c73e1f4e0390bacc08334da619ffe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c4c73e1f4e0390bacc08334da619ffe"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteCliente</b> ()</td></tr>
 <tr class="separator:a9c4c73e1f4e0390bacc08334da619ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c0ce208f721075d8cb1f097092aab66"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c0ce208f721075d8cb1f097092aab66"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>insertCliente</b> (<a class="el" href="class_cliente.html">Cliente</a> *c1)</td></tr>
-<tr class="separator:a4c0ce208f721075d8cb1f097092aab66"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9b432b540b379dede5b4c62466c008c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9b432b540b379dede5b4c62466c008c"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>indexCliente</b> (string cliName)</td></tr>
-<tr class="separator:ab9b432b540b379dede5b4c62466c008c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7ae1d3c24dc7fa17812918e0878fa9f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae7ae1d3c24dc7fa17812918e0878fa9f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateCliente</b> ()</td></tr>
 <tr class="separator:ae7ae1d3c24dc7fa17812918e0878fa9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a612bead044de133c35244f4ad6af9d8f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a612bead044de133c35244f4ad6af9d8f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Developer_create</b> ()</td></tr>
-<tr class="separator:a612bead044de133c35244f4ad6af9d8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae25bcf197048c1edcceb33d3be0594df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae25bcf197048c1edcceb33d3be0594df"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Developer_delete</b> ()</td></tr>
-<tr class="separator:ae25bcf197048c1edcceb33d3be0594df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06f85de98150acf683fdcfb74f40f405"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06f85de98150acf683fdcfb74f40f405"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>indexDeveloper</b> (string devName) const </td></tr>
-<tr class="separator:a06f85de98150acf683fdcfb74f40f405"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add2051ee4683a2f79b54f8d002715dc9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add2051ee4683a2f79b54f8d002715dc9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>insertDeveloper</b> (<a class="el" href="class_developer.html">Developer</a> *dev)</td></tr>
-<tr class="separator:add2051ee4683a2f79b54f8d002715dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e33e4058aee13e4723ab577ef61399e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e33e4058aee13e4723ab577ef61399e"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>Developer_update</b> ()</td></tr>
-<tr class="separator:a7e33e4058aee13e4723ab577ef61399e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c4d7d638749390701a4d2dce9bbfab5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c4d7d638749390701a4d2dce9bbfab5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Cliente_menu</b> ()</td></tr>
-<tr class="separator:a8c4d7d638749390701a4d2dce9bbfab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac443c48294134e7fc66bc5ebacac8568"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac443c48294134e7fc66bc5ebacac8568"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Developer_menu</b> ()</td></tr>
-<tr class="separator:ac443c48294134e7fc66bc5ebacac8568"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaabb20cc5701af35f04452c5f19cb1f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaabb20cc5701af35f04452c5f19cb1f1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Cliente_browse</b> (int cliIndex)</td></tr>
-<tr class="separator:aaabb20cc5701af35f04452c5f19cb1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab378b7986b83da52f332ac5a2799a6e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab378b7986b83da52f332ac5a2799a6e5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>createDeveloper</b> ()</td></tr>
+<tr class="separator:ab378b7986b83da52f332ac5a2799a6e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab23c0791d05005afb59b35aa2b0524ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab23c0791d05005afb59b35aa2b0524ff"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteDeveloper</b> ()</td></tr>
+<tr class="separator:ab23c0791d05005afb59b35aa2b0524ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadd55aac42b87dc5ff85b8aec545e40d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aadd55aac42b87dc5ff85b8aec545e40d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateDeveloper</b> ()</td></tr>
+<tr class="separator:aadd55aac42b87dc5ff85b8aec545e40d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d957988ec36f583131dd3e0ed537bbc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d957988ec36f583131dd3e0ed537bbc"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAppsTable</b> (const vector&lt; <a class="el" href="class_app.html">App</a> &gt; &amp;v) const </td></tr>
 <tr class="separator:a3d957988ec36f583131dd3e0ed537bbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef671a9b6981fee643c969c8506f9bde"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef671a9b6981fee643c969c8506f9bde"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAppsTable</b> (const vector&lt; <a class="el" href="class_app.html">App</a> * &gt; &amp;v) const </td></tr>
 <tr class="separator:aef671a9b6981fee643c969c8506f9bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa80707a83ba2058e8d4784470b7be691"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa80707a83ba2058e8d4784470b7be691"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAppsTable2</b> (const vector&lt; <a class="el" href="class_app.html">App</a> * &gt; &amp;v) const </td></tr>
-<tr class="separator:aa80707a83ba2058e8d4784470b7be691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ce0648dace90ae83dda350d0a8b947"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77ce0648dace90ae83dda350d0a8b947"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAppsTableD</b> (const vector&lt; <a class="el" href="class_app.html">App</a> * &gt; &amp;v) const </td></tr>
+<tr class="separator:a77ce0648dace90ae83dda350d0a8b947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49f93f6458d455f2e74548bf3801729e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a49f93f6458d455f2e74548bf3801729e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAppsTableS</b> (const vector&lt; <a class="el" href="class_app.html">App</a> * &gt; &amp;v) const </td></tr>
+<tr class="separator:a49f93f6458d455f2e74548bf3801729e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaaa32439f016cf8af83b7ca3f748d031"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaaa32439f016cf8af83b7ca3f748d031"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIClienteTable</b> (const vector&lt; <a class="el" href="class_cliente.html">Cliente</a> * &gt; &amp;v) const </td></tr>
 <tr class="separator:aaaa32439f016cf8af83b7ca3f748d031"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15b062ddde76bbbe40bc578c30e930e1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15b062ddde76bbbe40bc578c30e930e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIDeveloperAppsTable</b> (const vector&lt; <a class="el" href="class_app.html">App</a> * &gt; &amp;v) const </td></tr>
+<tr class="separator:a15b062ddde76bbbe40bc578c30e930e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf09a0774d3268e2a14e26fa3a093133"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abf09a0774d3268e2a14e26fa3a093133"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIDeveloperTable</b> (const vector&lt; <a class="el" href="class_developer.html">Developer</a> * &gt; &amp;v) const </td></tr>
 <tr class="separator:abf09a0774d3268e2a14e26fa3a093133"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,23 +159,42 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIDeveloperBar</b> (
 <tr class="memitem:aff1d27bef269da9e76316e648fcbd018"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff1d27bef269da9e76316e648fcbd018"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIClienteBar</b> (int cliIndex) const </td></tr>
 <tr class="separator:aff1d27bef269da9e76316e648fcbd018"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa835eff8c7e201aa427597b6a9c08804"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa835eff8c7e201aa427597b6a9c08804"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAppCRUD</b> ()</td></tr>
+<tr class="separator:aa835eff8c7e201aa427597b6a9c08804"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65bb2538fea375c1626f90667073b7aa"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a65bb2538fea375c1626f90667073b7aa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIClienteCRUD</b> ()</td></tr>
+<tr class="separator:a65bb2538fea375c1626f90667073b7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a992f4e1f7d412d070b056d651edb8495"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a992f4e1f7d412d070b056d651edb8495"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIDeveloperCRUD</b> ()</td></tr>
+<tr class="separator:a992f4e1f7d412d070b056d651edb8495"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa22107006357925875a3c4c87080ceb9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa22107006357925875a3c4c87080ceb9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAddFunds</b> (int cliIndex)</td></tr>
 <tr class="separator:aa22107006357925875a3c4c87080ceb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a797f20efc04bfab64b3d7c998a2d7b64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a797f20efc04bfab64b3d7c998a2d7b64"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAddToCart</b> (int appIndex, int cliIndex)</td></tr>
 <tr class="separator:a797f20efc04bfab64b3d7c998a2d7b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a925e48c7c2d42d07afd8f6b42bb1696b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a925e48c7c2d42d07afd8f6b42bb1696b"></a>
+<tr class="memitem:a744e5453fa6e53a928db481d16bfc7ef"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a744e5453fa6e53a928db481d16bfc7ef"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIActivateVoucher</b> (int cliIndex)</td></tr>
-<tr class="separator:a925e48c7c2d42d07afd8f6b42bb1696b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:a744e5453fa6e53a928db481d16bfc7ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3235b4b193ffd7cf25bffb0ffac834e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3235b4b193ffd7cf25bffb0ffac834e3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIBrowseApps</b> (int cliIndex)</td></tr>
+<tr class="separator:a3235b4b193ffd7cf25bffb0ffac834e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20575980738ce4b02c4a7962a15a3bfe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20575980738ce4b02c4a7962a15a3bfe"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUICheckoutCart</b> (int cliIndex)</td></tr>
 <tr class="separator:a20575980738ce4b02c4a7962a15a3bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae70b6901e826f21c8f57c1b84f8c861f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae70b6901e826f21c8f57c1b84f8c861f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIFreeVoucher</b> ()</td></tr>
 <tr class="separator:ae70b6901e826f21c8f57c1b84f8c861f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54d3ea03a0c13f9c915aed13772fbc2b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app_store.html#a54d3ea03a0c13f9c915aed13772fbc2b">GUIRateApp</a> (int appIndex)</td></tr>
+<tr class="memitem:ad0611ee3a127a8f8ebeeefe8cf399ed1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0611ee3a127a8f8ebeeefe8cf399ed1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIPendingApps</b> (int devIndex)</td></tr>
+<tr class="separator:ad0611ee3a127a8f8ebeeefe8cf399ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54d3ea03a0c13f9c915aed13772fbc2b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54d3ea03a0c13f9c915aed13772fbc2b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIRateApp</b> (int appIndex)</td></tr>
 <tr class="separator:a54d3ea03a0c13f9c915aed13772fbc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46628cd1a766232c61b71b7a2089f8c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46628cd1a766232c61b71b7a2089f8c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIRemovedApps</b> (int devIndex)</td></tr>
+<tr class="separator:a46628cd1a766232c61b71b7a2089f8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48e111835fcc3a60ae0c30549db86c49"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48e111835fcc3a60ae0c30549db86c49"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUISearchCategory</b> () const </td></tr>
 <tr class="separator:a48e111835fcc3a60ae0c30549db86c49"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,65 +210,64 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>GUISearchRating</b> (
 <tr class="memitem:add280ab8077e5a6ae5b0b7aa0907423e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="add280ab8077e5a6ae5b0b7aa0907423e"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>GUIRemoveFromCart</b> ()</td></tr>
 <tr class="separator:add280ab8077e5a6ae5b0b7aa0907423e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81ae6c344379e49071caa9b160a57e1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a81ae6c344379e49071caa9b160a57e1f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>createApp</b> (int devIndex)</td></tr>
-<tr class="separator:a81ae6c344379e49071caa9b160a57e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16b34961fb63dad32b8fba1870296c82"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16b34961fb63dad32b8fba1870296c82"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>deleteApp</b> (int devIndex)</td></tr>
-<tr class="separator:a16b34961fb63dad32b8fba1870296c82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9827ad6e3df17ccf02bb190783e242fe"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9827ad6e3df17ccf02bb190783e242fe"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>insertApp</b> (<a class="el" href="class_app.html">App</a> *app)</td></tr>
-<tr class="separator:a9827ad6e3df17ccf02bb190783e242fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a72333753bd8f9cc1602647f1a55ab8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a72333753bd8f9cc1602647f1a55ab8"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateApp</b> (int devIndex)</td></tr>
-<tr class="separator:a2a72333753bd8f9cc1602647f1a55ab8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ac5441696a33cf8be6857c2206f1211"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ac5441696a33cf8be6857c2206f1211"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateApp</b> (<a class="el" href="class_app.html">App</a> *app)</td></tr>
-<tr class="separator:a0ac5441696a33cf8be6857c2206f1211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ace8fea80b29e1b8a1441e58cb89964"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ace8fea80b29e1b8a1441e58cb89964"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>appIndex</b> (string appName) const </td></tr>
 <tr class="separator:a2ace8fea80b29e1b8a1441e58cb89964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae07f2edf6839397e8c5e7ef948abe17f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae07f2edf6839397e8c5e7ef948abe17f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>App_list</b> () const </td></tr>
-<tr class="separator:ae07f2edf6839397e8c5e7ef948abe17f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ac34b05513f255e419cb077c3c6ee1b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ac34b05513f255e419cb077c3c6ee1b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>App_menu</b> ()</td></tr>
-<tr class="separator:a6ac34b05513f255e419cb077c3c6ee1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b432b540b379dede5b4c62466c008c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9b432b540b379dede5b4c62466c008c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>indexCliente</b> (string cliName)</td></tr>
+<tr class="separator:ab9b432b540b379dede5b4c62466c008c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f85de98150acf683fdcfb74f40f405"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06f85de98150acf683fdcfb74f40f405"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>indexDeveloper</b> (string devName) const </td></tr>
+<tr class="separator:a06f85de98150acf683fdcfb74f40f405"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10c7f022baaca2d023a1a1dffd9013b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a10c7f022baaca2d023a1a1dffd9013b6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIListApps</b> () const </td></tr>
+<tr class="separator:a10c7f022baaca2d023a1a1dffd9013b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5771d8e776079615c16749dcfb830970"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5771d8e776079615c16749dcfb830970"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIListPending</b> () const </td></tr>
+<tr class="separator:a5771d8e776079615c16749dcfb830970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9f4ac1697cb481790b267d0b835804d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9f4ac1697cb481790b267d0b835804d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIListPublished</b> (int devIndex) const </td></tr>
+<tr class="separator:ae9f4ac1697cb481790b267d0b835804d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33c8e0ba4e05107af357f5196558012b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a33c8e0ba4e05107af357f5196558012b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIListSales</b> () const </td></tr>
+<tr class="separator:a33c8e0ba4e05107af357f5196558012b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66e325c74ba4b7dbb716911040b2a7ec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66e325c74ba4b7dbb716911040b2a7ec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIDeveloperPending</b> (int devIndex)</td></tr>
+<tr class="separator:a66e325c74ba4b7dbb716911040b2a7ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a599cc9a7d18168cead566badf0668"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86a599cc9a7d18168cead566badf0668"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>App_comment</b> (int appIndex, int cliIndex)</td></tr>
 <tr class="separator:a86a599cc9a7d18168cead566badf0668"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29a4e1a88cf37136a3dfa68b29f409e0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29a4e1a88cf37136a3dfa68b29f409e0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>App_publish</b> ()</td></tr>
-<tr class="separator:a29a4e1a88cf37136a3dfa68b29f409e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2e702b7bdf029299445b745c63080e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2e702b7bdf029299445b745c63080e5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>App_print</b> (int appIndex, int cliIndex)</td></tr>
 <tr class="separator:ad2e702b7bdf029299445b745c63080e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af081a395f9e19d90f7f0b6d3af77a869"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af081a395f9e19d90f7f0b6d3af77a869"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>App_checkout</b> (int cliIndex, bool voucher)</td></tr>
 <tr class="separator:af081a395f9e19d90f7f0b6d3af77a869"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a625f41c701daa179a03fffff7cc5e51f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_b_s_t.html">BST</a>&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app_store.html#a625f41c701daa179a03fffff7cc5e51f">BSTGetApps</a> () const </td></tr>
-<tr class="separator:a625f41c701daa179a03fffff7cc5e51f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a937cd3487fdc8ef34b48fc2e2616b809"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a937cd3487fdc8ef34b48fc2e2616b809"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>BSTInsertApp</b> (<a class="el" href="class_app.html">App</a> *a)</td></tr>
-<tr class="separator:a937cd3487fdc8ef34b48fc2e2616b809"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a622a50f4cc0ea0771940c7b6bad59db5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a622a50f4cc0ea0771940c7b6bad59db5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>BSTRemoveApp</b> (<a class="el" href="class_app.html">App</a> *a)</td></tr>
-<tr class="separator:a622a50f4cc0ea0771940c7b6bad59db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a071931c55b4e93af5c71a9b4135b1d2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a071931c55b4e93af5c71a9b4135b1d2d"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>BSTRemoveApp</b> (string appName)</td></tr>
-<tr class="separator:a071931c55b4e93af5c71a9b4135b1d2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc95f2d1e0003dc36f7ae36a9c19c75e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acc95f2d1e0003dc36f7ae36a9c19c75e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadApps</b> ()</td></tr>
+<tr class="memitem:acc95f2d1e0003dc36f7ae36a9c19c75e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app_store.html#acc95f2d1e0003dc36f7ae36a9c19c75e">IOReadApps</a> ()</td></tr>
 <tr class="separator:acc95f2d1e0003dc36f7ae36a9c19c75e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a7fb3e415b875f832ec9ded4986aa02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a7fb3e415b875f832ec9ded4986aa02"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteApps</b> () const </td></tr>
+<tr class="memitem:a8054a8bd028c983b8364a6f63442ab4b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8054a8bd028c983b8364a6f63442ab4b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadApp</b> (ifstream &amp;fin)</td></tr>
+<tr class="separator:a8054a8bd028c983b8364a6f63442ab4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a7fb3e415b875f832ec9ded4986aa02"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_app_store.html#a8a7fb3e415b875f832ec9ded4986aa02">IOWriteApps</a> () const </td></tr>
 <tr class="separator:a8a7fb3e415b875f832ec9ded4986aa02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d6efa8865d0d295d669c7411850e14"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8d6efa8865d0d295d669c7411850e14"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadRemovedApps</b> ()</td></tr>
+<tr class="separator:ae8d6efa8865d0d295d669c7411850e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20da80943d4231a5abebfee983659344"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20da80943d4231a5abebfee983659344"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadRemovedApp</b> (ifstream &amp;fin)</td></tr>
+<tr class="separator:a20da80943d4231a5abebfee983659344"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20333f22192ad03e295a50891445b058"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a20333f22192ad03e295a50891445b058"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteRemovedApps</b> () const </td></tr>
+<tr class="separator:a20333f22192ad03e295a50891445b058"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6557ab98dc83301e8c4ada370ee8a634"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6557ab98dc83301e8c4ada370ee8a634"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadClientes</b> ()</td></tr>
 <tr class="separator:a6557ab98dc83301e8c4ada370ee8a634"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a188138adeb68178d8effb7420d65a537"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a188138adeb68178d8effb7420d65a537"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteClientes</b> () const </td></tr>
 <tr class="separator:a188138adeb68178d8effb7420d65a537"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d046c1e5f3c5b2eefe2f899a6e9b6e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3d046c1e5f3c5b2eefe2f899a6e9b6e4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadDeveloper</b> (ifstream &amp;fin)</td></tr>
+<tr class="separator:a3d046c1e5f3c5b2eefe2f899a6e9b6e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a972d35cb01ff315533eb38a23c7c10ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a972d35cb01ff315533eb38a23c7c10ee"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadDevelopers</b> ()</td></tr>
 <tr class="separator:a972d35cb01ff315533eb38a23c7c10ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -247,6 +277,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteDevelopers</b>
 <tr class="memitem:ae9c4473c82121b39e2e1cef2ff80599f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9c4473c82121b39e2e1cef2ff80599f"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadSales</b> ()</td></tr>
 <tr class="separator:ae9c4473c82121b39e2e1cef2ff80599f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a336cdbd384023f0c5db360e4c40097"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a336cdbd384023f0c5db360e4c40097"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>IOReadSale</b> (ifstream &amp;fin)</td></tr>
+<tr class="separator:a8a336cdbd384023f0c5db360e4c40097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a282c43f6185dc68ee9c2d861514da267"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a282c43f6185dc68ee9c2d861514da267"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteSale</b> (const <a class="el" href="class_sale.html">Sale</a> &amp;s, ofstream &amp;fout) const </td></tr>
+<tr class="separator:a282c43f6185dc68ee9c2d861514da267"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66a5b6875895239682bd02f2fbdbc415"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66a5b6875895239682bd02f2fbdbc415"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteSales</b> () const </td></tr>
 <tr class="separator:a66a5b6875895239682bd02f2fbdbc415"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -259,15 +295,66 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>IOWriteStore</b> () c
 <tr class="memitem:a4b5c1d2e182ab1b5383f929302605942"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b5c1d2e182ab1b5383f929302605942"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIAdminMenu</b> ()</td></tr>
 <tr class="separator:a4b5c1d2e182ab1b5383f929302605942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1587c4d2cb79b35fdcb9a39d5518afd4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1587c4d2cb79b35fdcb9a39d5518afd4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIPendingMenu</b> ()</td></tr>
+<tr class="separator:a1587c4d2cb79b35fdcb9a39d5518afd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa485a9346473c0b61ef9491fcb5c8c21"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa485a9346473c0b61ef9491fcb5c8c21"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>GUIDeveloperMenu</b> (int devIndex)</td></tr>
 <tr class="separator:aa485a9346473c0b61ef9491fcb5c8c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96c25776670d27d354e9e3d2ca24fa7b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96c25776670d27d354e9e3d2ca24fa7b"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>GUIClienteMenu</b> (int cliIndex)</td></tr>
 <tr class="separator:a96c25776670d27d354e9e3d2ca24fa7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a438fddb13525e2b5f282d2f446af6672"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a438fddb13525e2b5f282d2f446af6672"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resetCart</b> ()</td></tr>
-<tr class="separator:a438fddb13525e2b5f282d2f446af6672"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ec2c6c4b2c8b4fb062a20927349ffc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8ec2c6c4b2c8b4fb062a20927349ffc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByName</b> () const </td></tr>
+<tr class="separator:ae8ec2c6c4b2c8b4fb062a20927349ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c920d06d687df4d2477fb4719e9a129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c920d06d687df4d2477fb4719e9a129"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByCategory</b> (string cat) const </td></tr>
+<tr class="separator:a4c920d06d687df4d2477fb4719e9a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade22af301aed49c9aca25a34044f940c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade22af301aed49c9aca25a34044f940c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByCliente</b> (int cliIndex) const </td></tr>
+<tr class="separator:ade22af301aed49c9aca25a34044f940c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62922071c5b3dba0051cda462d5eb340"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62922071c5b3dba0051cda462d5eb340"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByDate</b> () const </td></tr>
+<tr class="separator:a62922071c5b3dba0051cda462d5eb340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9b5e0086ec6a02c9c06979b720cf27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c9b5e0086ec6a02c9c06979b720cf27"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByPrice</b> () const </td></tr>
+<tr class="separator:a8c9b5e0086ec6a02c9c06979b720cf27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e3ab18b4fb1603e86afe5efd36e506d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e3ab18b4fb1603e86afe5efd36e506d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByPrice</b> (double min, double max) const </td></tr>
+<tr class="separator:a0e3ab18b4fb1603e86afe5efd36e506d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fac919f480ac3691b9ec860f907af85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5fac919f480ac3691b9ec860f907af85"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByRating</b> () const </td></tr>
+<tr class="separator:a5fac919f480ac3691b9ec860f907af85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a498f7fcf6d07b42f85691845826ccef6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a498f7fcf6d07b42f85691845826ccef6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByRating</b> (unsigned value) const </td></tr>
+<tr class="separator:a498f7fcf6d07b42f85691845826ccef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69af60b2a531844943bfa3746145e17c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a69af60b2a531844943bfa3746145e17c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsBySales</b> () const </td></tr>
+<tr class="separator:a69af60b2a531844943bfa3746145e17c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5b4bf535611ff12fe5390760458d260"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5b4bf535611ff12fe5390760458d260"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listPendingByName</b> () const </td></tr>
+<tr class="separator:ab5b4bf535611ff12fe5390760458d260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a605af7735331d378763cbed644c0d7a5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a605af7735331d378763cbed644c0d7a5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listPendingByDate</b> () const </td></tr>
+<tr class="separator:a605af7735331d378763cbed644c0d7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a72c53f333c53e92d29e6f48ae27230"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a72c53f333c53e92d29e6f48ae27230"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listPendingByPrice</b> () const </td></tr>
+<tr class="separator:a8a72c53f333c53e92d29e6f48ae27230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a8b50c4b39774fc657c0943bf481613"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a8b50c4b39774fc657c0943bf481613"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listPendingByPriority</b> () const </td></tr>
+<tr class="separator:a9a8b50c4b39774fc657c0943bf481613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef9fda9c41f5fecd64bbd0e800eeab2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef9fda9c41f5fecd64bbd0e800eeab2d"></a>
+vector&lt; <a class="el" href="class_app.html">App</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperRemoved</b> (int devIndex) const </td></tr>
+<tr class="separator:aef9fda9c41f5fecd64bbd0e800eeab2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99faa851e14ba1e89df657c06825df28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99faa851e14ba1e89df657c06825df28"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listRemovedByName</b> (int devIndex) const </td></tr>
+<tr class="separator:a99faa851e14ba1e89df657c06825df28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47fbeefc6fbaed34119a63380c29d721"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47fbeefc6fbaed34119a63380c29d721"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listRemovedByPrice</b> (int devIndex) const </td></tr>
+<tr class="separator:a47fbeefc6fbaed34119a63380c29d721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed53b1cd940356c4505afc9a65c6c820"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed53b1cd940356c4505afc9a65c6c820"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listRemovedBySales</b> (int devIndex) const </td></tr>
+<tr class="separator:aed53b1cd940356c4505afc9a65c6c820"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1a75eed7063705ad44ecc02ee6cc513"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1a75eed7063705ad44ecc02ee6cc513"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listClientesByName</b> () const </td></tr>
 <tr class="separator:ac1a75eed7063705ad44ecc02ee6cc513"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -277,6 +364,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>listClientesBySaldo</
 <tr class="memitem:a73ca89ed83ee5c7eafb3cf2b22aceb50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73ca89ed83ee5c7eafb3cf2b22aceb50"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listClientesByApps</b> () const </td></tr>
 <tr class="separator:a73ca89ed83ee5c7eafb3cf2b22aceb50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22d57e0c286a2f38fbc83f6a9901903b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22d57e0c286a2f38fbc83f6a9901903b"></a>
+vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperApps</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a22d57e0c286a2f38fbc83f6a9901903b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b7385d8b6bde01ca46e780cdc14f77a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b7385d8b6bde01ca46e780cdc14f77a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperAppsByDate</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a1b7385d8b6bde01ca46e780cdc14f77a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ffa1f36a423d6ace7914a8d6e8e7582"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ffa1f36a423d6ace7914a8d6e8e7582"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperAppsByName</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a5ffa1f36a423d6ace7914a8d6e8e7582"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3df39be2f46eba3de73a01d227c3e51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3df39be2f46eba3de73a01d227c3e51"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperAppsByPrice</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:aa3df39be2f46eba3de73a01d227c3e51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5413756f090a57145ac929fe062a4080"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5413756f090a57145ac929fe062a4080"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperAppsBySales</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a5413756f090a57145ac929fe062a4080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f9d848669161f19cf3eeb139cb12f51"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f9d848669161f19cf3eeb139cb12f51"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listDevelopersByName</b> () const </td></tr>
 <tr class="separator:a2f9d848669161f19cf3eeb139cb12f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -292,27 +394,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>listComments</b> (int
 <tr class="memitem:a1ad0192956288886d35c2661c47d2719"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ad0192956288886d35c2661c47d2719"></a>
 vector&lt; <a class="el" href="class_app.html">App</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperPending</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
 <tr class="separator:a1ad0192956288886d35c2661c47d2719"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef9fda9c41f5fecd64bbd0e800eeab2d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aef9fda9c41f5fecd64bbd0e800eeab2d"></a>
-vector&lt; <a class="el" href="class_app.html">App</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperRemoved</b> (int devIndex) const </td></tr>
-<tr class="separator:aef9fda9c41f5fecd64bbd0e800eeab2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4cf076711e99e37be6e8fec93ae5127"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4cf076711e99e37be6e8fec93ae5127"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listDevPendingByName</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
-<tr class="separator:af4cf076711e99e37be6e8fec93ae5127"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaadc3a2f444bd9ea94af5d04067d0af8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaadc3a2f444bd9ea94af5d04067d0af8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listDevPendingByPriority</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
-<tr class="separator:aaadc3a2f444bd9ea94af5d04067d0af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5b4bf535611ff12fe5390760458d260"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5b4bf535611ff12fe5390760458d260"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listPendingByName</b> () const </td></tr>
-<tr class="separator:ab5b4bf535611ff12fe5390760458d260"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a8b50c4b39774fc657c0943bf481613"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a8b50c4b39774fc657c0943bf481613"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listPendingByPriority</b> () const </td></tr>
-<tr class="separator:a9a8b50c4b39774fc657c0943bf481613"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99faa851e14ba1e89df657c06825df28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a99faa851e14ba1e89df657c06825df28"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listRemovedByName</b> (int devIndex) const </td></tr>
-<tr class="separator:a99faa851e14ba1e89df657c06825df28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47fbeefc6fbaed34119a63380c29d721"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47fbeefc6fbaed34119a63380c29d721"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listRemovedByPrice</b> (int devIndex) const </td></tr>
-<tr class="separator:a47fbeefc6fbaed34119a63380c29d721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0949bb47bbbcbc9ca951366acacf968c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0949bb47bbbcbc9ca951366acacf968c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperPendingByName</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a0949bb47bbbcbc9ca951366acacf968c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a061ae52b7f5b8640c002c2b7611cba5b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a061ae52b7f5b8640c002c2b7611cba5b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperPendingByPrice</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a061ae52b7f5b8640c002c2b7611cba5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2339a8b9d3a603b5ff5bf20cbe8a18c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2339a8b9d3a603b5ff5bf20cbe8a18c0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>listDeveloperPendingByPriority</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
+<tr class="separator:a2339a8b9d3a603b5ff5bf20cbe8a18c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a462216e607fb01a5b2c55933ddc8588c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a462216e607fb01a5b2c55933ddc8588c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listSalesByApps</b> () const </td></tr>
 <tr class="separator:a462216e607fb01a5b2c55933ddc8588c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,83 +418,43 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>listSalesByID</b> () 
 <tr class="memitem:aeb95a469b84b02657f267a2863e4256e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb95a469b84b02657f267a2863e4256e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listSalesByPrice</b> () const </td></tr>
 <tr class="separator:aeb95a469b84b02657f267a2863e4256e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8ec2c6c4b2c8b4fb062a20927349ffc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8ec2c6c4b2c8b4fb062a20927349ffc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByName</b> () const </td></tr>
-<tr class="separator:ae8ec2c6c4b2c8b4fb062a20927349ffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c920d06d687df4d2477fb4719e9a129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c920d06d687df4d2477fb4719e9a129"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByCategory</b> (string cat) const </td></tr>
-<tr class="separator:a4c920d06d687df4d2477fb4719e9a129"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade22af301aed49c9aca25a34044f940c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade22af301aed49c9aca25a34044f940c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByCliente</b> (int cliIndex) const </td></tr>
-<tr class="separator:ade22af301aed49c9aca25a34044f940c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8ec6119bbdec154c32e22f0e6b6798c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab8ec6119bbdec154c32e22f0e6b6798c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByDateAscending</b> () const </td></tr>
-<tr class="separator:ab8ec6119bbdec154c32e22f0e6b6798c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05f289dfa8f2ad8ccafed758875196e7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05f289dfa8f2ad8ccafed758875196e7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByDateDescending</b> () const </td></tr>
-<tr class="separator:a05f289dfa8f2ad8ccafed758875196e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3f32ac2c965f278ee7740c8d38d5ba1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa3f32ac2c965f278ee7740c8d38d5ba1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByDeveloper</b> (const <a class="el" href="class_developer.html">Developer</a> *dev) const </td></tr>
-<tr class="separator:aa3f32ac2c965f278ee7740c8d38d5ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c9b5e0086ec6a02c9c06979b720cf27"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c9b5e0086ec6a02c9c06979b720cf27"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByPrice</b> () const </td></tr>
-<tr class="separator:a8c9b5e0086ec6a02c9c06979b720cf27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e3ab18b4fb1603e86afe5efd36e506d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e3ab18b4fb1603e86afe5efd36e506d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByPrice</b> (double min, double max) const </td></tr>
-<tr class="separator:a0e3ab18b4fb1603e86afe5efd36e506d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fac919f480ac3691b9ec860f907af85"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5fac919f480ac3691b9ec860f907af85"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByRating</b> () const </td></tr>
-<tr class="separator:a5fac919f480ac3691b9ec860f907af85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a498f7fcf6d07b42f85691845826ccef6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a498f7fcf6d07b42f85691845826ccef6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsByRating</b> (unsigned value) const </td></tr>
-<tr class="separator:a498f7fcf6d07b42f85691845826ccef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ef96aff029224591a9bbde7c4c007c1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ef96aff029224591a9bbde7c4c007c1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsPending</b> () const </td></tr>
-<tr class="separator:a3ef96aff029224591a9bbde7c4c007c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bee9c49c84272379163446bdd7faf56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bee9c49c84272379163446bdd7faf56"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>listAppsPendingByName</b> () const </td></tr>
-<tr class="separator:a5bee9c49c84272379163446bdd7faf56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c0153a0cea025910e41b36b6dd27ddb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c0153a0cea025910e41b36b6dd27ddb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listTopNApps</b> (int topN) const </td></tr>
 <tr class="separator:a7c0153a0cea025910e41b36b6dd27ddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a956d8d73c64aa07167707c3210a928eb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a956d8d73c64aa07167707c3210a928eb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>listTop10Apps</b> () const </td></tr>
 <tr class="separator:a956d8d73c64aa07167707c3210a928eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addfbc6523d6642778289f4107c7144e6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="addfbc6523d6642778289f4107c7144e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>freeVoucher</b> ()</td></tr>
-<tr class="separator:addfbc6523d6642778289f4107c7144e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a625f41c701daa179a03fffff7cc5e51f"></a>
+<a class="anchor" id="acc95f2d1e0003dc36f7ae36a9c19c75e"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_b_s_t.html">BST</a>&lt; <a class="el" href="class_app.html">App</a> * &gt; AppStore::BSTGetApps </td>
+          <td class="memname">void AppStore::IOReadApps </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>READ APPS </p>
+
+</div>
+</div>
+<a class="anchor" id="a8a7fb3e415b875f832ec9ded4986aa02"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AppStore::IOWriteApps </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p><a class="el" href="class_b_s_t.html">BST</a> Functions </p>
-
-</div>
-</div>
-<a class="anchor" id="a54d3ea03a0c13f9c915aed13772fbc2b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void AppStore::GUIRateApp </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>appIndex</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>I/O Functions </p>
+<p>WRITE APPS </p>
 
 </div>
 </div>
@@ -413,11 +463,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>freeVoucher</b> ()</t
 <li><a class="el" href="_app_store_8cpp.html">AppStore.cpp</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:13 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_app_store.html">AppStore</a></li>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>

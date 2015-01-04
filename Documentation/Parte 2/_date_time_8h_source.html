@@ -8,6 +8,14 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -29,7 +37,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
@@ -41,6 +48,20 @@
     </ul>
   </div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_date_time_8h_source.html','');});
+</script>
+<div id="doc-content">
 <div class="header">
   <div class="headertitle">
 <div class="title">DateTime.h</div>  </div>
@@ -52,71 +73,58 @@
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_common_8h.html">Common.h</a>&quot;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">struct </span>tm tm_localtime() {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">struct </span>tm * timeinfo = <span class="keyword">new</span> <span class="keyword">struct </span>tm;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    time_t rawtime;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    time(&amp;rawtime);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    timeinfo = localtime(&amp;rawtime);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> *timeinfo;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">void</span> tm_write(<span class="keyword">struct</span> tm* timeinfo, ofstream &amp;fout) {</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    time_t rawtime = mktime(timeinfo);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    fout.write((<span class="keywordtype">char</span>*)&amp;rawtime, <span class="keyword">sizeof</span>(time_t));</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">struct </span>tm tm_read(time_t rawtime, ifstream &amp;fout) {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">struct </span>tm *timeinfo = <span class="keyword">new</span> <span class="keyword">struct </span>tm;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    fout.read((<span class="keywordtype">char</span>*)&amp;rawtime, <span class="keyword">sizeof</span>(time_t));</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    timeinfo = localtime(&amp;rawtime);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">return</span> *timeinfo;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">bool</span> operator&lt;(<span class="keyword">struct</span> tm t1, <span class="keyword">struct</span> tm t2) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> (t1.tm_year == t2.tm_year) {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">if</span> (t1.tm_mon == t2.tm_mon) {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> (t1.tm_mday &lt; t2.tm_mday);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> (t1.tm_mon &lt; t2.tm_mon);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> (t1.tm_year &lt; t2.tm_year);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">bool</span> operator==(<span class="keyword">struct</span> tm t1, <span class="keyword">struct</span> tm t2) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> (t1.tm_year == t2.tm_year &amp;&amp; t1.tm_mon == t2.tm_mon &amp;&amp; t1.tm_mday == t2.tm_mday);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">string</span> tm_converttime(<span class="keyword">struct</span> tm t1) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    ostringstream os;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    os &lt;&lt; setw(2) &lt;&lt; setfill(<span class="charliteral">&#39;0&#39;</span>) &lt;&lt; t1.tm_hour;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;:&quot;</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    os &lt;&lt; setw(2) &lt;&lt; setfill(<span class="charliteral">&#39;0&#39;</span>) &lt;&lt; t1.tm_min;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">return</span> os.str();</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keywordtype">string</span> tm_convertdate(<span class="keyword">struct</span> tm t1) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    ostringstream os;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    os &lt;&lt; setw(2) &lt;&lt; setfill(<span class="charliteral">&#39;0&#39;</span>) &lt;&lt; t1.tm_mday;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;/&quot;</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    os &lt;&lt; setw(2) &lt;&lt; setfill(<span class="charliteral">&#39;0&#39;</span>) &lt;&lt; t1.tm_mon;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    os &lt;&lt; <span class="stringliteral">&quot;/&quot;</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    os &lt;&lt; setw(4) &lt;&lt; left &lt;&lt; setfill(<span class="charliteral">&#39; &#39;</span>) &lt;&lt; t1.tm_year + 1900;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">return</span> os.str();</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;ostream &amp;operator&lt;&lt;(ostream&amp; os, <span class="keyword">struct</span> tm t1) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    os &lt;&lt; tm_convertdate(t1);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> os;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __DATETIME_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_date.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_date.html">Date</a></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_date.html#a4e59ed4ba66eec61c27460c5d09fa1bd">Date</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <a class="code" href="class_date.html#ade4b469433b7966cc034cbcc6799233b">~Date</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_date.html#a8a3bccb05f00086e64c5b5518a37949f">operator&lt;</a>(<span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;d) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_date.html#af5289b4792041bd78b151f33cc79f642">operator&gt;</a>(<span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;d) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_date.html#aa8208298c0efe5dbf661c66a284fd163">operator==</a>(<span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;d) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">friend</span> ostream &amp;<a class="code" href="class_date.html#a8e8b3d76200d2f9bc2eefc5c30b1f326">operator&lt;&lt;</a>(ostream&amp; os, <span class="keyword">const</span> <a class="code" href="class_date.html">Date</a> &amp;d);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_date.html#a13151b0c602df2d15d069aa810ba545a">str</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_date.html#a762ccd9be6d656b190b3df9dd0768fae">read</a>(ifstream &amp;fin);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_date.html#a071e9e19c14f73de19ec40ccb1457904">write</a>(ofstream &amp;fout) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    uint8_t day;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    uint8_t month;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    uint16_t year;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* __DATETIME_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="class_date_html_aa8208298c0efe5dbf661c66a284fd163"><div class="ttname"><a href="class_date.html#aa8208298c0efe5dbf661c66a284fd163">Date::operator==</a></div><div class="ttdeci">bool operator==(const Date &amp;d) const </div><div class="ttdoc">compares two dates for equality </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:64</div></div>
+<div class="ttc" id="class_date_html_a762ccd9be6d656b190b3df9dd0768fae"><div class="ttname"><a href="class_date.html#a762ccd9be6d656b190b3df9dd0768fae">Date::read</a></div><div class="ttdeci">void read(ifstream &amp;fin)</div><div class="ttdoc">reads date and time information from a given file </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:32</div></div>
+<div class="ttc" id="class_date_html_a8e8b3d76200d2f9bc2eefc5c30b1f326"><div class="ttname"><a href="class_date.html#a8e8b3d76200d2f9bc2eefc5c30b1f326">Date::operator&lt;&lt;</a></div><div class="ttdeci">friend ostream &amp; operator&lt;&lt;(ostream &amp;os, const Date &amp;d)</div><div class="ttdoc">displays date information in a more user-friendly way </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:69</div></div>
+<div class="ttc" id="class_date_html_a4e59ed4ba66eec61c27460c5d09fa1bd"><div class="ttname"><a href="class_date.html#a4e59ed4ba66eec61c27460c5d09fa1bd">Date::Date</a></div><div class="ttdeci">Date()</div><div class="ttdoc">default construtor for &#39;Date&#39; class </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:15</div></div>
+<div class="ttc" id="class_date_html_af5289b4792041bd78b151f33cc79f642"><div class="ttname"><a href="class_date.html#af5289b4792041bd78b151f33cc79f642">Date::operator&gt;</a></div><div class="ttdeci">bool operator&gt;(const Date &amp;d) const </div><div class="ttdoc">compares two dates </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:59</div></div>
+<div class="ttc" id="class_date_html_a8a3bccb05f00086e64c5b5518a37949f"><div class="ttname"><a href="class_date.html#a8a3bccb05f00086e64c5b5518a37949f">Date::operator&lt;</a></div><div class="ttdeci">bool operator&lt;(const Date &amp;d) const </div><div class="ttdoc">compares two dates </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:46</div></div>
 <div class="ttc" id="_common_8h_html"><div class="ttname"><a href="_common_8h.html">Common.h</a></div></div>
+<div class="ttc" id="class_date_html"><div class="ttname"><a href="class_date.html">Date</a></div><div class="ttdef"><b>Definition:</b> DateTime.h:18</div></div>
+<div class="ttc" id="class_date_html_a13151b0c602df2d15d069aa810ba545a"><div class="ttname"><a href="class_date.html#a13151b0c602df2d15d069aa810ba545a">Date::str</a></div><div class="ttdeci">string str() const </div><div class="ttdoc">displays date information in a more user-friendly way </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:75</div></div>
+<div class="ttc" id="class_date_html_a071e9e19c14f73de19ec40ccb1457904"><div class="ttname"><a href="class_date.html#a071e9e19c14f73de19ec40ccb1457904">Date::write</a></div><div class="ttdeci">void write(ofstream &amp;fout) const </div><div class="ttdoc">writes date and time information to a given file </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:39</div></div>
+<div class="ttc" id="class_date_html_ade4b469433b7966cc034cbcc6799233b"><div class="ttname"><a href="class_date.html#ade4b469433b7966cc034cbcc6799233b">Date::~Date</a></div><div class="ttdeci">~Date()</div><div class="ttdoc">default destructor for &#39;Date&#39; class </div><div class="ttdef"><b>Definition:</b> DateTime.cpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 29 2014 15:55:12 for FEUP_AEDA1415_2MIEIC03_D by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.9
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="_date_time_8h.html">DateTime.h</a></li>
+    <li class="footer">Generated on Sun Jan 4 2015 17:27:30 for FEUP_AEDA1415_2MIEIC03_D by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.9 </li>
+  </ul>
+</div>
 </body>
 </html>
