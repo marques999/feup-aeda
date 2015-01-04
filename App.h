@@ -258,7 +258,6 @@ public:
 	 * @param fout the output filestream
 	 */
 	void write(ofstream &fout) const;
-	bool operator<(const App &ap2) const;
 
 private:
 

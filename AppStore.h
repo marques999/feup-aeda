@@ -6,7 +6,7 @@
  * \author Diogo Marques
  * \author Fabio Carneiro
  *
- * \date Dezembro 2014
+ * \date Janeiro 2015
  *
  */
 
@@ -19,7 +19,7 @@
 #include "Sale.h"
 #include "Developer.h"
 
-typedef enum  {
+typedef enum {
 	APP_NAME, APP_DATE, APP_PRICE, APP_RATING, APP_SALES
 } AppSort;
 
@@ -78,12 +78,20 @@ public:
 	////////////////////////////////////////////////////////
 	bool createApp(int devIndex);
 	bool deleteApp(int devIndex);
-	bool deletePendingApp(int devIndex);
-	void publishRemovedApp(int devIndex);
 	bool updateApp(int devIndex);
-	bool updatePendingApp(int devIndex);
-	bool updateRemovedApp(int devIndex);
 	void updateApp(App* app);
+
+	////////////////////////////////////////////////////////
+	//					PENDING APP C/R/U/D				  //
+	////////////////////////////////////////////////////////
+	bool deletePendingApp(int devIndex);
+	bool updatePendingApp(int devIndex);
+
+	////////////////////////////////////////////////////////
+	//					REMOVED APP C/R/U/D				  //
+	////////////////////////////////////////////////////////
+	void publishRemovedApp(int devIndex);
+	bool updateRemovedApp(int devIndex);
 
 	////////////////////////////////////////////////////////
 	//					 CLIENTE C/R/U/D				  //
@@ -153,7 +161,9 @@ public:
 	void GUIListApps() const;
 	void GUIListPending() const;
 	void GUIListPublished(int devIndex) const;
-	void GUIPendingMenu();
+	void GUIListSales() const;
+
+
 	void GUIDeveloperPending(int devIndex);
 
 	void App_comment(int appIndex, int cliIndex);
@@ -161,47 +171,48 @@ public:
 	void App_print(int appIndex, int cliIndex);
 	void App_checkout(int cliIndex, bool voucher);
 
-	// Binary search tree
-
+	////////////////////////////////////////////////////////
+	//				   BINARY SEARCH TREE				  //
+	////////////////////////////////////////////////////////
 	BST<App*> BSTGetApps() const;
 	bool BSTInsertApp(App* a);
 	bool BSTRemoveApp(App* a);
 	bool BSTRemoveApp(string appName);
-	App* queueFindElement(string name) const;
 
-
-	// IO
-
+	////////////////////////////////////////////////////////
+	//				     I/O OPERATIONS					  //
+	////////////////////////////////////////////////////////
 	void IOReadApps();
 	bool IOReadApp(ifstream &fin);
+	void IOWriteApps() const;
+
 	void IOReadRemovedApps();
 	bool IOReadRemovedApp(ifstream &fin);
-	void IOWriteApps() const;
 	void IOWriteRemovedApps() const;
 
 	void IOReadClientes();
 	void IOWriteClientes() const;
+
 	bool IOReadDeveloper(ifstream &fin);
 	void IOReadDevelopers();
-	void IOWriteDeveloper(Developer* dev, ofstream &fout) const;
 	void IOWriteDevelopers() const;
 
 	void IOReadSales();
+	void IOReadSale(ifstream &fin);
 	void IOWriteSale(const Sale &s, ofstream& fout) const;
 	void IOWriteSales() const;
+
 	bool IOReadStore();
 	bool IOWriteStore() const;
 	
-	void IOReadSale(ifstream &fin);
-
 	// MENU
 
 	void GUIAdminMenu();
+	void GUIPendingMenu();
 	void GUIDeveloperMenu(int devIndex);
 	bool GUIClienteMenu(int cliIndex);
 
-
-	void GUIListSales() const;
+	App* queueFindElement(string name) const;
 	
 
 	////////////////////////////////////////////////////////
@@ -220,9 +231,18 @@ public:
 	////////////////////////////////////////////////////////
 	//				   LIST PENDING APPS				  //
 	////////////////////////////////////////////////////////
-	void listAppsPending() const;
-	void listAppsPendingByName() const;
+	void listPendingByName() const;
+	void listPendingByDate() const;
+	void listPendingByPrice() const;
+	void listPendingByPriority() const;
 
+	////////////////////////////////////////////////////////
+	//			     	 LIST REMOVED APPS     			  //
+	////////////////////////////////////////////////////////
+	vector<App> listDeveloperRemoved(int devIndex) const;
+	void listRemovedByName(int devIndex) const;
+	void listRemovedByPrice(int devIndex) const;
+	void listRemovedBySales(int devIndex) const;
 
 	////////////////////////////////////////////////////////
 	//			    	  LIST CLIENTES					  //
@@ -261,22 +281,6 @@ public:
 	void listDeveloperPendingByPriority(const Developer* dev) const;
 
 	////////////////////////////////////////////////////////
-	//			    	 LIST PENDING APPS	        	  //
-	////////////////////////////////////////////////////////
-	void listPendingByName() const;
-	void listPendingByDate() const;
-	void listPendingByPrice() const;
-	void listPendingByPriority() const;
-
-	////////////////////////////////////////////////////////
-	//			     	 LIST REMOVED APPS     			  //
-	////////////////////////////////////////////////////////
-	vector<App> listDeveloperRemoved(int devIndex) const;
-	void listRemovedByName(int devIndex) const;
-	void listRemovedByPrice(int devIndex) const;
-	void listRemovedBySales(int devIndex) const;
-
-	////////////////////////////////////////////////////////
 	//			 		     LIST SALES					  //
 	////////////////////////////////////////////////////////
 	void listSalesByApps() const;
@@ -305,6 +309,7 @@ private:
 	void queueInsertElement(App* elem);
 	bool queueRemoveElement(string name);
 	void queueUpdateElement(App* o, App* n);
+	bool queueRemoveDeveloper(int devIndex);
 
 	void resetCart();
 
@@ -313,7 +318,7 @@ private:
 
 	vector<App*> apps;
 	queuePending pending;
-	BST<App*> appsRanking;
+	BST<App*> ranking;
 
 	vector<Cliente*> clientes;
 	vector<Developer*> developers;

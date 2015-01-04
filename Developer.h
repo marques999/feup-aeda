@@ -236,12 +236,14 @@ public:
 	 */
 	App find(string name)
 	{
-		App appProcurada = App(name, 0, "", "");
-		hashDeveloper::iterator it = removedApps.find(appProcurada);
+		hashDeveloper::const_iterator it = removedApps.begin();
 
-		if (it != removedApps.end())
+		for (; it != removedApps.end(); it++)
 		{
-			return *it;
+			if (it->getName() == name)
+			{
+				return *it;
+			}
 		}
 
 		return APP_NOT_FOUND;
