@@ -82,3 +82,17 @@ void App::write(ofstream &fout) const
 		fout << x.comment << endl;
 	}
 }
+
+
+bool App::operator<(const App &ap2) const {
+	if (this->getRating().get() == ap2.getRating().get()) {
+
+		if (this->getPrice() == ap2.getPrice()) {
+			return (this->getCategory() < ap2.getCategory());
+		}
+
+		return !(this->getPrice() < ap2.getPrice());
+	}
+
+	return !(this->getRating().get() < ap2.getRating().get());
+}
